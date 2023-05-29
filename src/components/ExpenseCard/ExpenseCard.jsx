@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
-import './Card.css';
+import './ExpenseCard.css';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { motion, AnimateSharedLayout } from 'framer-motion';
 import { UilTimes } from '@iconscout/react-unicons';
 import Chart from 'react-apexcharts';
+import { TextField, Typography, Button, Input } from '@mui/material';
+import { UilCalendarAlt } from '@iconscout/react-unicons';
+import DatePicker from 'react-date-picker';
 
 // parent Card
 
@@ -18,6 +21,12 @@ const ExpenseCard = (props) => {
 
 // Compact Card
 function CompactCard({ param, setExpanded }) {
+	const handleInputChange = (event) => {
+		const value = event.target.value;
+		const onlyNumbers = value.replace(/[^0-9]/g, ''); // Remove non-numeric characters
+		event.target.value = onlyNumbers;
+	};
+
 	const Png = param.png;
 	return (
 		<motion.div
@@ -26,21 +35,34 @@ function CompactCard({ param, setExpanded }) {
 				background: param.color.backGround,
 				boxShadow: param.color.boxShadow
 			}}
-			layoutId="expandableCard"
-			onClick={setExpanded}
 		>
-			<div className="radialBar">
-				<CircularProgressbar
-					value={param.barValue}
-					text={`${param.barValue}%`}
-				/>
-				<span>{param.title}</span>
+			<div className="topDiv">
+				<div className="title">
+					<span>{param.title}</span>
+				</div>
 			</div>
-			<div className="detail">
-				<Png />
-				<span>${param.value}</span>
-				<span>Last 24 hours</span>
+			<div className="input">
+				<div className="amount">
+					<TextField
+						variant="standard"
+						type="text"
+						label="Amount"
+						onInput={handleInputChange}
+						sx={{
+							'& .MuiInputBase-root': {
+								background: 'transparent',
+								boxShadow: 'none'
+							}
+						}}
+					/>
+				</div>
+				<div className="date">
+					<UilCalendarAlt size="2rem" />
+				</div>
 			</div>
+			<Button className="add-button" variant="contained">
+				Add
+			</Button>
 		</motion.div>
 	);
 }

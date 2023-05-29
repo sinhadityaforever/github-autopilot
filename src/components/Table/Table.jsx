@@ -45,7 +45,7 @@ const makeStyle=(status)=>{
 
 export default function BasicTable() {
   return (
-      <div className="Table">
+    <div className="Table">
       <h3>Recent Orders</h3>
         <TableContainer
           component={Paper}

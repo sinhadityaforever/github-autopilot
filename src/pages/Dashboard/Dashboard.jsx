@@ -3,12 +3,14 @@ import Table from '../../components/Table/Table';
 import './Dashboard.css';
 import ExpenseCards from '../../components/ExpenseCards/ExpenseCards';
 import BudgetChart from '../../components/BudgetChart/BudgetChart';
+import ExpenseChart from '../../components/ExpenseChart/ExpenseChart';
 const Dashboard = () => {
 	return (
 		<div className="Dashboard">
 			<h1>Dashboard</h1>
 			<div className="topDiv">
 				<ExpenseCards />
+				<ExpenseChart />
 			</div>
 
 			<div className="bottomDiv">

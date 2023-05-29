@@ -1,7 +1,7 @@
 .CompactCard {
 	display: flex;
 	flex-direction: column;
-	min-height: 20vh;
+	min-height: 30vh;
 	/* flex: 1;
 	height: 7rem !important; */
 	border-radius: 0.7rem;
@@ -10,7 +10,6 @@
 	position: relative;
 	/* cursor: pointer; */
 	width: 20vw;
-	max-height: 30vh;
 }
 .CompactCard:hover {
 	box-shadow: none !important;

@@ -20,7 +20,7 @@ const ExpenseCard = (props) => {
 };
 
 // Compact Card
-function CompactCard({ param, setExpanded }) {
+function CompactCard({ param }) {
 	const handleInputChange = (event) => {
 		const value = event.target.value;
 		const onlyNumbers = value.replace(/[^0-9]/g, ''); // Remove non-numeric characters
@@ -58,6 +58,24 @@ function CompactCard({ param, setExpanded }) {
 				</div>
 				<div className="date">
 					<UilCalendarAlt size="2rem" />
+				</div>
+			</div>
+			<div className="input">
+				<div className="amount">
+					<TextField
+						variant="standard"
+						type="date"
+						onInput={handleInputChange}
+						sx={{
+							'& .MuiInputBase-root': {
+								background: 'transparent',
+								boxShadow: 'none'
+							}
+						}}
+					/>
+				</div>
+				<div className="date">
+					<Png size="2rem" />
 				</div>
 			</div>
 			<Button className="add-button" variant="contained">

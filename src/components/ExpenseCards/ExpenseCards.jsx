@@ -11,7 +11,7 @@ const ExpenseCards = () => {
 			{expenseCardData.map((card, id) => {
 				return (
 					<div className="parentContainer" key={id}>
-						<ExpenseCard title={card.title} color={card.color} />
+						<ExpenseCard title={card.title} color={card.color} png={card.png} />
 					</div>
 				);
 			})}

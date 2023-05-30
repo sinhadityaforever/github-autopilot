@@ -12,7 +12,6 @@
 }
 
 .App {
-
 	/* padding: 0.5rem 3.5rem; */
 	color: var(--black);
 	background: linear-gradient(
@@ -26,6 +25,7 @@
 	align-items: center;
 	justify-content: center;
 	font-family: 'Inter', sans-serif;
+	overflow: auto;
 }
 
 .AppGlass {
@@ -35,9 +35,9 @@
 	background: var(--glass);
 	border-radius: 2rem;
 	gap: 16px;
-	/* grid-template-columns: 11rem auto 20rem; */
-	grid-template-columns: auto auto auto;
-	overflow: hidden;
+	grid-template-columns: 11rem auto auto;
+	/* grid-template-columns: auto auto auto; */
+	overflow: auto;
 }
 
 @media screen and (max-width: 1200px) {
@@ -45,7 +45,6 @@
 		grid-template-columns: 10% 50% auto;
 		overflow-y: scroll;
 	}
-
 }
 
 @media screen and (max-width: 768px) {

@@ -11,7 +11,7 @@ import './Table.css';
 const makeStyle = (type) => {
 	if (type === 'income') {
 		return {
-			background: 'rgb(145 254 159 / 47%)',
+			background: 'rgb(145 254 159 / 50%)',
 			color: 'green'
 		};
 	} else if (type === 'expense') {

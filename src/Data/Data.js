@@ -5,8 +5,11 @@ import {
 	UilUsersAlt,
 	UilPackage,
 	UilChart,
-	UilComparison
+	UilComparison,
+	UilMoneyInsert,
+	UilMoneyWithdraw
 } from '@iconscout/react-unicons';
+import { format } from 'date-fns';
 
 // Analytics Cards imports
 import { UilUsdSquare, UilMoneyWithdrawal } from '@iconscout/react-unicons';
@@ -94,6 +97,25 @@ export const cardsData = [
 	// }
 ];
 
+export const expenseCardData = [
+	{
+		title: 'Add Income',
+		color: {
+			backGround: 'linear-gradient(180deg, #bb67ff 0%, #c484f3 100%)',
+			boxShadow: '0px 10px 20px 0px #e0c6f5'
+		},
+		png: UilMoneyWithdraw
+	},
+	{
+		title: 'Add Expense',
+		color: {
+			backGround: 'linear-gradient(180deg, #FF919D 0%, #FC929D 100%)',
+			boxShadow: '0px 10px 20px 0px #FDC0C7'
+		},
+		png: UilMoneyInsert
+	}
+];
+
 // Recent Update Card Data
 export const UpdatesData = [
 	{
@@ -113,5 +135,45 @@ export const UpdatesData = [
 		name: 'Iron Man',
 		noti: 'has ordered Apple smart watch, samsung Gear 2500mh battery.',
 		time: '2 hours ago'
+	}
+];
+
+export const categories = [
+	'Food',
+	'Business',
+	'Clothes',
+	'Education',
+	'Entertainment',
+	'Health',
+	'Gifts',
+	'Investments',
+	'Other'
+];
+const categoryObj = {
+	Food: categories[0],
+	Business: categories[1],
+	Clothes: categories[2],
+	Education: categories[3],
+	Entertainment: categories[4],
+	Health: categories[5],
+	Gifts: categories[6],
+	Investments: categories[7],
+	Other: categories[8]
+};
+
+export const transactionsData = [
+	{
+		name: 'Ordered Pizza',
+		date: '12/12/2021',
+		type: 'expense',
+		category: categoryObj.Food,
+		amount: 320
+	},
+	{
+		name: 'Salary',
+		date: '12/12/2021',
+		type: 'income',
+		category: categoryObj.Business,
+		amount: 25000
 	}
 ];

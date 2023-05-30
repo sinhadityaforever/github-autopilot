@@ -5,6 +5,17 @@
 	justify-content: space-evenly;
 }
 
+.topDiv {
+	align-self: flex-start;
+}
+
+.bottomDiv {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-self: space-between;
+}
+
 @media screen and (max-width: 1200px) {
 	.Dashboard {
 		justify-content: flex-start;

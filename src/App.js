@@ -31,7 +31,7 @@ function App() {
 				<Sidebar onChildProp={handleChildProp} />
 				{/* <Dashboard /> */}
 				{renderComponent()}
-				<RightSide />
+				{/* <RightSide /> */}
 			</div>
 		</div>
 	);

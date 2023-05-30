@@ -1,10 +1,24 @@
 import React from 'react';
 import ReactApexChart from 'react-apexcharts';
-function ExpenseChart() {
+function ExpenseChart({ transactionsData }) {
+	var expense = 0;
+	var income = 0;
+
+	const getData = () => {
+		transactionsData.forEach((item) => {
+			if (item.type === 'expense') {
+				expense += item.amount;
+			} else {
+				income += item.amount;
+			}
+		});
+	};
+	getData();
+
 	const initializer = {
 		series: [
 			{
-				data: [19000, 4300]
+				data: [income, expense]
 			}
 		],
 		options: {

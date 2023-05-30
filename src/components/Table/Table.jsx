@@ -8,79 +8,64 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import './Table.css';
 
-function createData(name, date, type) {
-	return { name, date, type };
-}
-
-const rows = [
-	createData('Lasania Chiken Fri', '2 March 2022', 'Expense'),
-	createData('Big Baza Bang ', '2 March 2022', 'Income'),
-	createData('Mouth Freshner', '2 March 2022', 'Income'),
-	createData('Cupcake', '2 March 2022', 'Expense')
-];
-
 const makeStyle = (type) => {
-	if (type === 'Income') {
+	if (type === 'income') {
 		return {
 			background: 'rgb(145 254 159 / 47%)',
 			color: 'green'
 		};
-	} else if (type === 'Expense') {
+	} else if (type === 'expense') {
 		return {
 			background: '#ffadad8f',
 			color: 'red'
 		};
 	}
-	// else {
-	// 	return {
-	// 		background: '#59bfff',
-	// 		color: 'white'
-	// 	};
-	// }
 };
 
-export default function BasicTable() {
+export default function BasicTable({ rows }) {
 	return (
 		<div className="Table">
-			<h3>Recent Orders</h3>
-			<TableContainer
-				component={Paper}
-				style={{ boxShadow: '0px 13px 20px 0px #80808029' }}
-			>
-				<Table sx={{ minWidth: 650 }} aria-label="simple table">
-					<TableHead>
-						<TableRow>
-							<TableCell>Transaction Name</TableCell>
-							{/* <TableCell align="left">Tracking ID</TableCell> */}
-							<TableCell align="left">Date</TableCell>
-							<TableCell align="left">Transaction Type</TableCell>
-							<TableCell align="left"></TableCell>
-						</TableRow>
-					</TableHead>
-					<TableBody style={{ color: 'white' }}>
-						{rows.map((row) => (
-							<TableRow
-								key={row.name}
-								sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-							>
-								<TableCell component="th" scope="row">
-									{row.name}
-								</TableCell>
-								{/* <TableCell align="left">{row.trackingId}</TableCell> */}
-								<TableCell align="left">{row.date}</TableCell>
-								<TableCell align="left">
-									<span className="status" style={makeStyle(row.type)}>
-										{row.type}
-									</span>
-								</TableCell>
-								<TableCell align="left" className="Details">
-									Details
-								</TableCell>
+			<h3>Recent Transactions</h3>
+			{rows && rows.length > 0 ? (
+				<TableContainer
+					component={Paper}
+					style={{ boxShadow: '0px 13px 20px 0px #80808029' }}
+				>
+					<Table sx={{ minWidth: 650 }} aria-label="simple table">
+						<TableHead>
+							<TableRow>
+								<TableCell>Transaction Name</TableCell>
+								<TableCell>Amount</TableCell>
+								<TableCell align="left">Date</TableCell>
+								<TableCell align="left">Transaction Type</TableCell>
+								<TableCell align="left">Category</TableCell>
 							</TableRow>
-						))}
-					</TableBody>
-				</Table>
-			</TableContainer>
+						</TableHead>
+						<TableBody style={{ color: 'white' }}>
+							{rows.map((row) => (
+								<TableRow
+									key={row.name}
+									sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+								>
+									<TableCell component="th" scope="row">
+										{row.name}
+									</TableCell>
+									<TableCell align="left">{row.amount}</TableCell>
+									<TableCell align="left">{row.date}</TableCell>
+									<TableCell align="left">
+										<span className="status" style={makeStyle(row.type)}>
+											{row.type}
+										</span>
+									</TableCell>
+									<TableCell align="left">{row.category}</TableCell>
+								</TableRow>
+							))}
+						</TableBody>
+					</Table>
+				</TableContainer>
+			) : (
+				<span>No Records Found</span>
+			)}
 		</div>
 	);
 }

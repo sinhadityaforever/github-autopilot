@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './ExpenseCard.css';
-import { CircularProgressbar } from 'react-circular-progressbar';
-import 'react-circular-progressbar/dist/styles.css';
 import { motion, AnimateSharedLayout } from 'framer-motion';
-import { UilTimes } from '@iconscout/react-unicons';
-import Chart from 'react-apexcharts';
-import { TextField, Typography, Button, Input } from '@mui/material';
-import { UilCalendarAlt } from '@iconscout/react-unicons';
-import DatePicker from 'react-date-picker';
+import {
+	TextField,
+	Button,
+	Select,
+	MenuItem,
+	InputLabel,
+	FormControl
+} from '@mui/material';
 
 // parent Card
 
@@ -40,8 +41,14 @@ function CompactCard({ param }) {
 				<div className="title">
 					<span>{param.title}</span>
 				</div>
+				<div className="topIcon">
+					<Png size="2rem" />
+				</div>
 			</div>
-			<div className="input">
+			<div className="topInput">
+				<div className="expense-name">
+					<TextField label="Name" variant="standard"></TextField>
+				</div>
 				<div className="amount">
 					<TextField
 						variant="standard"
@@ -56,12 +63,9 @@ function CompactCard({ param }) {
 						}}
 					/>
 				</div>
-				<div className="date">
-					<UilCalendarAlt size="2rem" />
-				</div>
 			</div>
-			<div className="input">
-				<div className="amount">
+			<div className="bottomInput">
+				<div className="date">
 					<TextField
 						variant="standard"
 						type="date"
@@ -74,8 +78,23 @@ function CompactCard({ param }) {
 						}}
 					/>
 				</div>
-				<div className="date">
-					<Png size="2rem" />
+				<div className="category">
+					<FormControl fullWidth>
+						<InputLabel id="category">Category</InputLabel>
+						<Select
+							required
+							variant="standard"
+							labelId="category"
+							label="Category"
+						>
+							{/* <MenuItem value={'groceries'}>Groceries</MenuItem>
+							<MenuItem value={'clothes'}>Clothes</MenuItem>
+							<MenuItem value={'investments'}>Investment</MenuItem> */}
+							{param.categories.map((category) => {
+								return <MenuItem value={category}>{category}</MenuItem>;
+							})}
+						</Select>
+					</FormControl>
 				</div>
 			</div>
 			<Button className="add-button" variant="contained">

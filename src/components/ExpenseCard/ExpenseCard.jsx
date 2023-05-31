@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './ExpenseCard.css';
 import { motion, AnimateSharedLayout } from 'framer-motion';
 import {
@@ -9,6 +9,8 @@ import {
 	InputLabel,
 	FormControl
 } from '@mui/material';
+import { useAppDispatch } from '../../app/hooks';
+import { addTransaction } from '../../features/transactionState/transactionStateSlice';
 
 // parent Card
 
@@ -22,10 +24,39 @@ const ExpenseCard = (props) => {
 
 // Compact Card
 function CompactCard({ param }) {
+	const [name, setName] = useState('');
+	const [amount, setAmount] = useState(0);
+	const [category, setCategory] = useState('Other');
+	const [date, setDate] = useState();
+	const dispatch = useAppDispatch();
+	const nameHandler = (event) => {
+		setName(event.target.value);
+	};
+	const categoryHandler = (event) => {
+		setCategory(event.target.value);
+	};
+	const dateHandler = (event) => {
+		setDate(event.target.value);
+	};
+
 	const handleInputChange = (event) => {
 		const value = event.target.value;
 		const onlyNumbers = value.replace(/[^0-9]/g, ''); // Remove non-numeric characters
 		event.target.value = onlyNumbers;
+		setAmount(event.target.value);
+	};
+
+	const submitHandler = () => {
+		if (!name || !amount || !category || !date) return;
+		dispatch(
+			addTransaction({
+				name,
+				date,
+				type: param.type,
+				category,
+				amount
+			})
+		);
 	};
 
 	const Png = param.png;
@@ -47,7 +78,11 @@ function CompactCard({ param }) {
 			</div>
 			<div className="topInput">
 				<div className="expense-name">
-					<TextField label="Name" variant="standard"></TextField>
+					<TextField
+						label="Name"
+						variant="standard"
+						onChange={nameHandler}
+					></TextField>
 				</div>
 				<div className="amount">
 					<TextField
@@ -69,7 +104,7 @@ function CompactCard({ param }) {
 					<TextField
 						variant="standard"
 						type="date"
-						onInput={handleInputChange}
+						onInput={dateHandler}
 						sx={{
 							'& .MuiInputBase-root': {
 								background: 'transparent',
@@ -82,10 +117,12 @@ function CompactCard({ param }) {
 					<FormControl fullWidth>
 						<InputLabel id="category">Category</InputLabel>
 						<Select
+							onChange={categoryHandler}
 							required
 							variant="standard"
 							labelId="category"
 							label="Category"
+							value={category}
 						>
 							{/* <MenuItem value={'groceries'}>Groceries</MenuItem>
 							<MenuItem value={'clothes'}>Clothes</MenuItem>
@@ -97,7 +134,11 @@ function CompactCard({ param }) {
 					</FormControl>
 				</div>
 			</div>
-			<Button className="add-button" variant="contained">
+			<Button
+				onClick={submitHandler}
+				className="add-button"
+				variant="contained"
+			>
 				Add
 			</Button>
 		</motion.div>

@@ -4,8 +4,17 @@ import './Dashboard.css';
 import ExpenseCards from '../../components/ExpenseCards/ExpenseCards';
 import CategoryChart from '../../components/CategoryChart/CategoryChart';
 import ExpenseChart from '../../components/ExpenseChart/ExpenseChart';
-import { transactionsData } from '../../Data/Data';
+import { useAppSelector } from '../../app/hooks';
 const Dashboard = () => {
+	const transactionsData = useAppSelector(
+		(state) => state.transactionState.transactions
+	);
+
+	const tableTransactionsData = [...transactionsData];
+	tableTransactionsData.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+	const recentTransactions = tableTransactionsData.slice(0, 9);
+
 	return (
 		<div className="Dashboard">
 			<h1>Dashboard</h1>
@@ -15,7 +24,7 @@ const Dashboard = () => {
 			</div>
 
 			<div className="bottomDiv">
-				<Table rows={transactionsData} />
+				<Table rows={recentTransactions} />
 				<CategoryChart transactionsData={transactionsData} />
 			</div>
 		</div>

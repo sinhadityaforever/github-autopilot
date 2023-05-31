@@ -77,7 +77,7 @@ export const cardsData = [
 				data: [10, 100, 50, 70, 80, 30, 40]
 			}
 		]
-	},
+	}
 	// {
 	// 	title: 'Expenses',
 	// 	color: {
@@ -104,7 +104,8 @@ export const expenseCardData = [
 			backGround: 'linear-gradient(180deg, #bb67ff 0%, #c484f3 100%)',
 			boxShadow: '0px 10px 20px 0px #e0c6f5'
 		},
-		png: UilMoneyWithdraw
+		png: UilMoneyWithdraw,
+		type: 'income'
 	},
 	{
 		title: 'Add Expense',
@@ -112,7 +113,8 @@ export const expenseCardData = [
 			backGround: 'linear-gradient(180deg, #FF919D 0%, #FC929D 100%)',
 			boxShadow: '0px 10px 20px 0px #FDC0C7'
 		},
-		png: UilMoneyInsert
+		png: UilMoneyInsert,
+		type: 'expense'
 	}
 ];
 

@@ -7,6 +7,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import './Table.css';
+import { Card } from '@mui/material';
 
 const makeStyle = (type) => {
 	if (type === 'income') {
@@ -29,9 +30,15 @@ export default function BasicTable({ rows }) {
 			{rows && rows.length > 0 ? (
 				<TableContainer
 					component={Paper}
-					style={{ boxShadow: '0px 13px 20px 0px #80808029' }}
+					style={{
+						boxShadow: '0px 13px 20px 0px #80808029',
+						maxHeight: '15rem'
+					}}
 				>
-					<Table sx={{ minWidth: 650 }} aria-label="simple table">
+					<Table
+						sx={{ minWidth: 650, maxHeight: '10rem' }}
+						aria-label="simple table"
+					>
 						<TableHead>
 							<TableRow>
 								<TableCell>Transaction Name</TableCell>

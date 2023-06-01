@@ -7,7 +7,8 @@ import {
 	UilChart,
 	UilComparison,
 	UilMoneyInsert,
-	UilMoneyWithdraw
+	UilMoneyWithdraw,
+	UilUser
 } from '@iconscout/react-unicons';
 import { format } from 'date-fns';
 
@@ -33,6 +34,10 @@ export const SidebarData = [
 	{
 		icon: UilComparison,
 		heading: 'Insights'
+	},
+	{
+		icon: UilUser,
+		heading: 'Profile'
 	}
 	// {
 	// 	icon: UilPackage,

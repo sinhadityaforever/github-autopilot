@@ -5,6 +5,7 @@
 	justify-content: space-evenly;
 	overflow-y: auto;
 	scrollbar-width: none;
+	color: white;
 }
 
 .topDiv {

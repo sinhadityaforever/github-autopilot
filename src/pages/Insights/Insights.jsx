@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import Chart from 'react-apexcharts';
-import Histogram from '../../components/Histogram/Histogram';
+
 import Progresschart from '../../components/Progresschart/Progresschart';
 import ApexCharts from 'apexcharts';
 import './Insights.css';
+
+
+ //stogram from '../../components/Histogram/Histogram';
 
 function Insights() {
 	return (
@@ -18,6 +21,7 @@ function Insights() {
 </div>
 			
 		</div>
+		
 	);
 }
 

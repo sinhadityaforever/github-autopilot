@@ -22,9 +22,11 @@ function ExpenseChart({ transactionsData }) {
 			}
 		],
 		options: {
+			colors: ['#03DAC5'],
 			chart: {
 				type: 'bar',
-				height: 350
+				height: 350,
+				foreColor: 'white'
 			},
 			plotOptions: {
 				bar: {
@@ -44,6 +46,7 @@ function ExpenseChart({ transactionsData }) {
 	return (
 		<div>
 			<ReactApexChart
+				style={{ marginTop: '5rem' }}
 				options={initializer.options}
 				series={initializer.series}
 				type="bar"

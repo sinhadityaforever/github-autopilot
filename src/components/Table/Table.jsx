@@ -12,13 +12,13 @@ import { Card } from '@mui/material';
 const makeStyle = (type) => {
 	if (type === 'income') {
 		return {
-			background: 'rgb(145 254 159 / 50%)',
-			color: 'green'
+			background: '#03DAC5',
+			color: 'black'
 		};
 	} else if (type === 'expense') {
 		return {
-			background: '#ffadad8f',
-			color: 'red'
+			background: '#BB86FC',
+			color: 'black'
 		};
 	}
 };
@@ -38,33 +38,48 @@ export default function BasicTable({ rows }) {
 					<Table
 						sx={{ minWidth: 650, maxHeight: '10rem' }}
 						aria-label="simple table"
+						style={{ backgroundColor: '#616161' }}
 					>
 						<TableHead>
 							<TableRow>
-								<TableCell>Transaction Name</TableCell>
-								<TableCell>Amount</TableCell>
-								<TableCell align="left">Date</TableCell>
-								<TableCell align="left">Transaction Type</TableCell>
-								<TableCell align="left">Category</TableCell>
+								<TableCell sx={{ color: 'white' }}>Transaction Name</TableCell>
+								<TableCell sx={{ color: 'white' }}>Amount</TableCell>
+								<TableCell sx={{ color: 'white' }} align="left">
+									Date
+								</TableCell>
+								<TableCell sx={{ color: 'white' }} align="left">
+									Transaction Type
+								</TableCell>
+								<TableCell sx={{ color: 'white' }} align="left">
+									Category
+								</TableCell>
 							</TableRow>
 						</TableHead>
 						<TableBody style={{ color: 'white' }}>
 							{rows.map((row) => (
 								<TableRow
 									key={row.name}
-									sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+									sx={{
+										'&:last-child td, &:last-child th': { border: 0 }
+									}}
 								>
-									<TableCell component="th" scope="row">
+									<TableCell sx={{ color: 'white' }} component="th" scope="row">
 										{row.name}
 									</TableCell>
-									<TableCell align="left">{row.amount}</TableCell>
-									<TableCell align="left">{row.date}</TableCell>
-									<TableCell align="left">
+									<TableCell sx={{ color: 'white' }} align="left">
+										{row.amount}
+									</TableCell>
+									<TableCell sx={{ color: 'white' }} align="left">
+										{row.date}
+									</TableCell>
+									<TableCell sx={{ color: 'white' }} align="left">
 										<span className="status" style={makeStyle(row.type)}>
 											{row.type}
 										</span>
 									</TableCell>
-									<TableCell align="left">{row.category}</TableCell>
+									<TableCell sx={{ color: 'white' }} align="left">
+										{row.category}
+									</TableCell>
 								</TableRow>
 							))}
 						</TableBody>

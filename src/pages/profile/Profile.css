@@ -4,6 +4,7 @@
 	justify-content: space-evenly;
 	width: 107%;
 	overflow-x: hidden;
+	color: white;
 }
 
 .edit-profile {
@@ -23,6 +24,7 @@
 	padding: 1rem;
 	display: flex;
 	flex-direction: column;
+	background-color: rgb(86, 85, 85);
 	box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
 	border-radius: 5px;
 }
@@ -72,7 +74,7 @@
 
 .detail-text {
 	font-size: 0.9rem;
-	color: grey;
+	color: rgb(202, 202, 202);
 	text-align: center;
 	margin-left: 1.5rem;
 }

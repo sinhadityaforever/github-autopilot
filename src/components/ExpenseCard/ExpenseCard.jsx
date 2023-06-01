@@ -22,6 +22,18 @@ const ExpenseCard = (props) => {
 	);
 };
 
+const lightColor = {
+	input: {
+		color: 'white',
+		'&::placeholder': {
+			opacity: 1
+		}
+	},
+	label: {
+		color: 'white'
+	}
+};
+
 // Compact Card
 function CompactCard({ param }) {
 	const [name, setName] = useState('');
@@ -64,8 +76,8 @@ function CompactCard({ param }) {
 		<motion.div
 			className="CompactCard"
 			style={{
-				background: param.color.backGround,
-				boxShadow: param.color.boxShadow
+				background: '#BB86FC'
+				// boxShadow: param.color.boxShadow
 			}}
 		>
 			<div className="topDiv">
@@ -79,6 +91,7 @@ function CompactCard({ param }) {
 			<div className="topInput">
 				<div className="expense-name">
 					<TextField
+						sx={lightColor}
 						label="Name"
 						variant="standard"
 						onChange={nameHandler}
@@ -90,12 +103,7 @@ function CompactCard({ param }) {
 						type="text"
 						label="Amount"
 						onInput={handleInputChange}
-						sx={{
-							'& .MuiInputBase-root': {
-								background: 'transparent',
-								boxShadow: 'none'
-							}
-						}}
+						sx={lightColor}
 					/>
 				</div>
 			</div>
@@ -105,18 +113,16 @@ function CompactCard({ param }) {
 						variant="standard"
 						type="date"
 						onInput={dateHandler}
-						sx={{
-							'& .MuiInputBase-root': {
-								background: 'transparent',
-								boxShadow: 'none'
-							}
-						}}
+						sx={lightColor}
 					/>
 				</div>
 				<div className="category">
 					<FormControl fullWidth>
 						<InputLabel id="category">Category</InputLabel>
 						<Select
+							sx={{
+								color: 'white'
+							}}
 							onChange={categoryHandler}
 							required
 							variant="standard"
@@ -138,6 +144,10 @@ function CompactCard({ param }) {
 				onClick={submitHandler}
 				className="add-button"
 				variant="contained"
+				sx={{
+					backgroundColor: '#1D1D1D',
+					':hover': { backgroundColor: '#636363' }
+				}}
 			>
 				Add
 			</Button>

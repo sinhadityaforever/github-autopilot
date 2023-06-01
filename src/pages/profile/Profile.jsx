@@ -4,7 +4,20 @@ import './Profile.css';
 import img1 from '../../imgs/img1.png';
 import { UilUserCircle } from '@iconscout/react-unicons';
 import { UilCameraChange } from '@iconscout/react-unicons';
+import { style } from '@mui/system';
 function Profile() {
+	const lightColor = {
+		borderColor: 'white',
+		input: {
+			color: 'white',
+			'&::placeholder': {
+				opacity: 1
+			}
+		},
+		label: {
+			color: 'white'
+		}
+	};
 	return (
 		<div className="profile">
 			<div className="edit-profile">
@@ -23,12 +36,13 @@ function Profile() {
 								style={{ marginTop: '10px' }}
 								placeholder="First Name"
 								fullWidth
-								variant="outlined"
+								sx={lightColor}
 							/>
 						</div>
 						<div className="right-field">
 							<span>Last Name</span>
 							<TextField
+								sx={lightColor}
 								style={{ marginTop: '10px' }}
 								placeholder="Last Name"
 								fullWidth
@@ -43,11 +57,13 @@ function Profile() {
 								placeholder="Email Address"
 								fullWidth
 								variant="outlined"
+								sx={lightColor}
 							/>
 						</div>
 						<div className="right-field">
 							<span>Phone Number</span>
 							<TextField
+								sx={lightColor}
 								style={{ marginTop: '10px' }}
 								placeholder="Phone Number"
 								fullWidth
@@ -58,6 +74,8 @@ function Profile() {
 						<div className="left-field">
 							<span>Address</span>
 							<TextField
+								placeholder="Address"
+								sx={lightColor}
 								style={{ marginTop: '10px' }}
 								fullWidth
 								variant="outlined"
@@ -71,21 +89,30 @@ function Profile() {
 						<div className="left-field">
 							<span>Country</span>
 							<TextField
+								sx={lightColor}
 								style={{ marginTop: '10px' }}
 								fullWidth
 								variant="outlined"
+								placeholder="Country"
 							/>
 						</div>
 						<div className="right-field">
 							<span>Postal Code</span>
-							<TextField style={{ marginTop: '10px' }} fullWidth />
+							<TextField
+								sx={lightColor}
+								style={{ marginTop: '10px' }}
+								fullWidth
+								placeholder="Postal Code"
+							/>
 						</div>
 					</div>
 					<Button
 						sx={{
+							backgroundColor: '#03DAC6',
 							width: '7rem',
 							alignSelf: 'flex-end',
-							margin: '1rem'
+							margin: '1rem',
+							color: 'black'
 						}}
 						variant="contained"
 					>

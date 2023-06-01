@@ -1,6 +1,7 @@
 .Budget {
 	overflow-y: auto;
 	scrollbar-width: none;
+	color: white;
 }
 
 button:hover {
@@ -50,16 +51,12 @@ button {
 	display: relative;
 }
 
-
-.flex-container{
+.flex-container {
 	display: flex;
 	margin-top: 5px;
 }
 
-
-
-.green{
-
+.green {
 	color: #35c33a;
 	font-family: 'Inter', sans-serif;
 	margin-left: 600px;
@@ -67,10 +64,6 @@ button {
 	font-weight: 500;
 }
 
-
-.spaces{
-  margin-top: 13px;
+.spaces {
+	margin-top: 13px;
 }
-
-
-

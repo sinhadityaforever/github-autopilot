@@ -23,12 +23,70 @@ const initialState = {
 			category: 'Food',
 			amount: 320
 		},
+
 		{
-			name: 'Salary',
-			date: '2021-5-5',
+			name: 'Groceries',
+			date: '2021-05-10',
+			type: 'expense',
+			category: 'Food',
+			amount: 150
+		},
+		{
+			name: 'Movie Tickets',
+			date: '2021-05-15',
+			type: 'expense',
+			category: 'Entertainment',
+			amount: 50
+		},
+		{
+			name: 'Clothing Shopping',
+			date: '2021-05-20',
+			type: 'expense',
+			category: 'Clothes',
+			amount: 200
+		},
+		{
+			name: 'Doctor',
+			date: '2021-05-25',
+			type: 'expense',
+			category: 'Health',
+			amount: 80
+		},
+		{
+			name: 'Birthday Gift',
+			date: '2021-05-28',
+			type: 'expense',
+			category: 'Gifts',
+			amount: 30
+		},
+
+		{
+			name: 'Freelance Work',
+			date: '2021-05-05',
 			type: 'income',
 			category: 'Business',
-			amount: 25000
+			amount: 500
+		},
+		{
+			name: 'Investment Dividends',
+			date: '2021-05-12',
+			type: 'income',
+			category: 'Investments',
+			amount: 300
+		},
+		{
+			name: 'Salary',
+			date: '2021-05-25',
+			type: 'income',
+			category: 'Salary',
+			amount: 350
+		},
+		{
+			name: 'Side Gig',
+			date: '2021-05-29',
+			type: 'income',
+			category: 'Other',
+			amount: 200
 		}
 	]
 };

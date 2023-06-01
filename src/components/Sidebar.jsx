@@ -5,6 +5,7 @@ import { UilSignOutAlt } from '@iconscout/react-unicons';
 import { SidebarData } from '../Data/Data';
 import { UilBars } from '@iconscout/react-unicons';
 import { motion } from 'framer-motion';
+import { UilUniversity } from '@iconscout/react-unicons';
 
 const Sidebar = ({ onChildProp }) => {
 	const [selected, setSelected] = useState(0);
@@ -36,7 +37,7 @@ const Sidebar = ({ onChildProp }) => {
 			>
 				{/* logo */}
 				<div className="logo">
-					<img src={Logo} alt="logo" />
+					<UilUniversity size="3rem" />
 					<span>
 						Sh<span>o</span>ps
 					</span>

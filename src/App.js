@@ -1,5 +1,7 @@
 import { useState } from 'react';
+import { Provider } from 'react-redux';
 import './App.css';
+import { store } from './app/store';
 import RightSide from './components/RigtSide/RightSide';
 import Sidebar from './components/Sidebar';
 import Budget from './pages/Budget/Budget';
@@ -26,14 +28,16 @@ function App() {
 	};
 
 	return (
-		<div className="App">
-			<div className="AppGlass">
-				<Sidebar onChildProp={handleChildProp} />
-				{/* <Dashboard /> */}
-				{renderComponent()}
-				{/* <RightSide /> */}
+		<Provider store={store}>
+			<div className="App">
+				<div className="AppGlass">
+					<Sidebar onChildProp={handleChildProp} />
+					{/* <Dashboard /> */}
+					{renderComponent()}
+					{/* <RightSide /> */}
+				</div>
 			</div>
-		</div>
+		</Provider>
 	);
 }
 

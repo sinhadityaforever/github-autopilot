@@ -3,9 +3,9 @@
 	scrollbar-width: none;
 }
 
-button:hover {
+/* :hover {
 	background-color: #29d32f;
-}
+}button */
 
 h4 {
 	font-family: 'Inter', sans-serif;
@@ -46,8 +46,27 @@ input {
 	margin-top: 75px;
 }
 
+.inline{
+	display: inline;
+}
+
 button {
-	display: relative;
+	
+	background-color: #4c5954;
+  border: none;
+  color: white;
+  padding: 17px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 4px;
+	border-radius: 15px;
+	cursor: pointer;
+}
+
+button:hover {
+	background-color: #131613;
 }
 
 
@@ -72,5 +91,36 @@ button {
   margin-top: 13px;
 }
 
+
+.close{
+
+	display: none;
+
+}
+
+.margin{
+	margin-top: 15px;
+	margin-left: 8px;
+
+}
+
+.btnstyle{
+
+	
+    cursor: pointer;
+
+}
+
+
+
+.box{
+  
+	color: #0c0e0c;
+	font-family: 'Inter', sans-serif;
+	margin-left: 600px;
+	margin-top: 17px;
+	font-weight: 500;
+
+}
 
 

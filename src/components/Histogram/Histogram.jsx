@@ -1,53 +1,106 @@
-import React, { Component } from "react";
-import Chart from "react-apexcharts";
+import React, { useEffect, useState } from 'react';
+import 'apexcharts/dist/apexcharts.css';
+import ApexCharts from 'apexcharts'
 
-
-	
-
-
-
-	
-
-class Histogram extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      options: {
+const Histogram = () => {
+  const [chart, setChart] = useState(null);
+useEffect(() => {
+    const options  = {
+      series: [{
+        name: 'Inflation',
+        data: [2.3, 3.1, 4.0, 10.1, 4.0, 3.6, 3.2, 2.3, 1.4, 0.8, 0.5, 0.2]
+      }],
         chart: {
-          id: "basic-bar"
-        },
-        xaxis: {
-          categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998]
+        height: 550,
+        type: 'bar',
+        width : 1000,
+      },
+      plotOptions: {
+        bar: {
+          borderRadius: 10,
+          dataLabels: {
+            position: 'top', // top, center, bottom
+          },
         }
       },
-      series: [
-        {
-          name: "series-1",
-          data: [30, 40, 45, 50, 49, 60, 70, 91]
+      dataLabels: {
+        enabled: true,
+        formatter: function (val) {
+          return val + "k";
+        },
+        offsetY: -20,
+        style: {
+          fontSize: '12px',
+          colors: ["#304758"]
         }
-      ]
-    };
-}
-  
+      },
+      
+      xaxis: {
+        categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        position: 'top',
+        axisBorder: {
+          show: false
+        },
+        axisTicks: {
+          show: false
+        },
+        crosshairs: {
+          fill: {
+            type: 'gradient',
+            gradient: {
+              colorFrom: '#D8E3F0',
+              colorTo: '#BED1E6',
+              stops: [0, 200],
+              opacityFrom: 0.4,
+              opacityTo: 0.5,
+            }
+          }
+        },
+        tooltip: {
+          enabled: true,
+        }
+      },
+      yaxis: {
+        axisBorder: {
+          show: false
+        },
+        axisTicks: {
+          show: false,
+        },
+        labels: {
+          show: false,
+          formatter: function (val) {
+            return val + "k";
+          }
+        }
+      
+      },
+      title: {
+        
+        floating: true,
+        offsetY: 330,
+        align: 'center',
+        style: {
+          color: '#444'
+        }
+      }
+      };
 
-  render() {
-    return (
-      <div className="app">
-        <div className="row">
-          <div className="mixed-chart">
-            <Chart
-              options={this.state.options}
-              series={this.state.series}
-              type="bar"
-              width="800"
-            />
-          </div>
-        </div>
-      </div>
-    );
-	}
-}
+      var chart = new ApexCharts(document.querySelector("#chart"), options);
+      chart.render();
+     
+
+     return () => {
+      if (chart) {
+        chart.destroy();
+      }
+    };
+  }, []);
+return (
+    <div id="chart"></div>
+    
+  );
+};
   
 
 

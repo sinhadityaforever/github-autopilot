@@ -7,7 +7,8 @@ import {
 	UilChart,
 	UilComparison,
 	UilMoneyInsert,
-	UilMoneyWithdraw
+	UilMoneyWithdraw,
+	UilUser
 } from '@iconscout/react-unicons';
 import { format } from 'date-fns';
 
@@ -33,6 +34,10 @@ export const SidebarData = [
 	{
 		icon: UilComparison,
 		heading: 'Insights'
+	},
+	{
+		icon: UilUser,
+		heading: 'Profile'
 	}
 	// {
 	// 	icon: UilPackage,
@@ -49,8 +54,8 @@ export const cardsData = [
 	{
 		title: 'Expenses',
 		color: {
-			backGround: 'linear-gradient(180deg, #bb67ff 0%, #c484f3 100%)',
-			boxShadow: '0px 10px 20px 0px #e0c6f5'
+			backGround: '#BB86FC'
+			//boxShadow: '0px 10px 20px 0px #e0c6f5'
 		},
 		barValue: 70,
 		value: '25,970',

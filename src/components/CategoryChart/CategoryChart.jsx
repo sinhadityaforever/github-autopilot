@@ -27,7 +27,8 @@ function CategoryChart({ transactionsData }) {
 		options: {
 			labels: expenseCategories,
 			chart: {
-				type: 'donut'
+				type: 'donut',
+				foreColor: 'white'
 			},
 			responsive: [
 				{

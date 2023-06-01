@@ -1,6 +1,7 @@
 .Budget {
 	overflow-y: auto;
 	scrollbar-width: none;
+	color: white;
 }
 
 /* :hover {
@@ -51,22 +52,7 @@ input {
 }
 
 button {
-	
-	background-color: #4c5954;
-  border: none;
-  color: white;
-  padding: 17px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 4px;
-	border-radius: 15px;
-	cursor: pointer;
-}
-
-button:hover {
-	background-color: #131613;
+	display: relative;
 }
 
 
@@ -75,10 +61,7 @@ button:hover {
 	margin-top: 5px;
 }
 
-
-
-.green{
-
+.green {
 	color: #35c33a;
 	font-family: 'Inter', sans-serif;
 	margin-left: 600px;
@@ -86,9 +69,8 @@ button:hover {
 	font-weight: 500;
 }
 
-
-.spaces{
-  margin-top: 13px;
+.spaces {
+	margin-top: 13px;
 }
 
 

@@ -5,6 +5,7 @@
 	width: 107%;
 	overflow-x: hidden;
 	color: white;
+	scrollbar-width: none;
 }
 
 .edit-profile {
@@ -81,4 +82,26 @@
 
 .edit-picture {
 	cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+	.profile {
+		flex-direction: column-reverse;
+		overflow-y: auto;
+		height: 100%;
+	}
+	.detail-text {
+		margin-left: -3rem;
+	}
+	.edit-profile {
+		margin-left: 0;
+		flex: 1.5 1;
+		width: 90%;
+		height: 100%;
+		overflow-x: hidden;
+	}
+	.edit-profile-field-container {
+		margin-left: 1rem;
+		font-size: smaller;
+	}
 }

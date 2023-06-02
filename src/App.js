@@ -7,7 +7,9 @@ import Sidebar from './components/Sidebar';
 import Budget from './pages/Budget/Budget';
 import Dashboard from './pages/Dashboard/Dashboard';
 import Insights from './pages/Insights/Insights';
-import Profile from './pages/profile/Profile';
+import Profile from './pages/Profile/Profile';
+import LoginPage from './pages/Loginpage/Loginpage';
+
 
 function App() {
 	const [sidebarOption, setSidebarOption] = useState(0);
@@ -23,8 +25,12 @@ function App() {
 				return <Budget />;
 			case 2:
 				return <Insights />;
-			case 3:
+				case 3:
 				return <Profile />;
+				case 3:
+				return <LoginPage />;
+			
+			
 
 			default:
 				return <Dashboard />;

@@ -23,9 +23,23 @@ function ExpenseChart({ transactionsData }) {
 		],
 		options: {
 			colors: ['#03DAC5'],
+			title: {
+				text: 'This Month',
+				align: 'left',
+				margin: 10,
+				offsetX: 10,
+				offsetY: 0,
+				floating: false,
+				style: {
+					fontSize: '20px',
+					fontWeight: 'bold',
+					fontFamily: undefined,
+					color: 'white'
+				}
+			},
 			chart: {
 				type: 'bar',
-				height: 350,
+				height: 400,
 				foreColor: 'white'
 			},
 			plotOptions: {

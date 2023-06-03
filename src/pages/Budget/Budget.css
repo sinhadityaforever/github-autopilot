@@ -180,8 +180,8 @@ button:hover {
 
   .grid-contain{
 	display: grid;
-	grid-template-columns: 70px 50px;
-	gap: 350px;
+	grid-template-columns: max-content 50px;
+	gap: 80px;
   }
 
   .overall{
@@ -191,6 +191,8 @@ button:hover {
 
   .up{
 	margin-top: 20px;
+	margin-left: 0px;
+	height: 40px;
   }
 
 

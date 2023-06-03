@@ -20,7 +20,7 @@ const FinanceScore = () => {
               }
             },
           },
-          labels: ['FinanceScore'],
+          labels: ['Budget Score: 70'],
           };
   
           var chart = new ApexCharts(document.querySelector("#chart"), options);

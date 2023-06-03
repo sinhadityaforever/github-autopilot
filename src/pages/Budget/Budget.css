@@ -12,7 +12,7 @@ h4 {
 	font-family: 'Inter', sans-serif;
 }
 
-input {
+/* input {
 	font-family: 'Inter', sans-serif;
 	font-size: 1.2rem;
 	border-radius: 5px;
@@ -22,7 +22,7 @@ input {
 	width: 98%;
 	height: 40px;
 	box-shadow: 0px 19px 60px rgb(0 0 0 / 8%);
-}
+} */
 
 .Budget {
 	align-items: center;
@@ -46,15 +46,24 @@ input {
 .space {
 	margin-top: 75px;
 }
-
 .inline{
-	display: inline;
+   display: inline;
+}
+
+.block{
+	display: block;
 }
 
 button {
 	display: relative;
+	margin: 4px;
+	border-radius: 5px;
+	cursor: pointer;
 }
 
+button:hover {
+	background-color: #4a4d4a;
+}
 
 .flex-container{
 	display: flex;
@@ -91,6 +100,7 @@ button {
 	
     cursor: pointer;
 
+
 }
 
 
@@ -106,3 +116,59 @@ button {
 }
 
 
+.Dashboard {
+	/* padding-top: 1rem; */
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	overflow-y: auto;
+	scrollbar-width: none;
+	color: white;
+}
+
+.topDiv {
+	align-self: flex-start;
+}
+
+.bottomDiv {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-self: space-between;
+}
+
+@media screen and (max-width: 1200px) {
+	.Dashboard {
+		justify-content: flex-start;
+		margin-top: 2rem;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.Dashboard {
+		align-items: center;
+	}
+}
+
+
+
+.style{
+	
+	padding: 5px;
+	border-radius: 5px;
+	border: 1px solid #f1e7e7f2;
+	width: 100px;
+	height: 30px;
+	box-shadow: 0px 19px 60px rgb(0 0 0 / 8%);
+	font-family: 'Inter', sans-serif;
+	font-size: 1rem;
+}
+
+
+.grid-container {
+	
+
+	display: grid;
+	grid-template-columns: 100px 100px 100px 100px;
+	gap: 20px 10px;
+  }

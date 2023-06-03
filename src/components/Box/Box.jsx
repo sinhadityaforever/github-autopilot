@@ -5,7 +5,7 @@ function Box(){
 
     return(
         <div className="change">
-            <input type="number" name="pin" size="4"></input>
+            <input type="number" name="pin" className="style"></input>
         </div>
     )
 }

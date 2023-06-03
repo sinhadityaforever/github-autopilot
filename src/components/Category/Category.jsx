@@ -18,19 +18,19 @@ const BUDGET_ITEMS = [
 		spent: 200
 	},
 	{
-		itemName: 'Video Games',
-		budgeted: 100,
-		spent: 200
+		itemName: 'Luxury',
+		budgeted: 200,
+		spent: 70
 	},
 	{
-		itemName: 'Video Games',
-		budgeted: 100,
-		spent: 200
+		itemName: 'Toiletries',
+		budgeted: 300,
+		spent: 150
 	},
 	{
-		itemName: 'Video Games',
-		budgeted: 100,
-		spent: 200
+		itemName: 'Travelling',
+		budgeted: 200,
+		spent: 130
 	}
 ];
 
@@ -74,11 +74,11 @@ const ProgressBar = ({ spent, budgeted }) => {
 };
 
 const Category = () => {
-	<div>
+	return (<div>
 		{BUDGET_ITEMS.map((item) => {
 			return <BudgetItem {...item} />;
 		})}
-	</div>;
+	</div>);
 };
 
 export default Category;

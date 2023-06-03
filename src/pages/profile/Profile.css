@@ -62,8 +62,7 @@
 
 .profile-picture {
 	margin-top: 2rem;
-	margin-left: 4rem;
-	width: 100%;
+	width: 15rem;
 	/* height: 100%; */
 	object-fit: cover;
 	border-radius: 50%;
@@ -82,6 +81,9 @@
 
 .edit-picture {
 	cursor: pointer;
+}
+.change-profile-picture {
+	margin-left: 13rem;
 }
 
 @media screen and (max-width: 768px) {
@@ -104,6 +106,13 @@
 		margin-left: 1rem;
 		font-size: smaller;
 	}
-
+	.profile-picture-container {
+		margin-left: 3.5rem;
+	}
+	.profile-picture {
+		width: 10rem;
+	}
+	.change-profile-picture {
+		margin-left: 9rem;
+	}
 }
-

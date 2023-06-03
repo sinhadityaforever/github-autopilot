@@ -122,10 +122,11 @@ function Profile() {
 			</div>
 			<div className="view-profile">
 				<div className="view-profile-container">
-					<div className="profile-picture">
-						<img src={img1} />
-
-						<UilCameraChange cursor="pointer"></UilCameraChange>
+					<div className="profile-picture-container">
+						<img className="profile-picture" src={img1} />
+						<div className="change-profile-picture">
+							<UilCameraChange cursor="pointer"></UilCameraChange>
+						</div>
 						<input
 							type="file"
 							accept="image/*"

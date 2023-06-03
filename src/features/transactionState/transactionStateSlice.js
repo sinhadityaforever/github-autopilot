@@ -88,7 +88,35 @@ const initialState = {
 			category: 'Other',
 			amount: 200
 		}
-	]
+	],
+	last5YearData: [
+		{
+			currentYear: true,
+			income: 400000,
+			expense: 200000
+		},
+		{
+			currentYear: false,
+			income: 400000,
+			expense: 300300
+		},
+		{
+			currentYear: false,
+			income: 500000,
+			expense: 400000
+		},
+		{
+			currentYear: false,
+			income: 600000,
+			expense: 400000
+		},
+		{
+			currentYear: false,
+			income: 650000,
+			expense: 400000
+		}
+	],
+	thisYearData: {}
 };
 
 const transactionStateSlice = createSlice({

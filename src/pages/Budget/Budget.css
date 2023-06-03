@@ -170,5 +170,27 @@ button:hover {
 
 	display: grid;
 	grid-template-columns: 100px 100px 100px 100px;
-	gap: 20px 10px;
+	gap: 100px;
   }
+
+
+  img{
+     width: 500px;
+  }
+
+  .grid-contain{
+	display: grid;
+	grid-template-columns: 70px 50px;
+	gap: 350px;
+  }
+
+  .overall{
+	margin-top: 50px;
+	width: 200px;
+  }
+
+  .up{
+	margin-top: 20px;
+  }
+
+

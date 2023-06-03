@@ -7,7 +7,7 @@ import Sidebar from './components/Sidebar';
 import Budget from './pages/Budget/Budget';
 import Dashboard from './pages/Dashboard/Dashboard';
 import Insights from './pages/Insights/Insights';
-import Profile from './pages/Profile/Profile';
+import Profile from './pages/profile/Profile';
 import LoginPage from './pages/Loginpage/Loginpage';
 
 

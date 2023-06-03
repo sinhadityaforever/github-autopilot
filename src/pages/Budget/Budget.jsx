@@ -1,17 +1,35 @@
-import React from 'react';
+import React,  { useState } from 'react';
 import Table from '../../components/Table/Table';
 import './Budget.css';
 import Cards from '../../components/Cards/Cards';
 import { Calculator, Fish } from "phosphor-react";
+import Box from '../../components/Box/Box';
+import Setit from '../../components/Setit/Setit';
+
 
 
 
 
 
 function Budget() {
-	const shoot = () => {
-		return this.parentElement.style.display='none';
+
+	const [isClicked, setClicked] = useState(false);
+	const [isCross, setCross] = useState(false);
+
+	// const shoot = () => {
+	// 	this.parentElement.style.display='none';
+	//   }
+
+	  function handleClick() {
+		setClicked(true);
 	  }
+
+	  function handleCross() {
+		setCross(true);
+	  }
+	
+
+
 
 	return (
 	
@@ -22,27 +40,32 @@ function Budget() {
 		<div className="flex-container">
 		<Calculator size={24} className="flex-child spaces"/>
 		<p className="flex-child">Overall Budget</p>
-		<p className="flex-child green">Set Now</p>
+        <div onClick={handleClick}>
+		{isClicked ? <Box/> : <Setit/>}
+		</div>
 		</div>
 		<br />
 	  </div>
          
 	  <h3>Category wise budget</h3>
-	    <div className="flex-container">
-		<Fish size={24} className="flex-child spaces"/>
-		<p className="flex-child">Food and drinks</p>
-		<p className="flex-child green">₹150</p>
-		<span class="closebtn" onClick={shoot}>&times;</span>
-		</div>
+	    <div className={isCross? "close flex-container" : "flex-container"}>
+		  <Fish size={24} className="flex-child spaces"/>
+		  <p className="flex-child">Food and drinks</p>
+		  <p className="flex-child green">₹150</p>
+		  <div onClick={handleCross} className="margin">
+		     <span className="btnstyle">&times;</span>
+		   </div>
+        </div>
 
 
 
 		
 		<br />
-		<button>Save</button>
+		<button>+</button>
+		<h4 className="inline">Add Category</h4>
 
 		
-		<Cards /> 
+		
 		
 
 

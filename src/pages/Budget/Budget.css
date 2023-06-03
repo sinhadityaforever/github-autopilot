@@ -4,9 +4,9 @@
 	color: white;
 }
 
-button:hover {
+/* :hover {
 	background-color: #29d32f;
-}
+}button */
 
 h4 {
 	font-family: 'Inter', sans-serif;
@@ -47,11 +47,16 @@ input {
 	margin-top: 75px;
 }
 
+.inline{
+	display: inline;
+}
+
 button {
 	display: relative;
 }
 
-.flex-container {
+
+.flex-container{
 	display: flex;
 	margin-top: 5px;
 }
@@ -67,3 +72,37 @@ button {
 .spaces {
 	margin-top: 13px;
 }
+
+
+.close{
+
+	display: none;
+
+}
+
+.margin{
+	margin-top: 15px;
+	margin-left: 8px;
+
+}
+
+.btnstyle{
+
+	
+    cursor: pointer;
+
+}
+
+
+
+.box{
+  
+	color: #0c0e0c;
+	font-family: 'Inter', sans-serif;
+	margin-left: 600px;
+	margin-top: 17px;
+	font-weight: 500;
+
+}
+
+

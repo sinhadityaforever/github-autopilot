@@ -60,15 +60,26 @@
 	overflow: auto;
 }
 
-@media screen and (max-width: 1200px) {
+/* @media screen and (max-width: 1200px) {
 	.AppGlass {
-		grid-template-columns: 10% 50% auto;
+		grid-template-columns: 11rem auto auto;
 		overflow-y: scroll;
 	}
-}
+} */
 
 @media screen and (max-width: 768px) {
+	.App {
+		padding: 0.5rem;
+	}
+
 	.AppGlass {
-		grid-template-columns: 1fr;
+		display: flex;
+		flex-direction: column;
+		/* height: auto;
+		width: auto; */
+		overflow: auto;
+		border-radius: 2rem;
+		gap: 16px;
+		overflow-x: hidden;
 	}
 }

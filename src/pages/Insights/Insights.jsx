@@ -15,6 +15,7 @@ import  StackedBarChart  from '../../components/Savingschart/Savingschart';
 
 
 
+
 function Insights() {
 	return (
 		<div className="container">
@@ -73,6 +74,7 @@ function Insights() {
 			
 		
 		
+
 	);
 }
 

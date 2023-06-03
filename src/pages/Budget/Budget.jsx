@@ -36,19 +36,29 @@ function Budget() {
 	const recentTransactions = tableTransactionsData.slice(0, 9);
 
 	return (
-		<div className="Budget">
-			<h1>Budget</h1>
+	<div className="Budget">
+		    <br/>
+		<div className="grid-contain">
+           
+		   <div>
+		   <h3>Budget</h3>
+		   <h4 className="overall">Overall Budget:</h4>	
+			<input type="number" className="block up" />
+            </div>
 
-			<h3>Set Overall Budget</h3>
-			<input type="number" />
+			<div>
 			<img src={meterImg} alt="Meter pic" />
+		     </div>
+
+		</div>
+			<br/>
 
 			<h4>Set your category-wise budget:</h4>
-
+            <br/>
 			<div className="grid-container">
-				<div>
-					<label for="category">Enter Category:</label>
-					<select name="category" id="category" className="style">
+				<div >
+					<label for="category" className="inline"></label>
+					 <select name="category" id="category" className="style">
 						<option value="Business">Business</option>
 						<option value="Investment">Investment</option>
 						<option value="Salary" selected>
@@ -81,8 +91,10 @@ function Budget() {
 					<p className="inline">Add Category</p>
 				</div>
 			</div>
-
+          <br/>
 			<Category />
+			<br/>
+			<br/>
 		</div>
 	);
 }

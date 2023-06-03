@@ -1,43 +1,35 @@
 import React, { useState } from 'react';
+import './Loginpage.css';
 
 const LoginPage = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-
-  const handleLogin = (e) => {
-    e.preventDefault();
-    // Perform login logic here
-    console.log('Username:', username);
-    console.log('Password:', password);
-    // Clear the input fields
-    setUsername('');
-    setPassword('');
-  };
-
   return (
-    <div>
-      <h1>Login Page</h1>
-      <form onSubmit={handleLogin}>
-        <div>
-          <label htmlFor="username">Username:</label>
-          <input
-            type="text"
-            id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
+    <div className="big-box">
+      <div className="the-box">
+        <input type="checkbox" id="chk" aria-hidden="true" />
+
+        <div className="signup">
+          <form>
+            <label htmlFor="chk" aria-hidden="true">
+              Sign up
+            </label>
+            <input type="text" name="txt" placeholder="User name" required="" />
+            <input type="email" name="email" placeholder="Email" required="" />
+            <input type="password" name="pswd" placeholder="Password" required="" />
+            <button>Sign up</button>
+          </form>
         </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+
+        <div className="login">
+          <form>
+            <label htmlFor="chk" aria-hidden="true">
+              Login
+            </label>
+            <input type="email" name="email" placeholder="Email" required="" />
+            <input type="password" name="pswd" placeholder="Password" required="" />
+            <button>Login</button>
+          </form>
         </div>
-        <button type="submit">Login</button>
-      </form>
+      </div>
     </div>
   );
 };

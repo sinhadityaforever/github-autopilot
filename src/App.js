@@ -27,7 +27,7 @@ function App() {
 				return <Insights />;
 				case 3:
 				return <Profile />;
-				case 3:
+				case 4:
 				return <LoginPage />;
 			
 			

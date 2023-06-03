@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import 'apexcharts/dist/apexcharts.css';
 import ApexCharts from 'apexcharts'
+import { colors } from '@mui/material';
 
 class Sparklines extends React.Component {
 constructor(props) {
@@ -37,13 +38,16 @@ renderChart() {
       group: 'sparklines',
       type: 'area',
       height: 160,
+     
       sparkline: {
-        enabled: true
+        enabled: true,
+        color : '#0000ff',
       },
       parentHeightOffset: 0
     },
     stroke: {
-      curve: 'straight'
+      curve: 'straight',
+      
     },
     fill: {
       opacity: 1
@@ -59,7 +63,7 @@ renderChart() {
     xaxis: {
       type: 'datetime'
     },
-    colors: ['#DCE6EC'],
+    // colors: ['#0000ff'],
     title: {
       text: 'Rs424,652',
       offsetX: 30,

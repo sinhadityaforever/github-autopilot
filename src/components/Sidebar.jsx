@@ -63,6 +63,7 @@ const Sidebar = ({ onChildProp }) => {
 
 					<div className="menuItem">
 						<UilSignOutAlt />
+						<span>Logout</span>
 					</div>
 				</div>
 			</motion.div>

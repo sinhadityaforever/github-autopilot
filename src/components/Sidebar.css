@@ -85,11 +85,14 @@
 	.sidebar {
 		position: fixed;
 		z-index: 9;
-		background: #ffe0e0;
+		background: #121212;
 		width: 55%;
 		padding-right: 1rem;
+		color: 'white';
 		height: 100%;
+		display: none;
 	}
+
 	.menuItem > span {
 		display: block;
 	}
@@ -98,14 +101,14 @@
 	}
 	.menu .menuItem:last-child {
 		position: relative;
-		margin-top: 6rem;
+		margin-top: 20rem;
 	}
 	.bars {
 		display: flex;
 		position: fixed;
 		top: 2rem;
 		left: 60%;
-		background: #ffe0e0;
+		background: #bb86fc;
 		padding: 10px;
 		border-radius: 10px;
 		z-index: 9;

@@ -61,7 +61,7 @@ function Profile() {
 							/>
 						</div>
 						<div className="right-field">
-							<span>Phone Number</span>
+							<span>Phone</span>
 							<TextField
 								sx={lightColor}
 								style={{ marginTop: '10px' }}

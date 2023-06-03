@@ -1,6 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
+
 function ExpenseChart({ transactionsData }) {
+	const [isMobile, setIsMobile] = useState(false);
+	useEffect(() => {
+		const handleResize = () => {
+			const isMobileView = window.matchMedia('(max-width: 768px)').matches;
+			setIsMobile(isMobileView);
+		};
+
+		// Initial check on component mount
+		handleResize();
+
+		// Add event listener for window resize
+		window.addEventListener('resize', handleResize);
+
+		// Clean up the event listener on component unmount
+		return () => {
+			window.removeEventListener('resize', handleResize);
+		};
+	}, []);
+
 	var expense = 0;
 	var income = 0;
 
@@ -23,9 +44,23 @@ function ExpenseChart({ transactionsData }) {
 		],
 		options: {
 			colors: ['#03DAC5'],
+			title: {
+				text: 'This Month',
+				align: 'left',
+				margin: 10,
+				offsetX: 10,
+				offsetY: 0,
+				floating: false,
+				style: {
+					fontSize: '20px',
+					fontWeight: 'bold',
+					fontFamily: undefined,
+					color: 'white'
+				}
+			},
 			chart: {
 				type: 'bar',
-				height: 350,
+
 				foreColor: 'white'
 			},
 			plotOptions: {
@@ -50,8 +85,8 @@ function ExpenseChart({ transactionsData }) {
 				options={initializer.options}
 				series={initializer.series}
 				type="bar"
-				height={200}
-				width={450}
+				height={isMobile ? '200' : 200}
+				width={isMobile ? '300' : 450}
 			/>
 		</div>
 	);

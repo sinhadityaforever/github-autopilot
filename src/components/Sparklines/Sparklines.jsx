@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import 'apexcharts/dist/apexcharts.css';
 import ApexCharts from 'apexcharts';
+import { useAppSelector } from '../../app/hooks';
 
 class Sparklines extends React.Component {
 	constructor(props) {
@@ -13,10 +14,50 @@ class Sparklines extends React.Component {
 	}
 
 	renderChart() {
-		var sparklineData = [
-			47, 45, 54, 38, 56, 24, 65, 31, 37, 39, 62, 51, 35, 41, 35, 27, 93, 53,
-			61, 27, 54, 43, 19, 46
+		const data = this.props.thisYearData;
+		const thisYearData = [...data];
+		const income = thisYearData
+			.sort((a, b) => b.index - a.index)
+			.map((item) => item.income);
+
+		const total = income.reduce(
+			(accumulator, currentValue) => accumulator + currentValue,
+			0
+		);
+		const formattedMoney = total.toLocaleString('en-US', {
+			style: 'currency',
+			currency: 'INR',
+			maximumFractionDigits: 0
+		});
+
+		const monthNames = [
+			'Jan',
+			'Feb',
+			'Mar',
+			'Apr',
+			'May',
+			'Jun',
+			'Jul',
+			'Aug',
+			'Sep',
+			'Oct',
+			'Nov',
+			'Dec'
 		];
+
+		const currentDate = new Date();
+		const lastTwelveMonths = [];
+
+		for (let i = 11; i >= 0; i--) {
+			const monthIndex = currentDate.getMonth() - 1 - i;
+			const year =
+				currentDate.getFullYear() +
+				Math.floor((currentDate.getMonth() - 1 - i) / 12);
+			const month = monthNames[monthIndex >= 0 ? monthIndex : monthIndex + 12];
+			lastTwelveMonths.push(month + ' ' + year);
+		}
+
+		var sparklineData = income;
 
 		var spark1 = {
 			chart: {
@@ -37,20 +78,17 @@ class Sparklines extends React.Component {
 			},
 			series: [
 				{
-					name: 'Sales',
+					name: 'Income',
 					data: sparklineData
 				}
 			],
-			labels: [...Array(24).keys()].map((n) => `2018-09-0${n + 1}`),
+			labels: lastTwelveMonths,
 			yaxis: {
 				min: 0
 			},
-			xaxis: {
-				type: 'datetime'
-			},
 			colors: ['#5DEBB8'],
 			title: {
-				text: 'Rs 424,652',
+				text: formattedMoney,
 				offsetX: 30,
 				style: {
 					fontSize: '24px',

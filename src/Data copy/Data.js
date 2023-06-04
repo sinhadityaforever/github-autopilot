@@ -104,19 +104,21 @@ export const cardsData = [
 
 export const expenseCardData = [
 	{
-		title: 'Add Income',
-		color: {
-			backGround: 'linear-gradient(180deg, #bb67ff 0%, #c484f3 100%)',
-			boxShadow: '0px 10px 20px 0px #e0c6f5'
+		title: 'Add Budget',
+		color:{
+		
+			backGround: 'linear-gradient(to right, rgb(3, 218, 197) 0%, rgb(255, 255, 255) 100%);',
 		},
+			// boxShadow: '0px 10px 20px 0px #e0c6f5'
+		
 		png: UilMoneyWithdraw,
 		type: 'income'
-	},
-	{
-		title: 'Add Expense',
+	}
+	,{
+		title: 'Add Savings',
 		color: {
-			 backGround: 'linear-gradient(180deg, #FF919D 0%, #FC929D 100%)',
-			boxShadow: '0px 10px 20px 0px #FDC0C7'
+			backGround: 'linear-gradient(to right, rgb(3, 218, 197) 0%, rgb(255, 255, 255) 100%);',
+			 boxShadow: '0px 10px 20px 0px #FDC0C7'
 		},
 		png: UilMoneyInsert,
 		type: 'expense'

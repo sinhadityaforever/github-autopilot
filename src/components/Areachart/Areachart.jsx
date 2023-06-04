@@ -6,15 +6,15 @@ const AreaChart = ({ lastFiveYearData }) => {
 	const date = new Date();
 	const thisYear = date.getFullYear();
 	const incomes = data
-		.sort((a, b) => b.index - a.index)
+		.sort((a, b) => a.index - b.index)
 		.map((item) => item.income);
 
 	const expenses = data
-		.sort((a, b) => b.index - a.index)
+		.sort((a, b) => a.index - b.index)
 		.map((item) => item.expense);
 
 	const savings = data
-		.sort((a, b) => b.index - a.index)
+		.sort((a, b) => a.index - b.index)
 		.map((item) => item.income - item.expense);
 
 	const years = [

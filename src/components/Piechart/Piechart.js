@@ -107,7 +107,7 @@ const DonutChart = ({ sixMonthsCategoryData, categories }) => {
 		return () => {
 			chart.destroy();
 		};
-	}, []);
+	}, [categoriesName, values]);
 
 	return <div id="chart" ref={chartRef}></div>;
 };

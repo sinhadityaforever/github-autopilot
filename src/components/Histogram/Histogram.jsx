@@ -9,11 +9,11 @@ const Histogram = ({ lastFiveYearData }) => {
 	const data = [...lastFiveYearData];
 	const thisYear = date.getFullYear();
 	const incomes = data
-		.sort((a, b) => b.index - a.index)
+		.sort((a, b) => a.index - b.index)
 		.map((item) => item.income);
 
 	const expenditures = data
-		.sort((a, b) => b.index - a.index)
+		.sort((a, b) => a.index - b.index)
 		.map((item) => item.expense);
 
 	useEffect(() => {
@@ -93,7 +93,7 @@ const Histogram = ({ lastFiveYearData }) => {
 		return () => {
 			chart.destroy();
 		};
-	}, []);
+	}, [expenditures, incomes, thisYear]);
 
 	return <div id="chart" ref={chartRef}></div>;
 };

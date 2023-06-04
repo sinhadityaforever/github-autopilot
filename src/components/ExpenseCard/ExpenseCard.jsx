@@ -37,6 +37,9 @@ const lightColor = {
 
 // Compact Card
 function CompactCard({ param }) {
+	const currDate = new Date();
+	const prevSixMonthDate = new Date(currDate.setMonth(currDate.getMonth() - 5));
+	const currMonth = currDate.getMonth();
 	const [name, setName] = useState('');
 	const [amount, setAmount] = useState(0);
 	const [category, setCategory] = useState('Other');
@@ -49,6 +52,8 @@ function CompactCard({ param }) {
 		setCategory(event.target.value);
 	};
 	const dateHandler = (event) => {
+		const selectedData = new Date(event.target.value);
+		console.log(currMonth - selectedData.getMonth());
 		setDate(event.target.value);
 	};
 
@@ -113,6 +118,11 @@ function CompactCard({ param }) {
 					<TextField
 						variant="standard"
 						type="date"
+						inputProps={{
+							max: new Date().toISOString().split('T')[0],
+							min: prevSixMonthDate.toISOString().split('T')[0]
+						}}
+						defaultValue={new Date().toISOString().split('T')[0]}
 						onInput={dateHandler}
 						sx={lightColor}
 					/>

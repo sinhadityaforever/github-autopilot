@@ -18,7 +18,7 @@ const initialState = {
 	transactions: [
 		{
 			name: 'Ordered Pizza',
-			date: '2021-5-5',
+			date: '2023-6-4',
 			type: 'expense',
 			category: 'Food',
 			amount: 320
@@ -26,35 +26,35 @@ const initialState = {
 
 		{
 			name: 'Groceries',
-			date: '2021-05-10',
+			date: '2023-06-2',
 			type: 'expense',
 			category: 'Food',
 			amount: 150
 		},
 		{
 			name: 'Movie Tickets',
-			date: '2021-05-15',
+			date: '2023-06-1',
 			type: 'expense',
 			category: 'Entertainment',
 			amount: 50
 		},
 		{
 			name: 'Clothing Shopping',
-			date: '2021-05-20',
+			date: '2023-06-03',
 			type: 'expense',
 			category: 'Clothes',
 			amount: 200
 		},
 		{
 			name: 'Doctor',
-			date: '2021-05-25',
+			date: '2023-06-02',
 			type: 'expense',
 			category: 'Health',
 			amount: 80
 		},
 		{
 			name: 'Birthday Gift',
-			date: '2021-05-28',
+			date: '2023-06-03',
 			type: 'expense',
 			category: 'Gifts',
 			amount: 30
@@ -62,28 +62,28 @@ const initialState = {
 
 		{
 			name: 'Freelance Work',
-			date: '2021-05-05',
+			date: '2023-06-03',
 			type: 'income',
 			category: 'Business',
 			amount: 500
 		},
 		{
 			name: 'Investment Dividends',
-			date: '2021-05-12',
+			date: '2023-06-03',
 			type: 'income',
 			category: 'Investments',
 			amount: 300
 		},
 		{
 			name: 'Salary',
-			date: '2021-05-25',
+			date: '2023-06-03',
 			type: 'income',
 			category: 'Salary',
 			amount: 350
 		},
 		{
 			name: 'Side Gig',
-			date: '2021-05-29',
+			date: '2023-06-03',
 			type: 'income',
 			category: 'Other',
 			amount: 200
@@ -222,14 +222,16 @@ const transactionStateSlice = createSlice({
 	reducers: {
 		addTransaction: (state, action) => {
 			action.payload.amount = parseInt(action.payload.amount);
+			const currMonth = new Date().getMonth();
+			const monthDiff = currMonth - new Date(action.payload.date).getMonth();
 
 			state.transactions.push(action.payload);
 			if (action.payload.type === 'income') {
 				state.lastFiveYearData[0].income += action.payload.amount;
-				state.thisYearData[0].income += action.payload.amount;
+				state.thisYearData[monthDiff].income += action.payload.amount;
 			} else {
 				state.lastFiveYearData[0].expense += action.payload.amount;
-				state.thisYearData[0].expenditure += action.payload.amount;
+				state.thisYearData[monthDiff].expenditure += action.payload.amount;
 				const categoryIdToUpdate = state.categories.find(
 					(category) => category.value === action.payload.category
 				).id;
@@ -237,7 +239,7 @@ const transactionStateSlice = createSlice({
 					(category) => category.categoryId === categoryIdToUpdate
 				);
 				if (categoryToUpdate) {
-					categoryToUpdate.data[0] += action.payload.amount;
+					categoryToUpdate.data[monthDiff] += action.payload.amount;
 				}
 			}
 		}

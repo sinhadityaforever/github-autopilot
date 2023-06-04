@@ -9,6 +9,10 @@ import Overall from '../../components/Overall/Overall';
 import { useAppSelector } from '../../app/hooks';
 import Category from '../../components/Category/Category';
 import meterImg from '../../imgs/meter.png.png';
+import NewTable from '../../components/NewTable/NewTable';
+import Enter from '../../components/Enter/Enter';
+import AddForm from '../../components/AddForm/AddForm';
+import FinanceScore from '../../components/FinanceScore/FinanceScore';
 
 function Budget() {
 	const [isClicked, setClicked] = useState(false);
@@ -26,39 +30,125 @@ function Budget() {
 		setCross(true);
 	}
 
-	const transactionsData = useAppSelector(
-		(state) => state.transactionState.transactions
-	);
-
+	const transactionsData = [
+		{
+			name: 'Ordered Pizza',
+			date: '12/12/2021',
+			category: 'Food and drinks',
+			type: 'delete',
+			amount: 320
+		},
+		{
+			name: 'Beer',
+			date: '12/12/2021',
+			
+			category: 'Food and drinks',
+			type: 'delete',
+			amount: 1500
+		},
+		{
+			name: 'Beer',
+			date: '12/12/2021',
+			
+			category: 'Food and drinks',
+			type: 'delete',
+			amount: 1500
+		},
+		{
+			name: 'Beer',
+			date: '12/12/2021',
+			
+			category: 'Food and drinks',
+			type: 'delete',
+			amount: 1500
+		},
+		{
+			name: 'Beer',
+			date: '12/12/2021',
+			
+			category: 'Food and drinks',
+			type: 'delete',
+			amount: 1500
+		},
+		{
+			name: 'Beer',
+			date: '12/12/2021',
+			
+			category: 'Food and drinks',
+			type: 'delete',
+			amount: 1500
+		},
+		{
+			name: 'Beer',
+			date: '12/12/2021',
+			
+			category: 'Food and drinks',
+			type: 'delete',
+			amount: 1500
+		},
+		{
+			name: 'Beer',
+			date: '12/12/2021',
+			
+			category: 'Food and drinks',
+			type: 'delete',
+			amount: 1500
+		},
+		{
+			name: 'Beer',
+			date: '12/12/2021',
+			
+			category: 'Food and drinks',
+			type: 'delete',
+			amount: 1500
+		}
+	];
+	
 	const tableTransactionsData = [...transactionsData];
 	tableTransactionsData.sort((a, b) => new Date(b.date) - new Date(a.date));
 
 	const recentTransactions = tableTransactionsData.slice(0, 9);
 
 	return (
-		<div className="Budget">
-			<h1>Budget</h1>
+	<div className="Budget">
+		    <br/>
+			<br/>
+		<div className="grid-contain">
+          
+		   <div>
+		   {/* <h3>Budget</h3>
+		   <h4 className="overall">Overall Budget:</h4>	
+			<input type="number" className="block up" /> */}
+			<AddForm name="SET BUDGET" />
+			<AddForm name="SET YOUR GOAL"/>
+            </div>
 
-			<h3>Set Overall Budget</h3>
-			<input type="number" />
-			<img src={meterImg} alt="Meter pic" />
+			<div style={{position: 'relative', top:'-35px'}}>
+			<FinanceScore />
+		     </div>
 
+		</div>
+			
+			
+			
 			<h4>Set your category-wise budget:</h4>
-
+            <br/>
+			
 			<div className="grid-container">
-				<div>
-					<label for="category">Enter Category:</label>
-					<select name="category" id="category" className="style">
+				<div style={{width: '100px'}}>
+					{/* <label for="category" className="inline"></label>
+					 <select name="category" id="category" className="style merge">
 						<option value="Business">Business</option>
 						<option value="Investment">Investment</option>
 						<option value="Salary" selected>
 							Salary
 						</option>
 						<option value="Other">Other</option>
-					</select>
+					</select> */}
+					<Enter />
 				</div>
 
-				<div>
+				{/* <div>
 					<input
 						type="number"
 						placeholder="Current Budget"
@@ -74,15 +164,35 @@ function Budget() {
 						name="new"
 						className="style"
 					/>
-				</div>
+				</div>  */}
 
-				<div>
-					<button>+</button>
-					<p className="inline">Add Category</p>
+<div class="form__linput merge">
+      <input class="form__input" type="number" name="fname" id="fname" pattern="\w{1,}" value="15000" style={{height:'54px'}} required />
+      <label class="form__label" for="fname">CURRENT BUDGET</label>
+    </div>
+
+    <div class="form__linput merge" style={{position: 'relative', top: '1px'}}>
+      <input class="form__input" type="number" name="lname" id="lname" pattern="\w{1,}" required style={{position: 'relative', top: '-4px', height:'57px'}}/>
+      <label class="form__label" for="lname" >NEW BUDGET</label>
+    </div>
+
+				<div className="light">
+					<button className="merge btnstyle"><div className="font">+ CATEGORY</div></button>
+					{/* <label class="form__label" for="button">+ Add</label> */}
+					
 				</div>
 			</div>
-
+          <br/>
+		 
+		  <NewTable rows={recentTransactions} />
+		  <br/>
+			<br/>
+			<br/>
+			<h4>Deeper look at category-wise budget:</h4>
+			
 			<Category />
+			<br/>
+			<br/>
 		</div>
 	);
 }

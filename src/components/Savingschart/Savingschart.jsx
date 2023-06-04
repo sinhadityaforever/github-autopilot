@@ -80,7 +80,7 @@ const StackedBarChart = ({ sixMonthsCategoryData, categories }) => {
 			tooltip: {
 				y: {
 					formatter: function (val) {
-						return val + 'K';
+						return val;
 					}
 				}
 			},

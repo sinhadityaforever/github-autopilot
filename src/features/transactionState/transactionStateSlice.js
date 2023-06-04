@@ -1,6 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
+	showEditModal: false,
+	editModalData: {},
 	categories: [
 		{ id: 0, value: 'Food', type: 'expense' },
 		{ id: 1, value: 'Business', type: 'income' },
@@ -18,7 +20,8 @@ const initialState = {
 	transactions: [
 		{
 			name: 'Ordered Pizza',
-			date: '2021-5-5',
+			transactionId: 1,
+			date: '2023-06-04',
 			type: 'expense',
 			category: 'Food',
 			amount: 320
@@ -26,35 +29,41 @@ const initialState = {
 
 		{
 			name: 'Groceries',
-			date: '2021-05-10',
+			transactionId: 2,
+			date: '2023-06-02',
 			type: 'expense',
 			category: 'Food',
 			amount: 150
 		},
 		{
 			name: 'Movie Tickets',
-			date: '2021-05-15',
+			transactionId: 3,
+			date: '2023-06-01',
+
 			type: 'expense',
 			category: 'Entertainment',
 			amount: 50
 		},
 		{
 			name: 'Clothing Shopping',
-			date: '2021-05-20',
+			transactionId: 4,
+			date: '2023-06-03',
 			type: 'expense',
 			category: 'Clothes',
 			amount: 200
 		},
 		{
 			name: 'Doctor',
-			date: '2021-05-25',
+			transactionId: 5,
+			date: '2023-06-02',
 			type: 'expense',
 			category: 'Health',
 			amount: 80
 		},
 		{
 			name: 'Birthday Gift',
-			date: '2021-05-28',
+			transactionId: 6,
+			date: '2023-06-03',
 			type: 'expense',
 			category: 'Gifts',
 			amount: 30
@@ -62,28 +71,32 @@ const initialState = {
 
 		{
 			name: 'Freelance Work',
-			date: '2021-05-05',
+			transactionId: 7,
+			date: '2023-06-03',
 			type: 'income',
 			category: 'Business',
 			amount: 500
 		},
 		{
 			name: 'Investment Dividends',
-			date: '2021-05-12',
+			transactionId: 8,
+			date: '2023-06-03',
 			type: 'income',
 			category: 'Investments',
 			amount: 300
 		},
 		{
 			name: 'Salary',
-			date: '2021-05-25',
+			transactionId: 9,
+			date: '2023-06-03',
 			type: 'income',
 			category: 'Salary',
 			amount: 350
 		},
 		{
 			name: 'Side Gig',
-			date: '2021-05-29',
+			transactionId: 10,
+			date: '2023-06-03',
 			type: 'income',
 			category: 'Other',
 			amount: 200
@@ -223,13 +236,20 @@ const transactionStateSlice = createSlice({
 		addTransaction: (state, action) => {
 			action.payload.amount = parseInt(action.payload.amount);
 
-			state.transactions.push(action.payload);
+			const currMonth = new Date().getMonth();
+			const monthDiff = currMonth - new Date(action.payload.date).getMonth();
+			const lastId =
+				state.transactions[state.transactions.length - 1].transactionId;
+			state.transactions.push({
+				...action.payload,
+				transactionId: lastId + 1
+			});
 			if (action.payload.type === 'income') {
 				state.lastFiveYearData[0].income += action.payload.amount;
-				state.thisYearData[0].income += action.payload.amount;
+				state.thisYearData[monthDiff].income += action.payload.amount;
 			} else {
 				state.lastFiveYearData[0].expense += action.payload.amount;
-				state.thisYearData[0].expenditure += action.payload.amount;
+				state.thisYearData[monthDiff].expenditure += action.payload.amount;
 				const categoryIdToUpdate = state.categories.find(
 					(category) => category.value === action.payload.category
 				).id;
@@ -237,12 +257,37 @@ const transactionStateSlice = createSlice({
 					(category) => category.categoryId === categoryIdToUpdate
 				);
 				if (categoryToUpdate) {
-					categoryToUpdate.data[0] += action.payload.amount;
+					categoryToUpdate.data[monthDiff] += action.payload.amount;
 				}
 			}
-		}
+		},
+		openModal: (state, action) => {
+			const editId = action.payload;
+			state.editModalData = state.transactions.find(
+				(transaction) => transaction.transactionId === editId
+			);
+			console.log(state.editModalData);
+			state.showEditModal = true;
+		},
+		closeModal: (state) => {
+			state.editModalData = {};
+			state.showEditModal = false;
+		},
+		editTransaction: (state, action) => {
+			const { transactionId, name, date, type, category, amount } =
+				action.payload;
+			const transactionToEdit = state.transactions.find(
+				(transaction) => transaction.transactionId === transactionId
+			);
+			transactionToEdit.name = name;
+			transactionToEdit.date = date;
+			transactionToEdit.category = category;
+			transactionToEdit.amount = amount;
+		},
+		deleteTransaction: (state, action) => {}
 	}
 });
 
-export const { addTransaction } = transactionStateSlice.actions;
+export const { addTransaction, openModal, closeModal } =
+	transactionStateSlice.actions;
 export default transactionStateSlice.reducer;

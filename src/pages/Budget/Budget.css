@@ -1,13 +1,9 @@
-.budget {
-	display: flex;
-	flex-direction: column;
-	overflow-y: auto;
-}
+
 .budget {
 	/* padding-top: 1rem; */
 	display: flex;
 	flex-direction: column;
-	justify-content: space-evenly;
+	justify-content:  space-between;;
 	overflow-y: auto;
 	scrollbar-width: none;
 	color: white;

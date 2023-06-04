@@ -10,6 +10,7 @@ import Cards from '../../components/Cards/Cards';
 // import Category from '../../components/Category/Category';
 // import meterImg from '../../imgs/meter.png.png';
 import BudgetCards from '../../components/ExpenseCards copy/ExpenseCards';
+import AddBudgetForm from '../../components/AddBudgetForm/AddBudgetForm';
 import FinanceScore from '../../components/FinanceScore/FinanceScore';
 function Budget() {
 	// const [isClicked, setClicked] = useState(false);
@@ -50,10 +51,16 @@ style={{
 					}}>
 					Budget</h1>
 			<div className="topDivision">
-				<BudgetCards />
+				<AddBudgetForm/>
+				
+
+				<AddBudgetForm/>
+				
 
 				<FinanceScore/>
-			</div>
+
+				</div>
+			
 
 			{/* <div className="bottomDiv">
 				<Table rows={recentTransactions} />

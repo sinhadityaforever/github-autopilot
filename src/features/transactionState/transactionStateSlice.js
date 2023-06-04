@@ -1,6 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
+	showEditModal: false,
+	editModalData: {},
 	categories: [
 		{ id: 0, value: 'Food', type: 'expense' },
 		{ id: 1, value: 'Business', type: 'income' },
@@ -18,7 +20,8 @@ const initialState = {
 	transactions: [
 		{
 			name: 'Ordered Pizza',
-			date: '2023-6-4',
+			transactionId: 1,
+			date: '2023-06-04',
 			type: 'expense',
 			category: 'Food',
 			amount: 320
@@ -26,20 +29,24 @@ const initialState = {
 
 		{
 			name: 'Groceries',
-			date: '2023-06-2',
+			transactionId: 2,
+			date: '2023-06-02',
 			type: 'expense',
 			category: 'Food',
 			amount: 150
 		},
 		{
 			name: 'Movie Tickets',
-			date: '2023-06-1',
+			transactionId: 3,
+			date: '2023-06-01',
+
 			type: 'expense',
 			category: 'Entertainment',
 			amount: 50
 		},
 		{
 			name: 'Clothing Shopping',
+			transactionId: 4,
 			date: '2023-06-03',
 			type: 'expense',
 			category: 'Clothes',
@@ -47,6 +54,7 @@ const initialState = {
 		},
 		{
 			name: 'Doctor',
+			transactionId: 5,
 			date: '2023-06-02',
 			type: 'expense',
 			category: 'Health',
@@ -54,6 +62,7 @@ const initialState = {
 		},
 		{
 			name: 'Birthday Gift',
+			transactionId: 6,
 			date: '2023-06-03',
 			type: 'expense',
 			category: 'Gifts',
@@ -62,6 +71,7 @@ const initialState = {
 
 		{
 			name: 'Freelance Work',
+			transactionId: 7,
 			date: '2023-06-03',
 			type: 'income',
 			category: 'Business',
@@ -69,6 +79,7 @@ const initialState = {
 		},
 		{
 			name: 'Investment Dividends',
+			transactionId: 8,
 			date: '2023-06-03',
 			type: 'income',
 			category: 'Investments',
@@ -76,6 +87,7 @@ const initialState = {
 		},
 		{
 			name: 'Salary',
+			transactionId: 9,
 			date: '2023-06-03',
 			type: 'income',
 			category: 'Salary',
@@ -83,6 +95,7 @@ const initialState = {
 		},
 		{
 			name: 'Side Gig',
+			transactionId: 10,
 			date: '2023-06-03',
 			type: 'income',
 			category: 'Other',
@@ -222,10 +235,15 @@ const transactionStateSlice = createSlice({
 	reducers: {
 		addTransaction: (state, action) => {
 			action.payload.amount = parseInt(action.payload.amount);
+
 			const currMonth = new Date().getMonth();
 			const monthDiff = currMonth - new Date(action.payload.date).getMonth();
-
-			state.transactions.push(action.payload);
+			const lastId =
+				state.transactions[state.transactions.length - 1].transactionId;
+			state.transactions.push({
+				...action.payload,
+				transactionId: lastId + 1
+			});
 			if (action.payload.type === 'income') {
 				state.lastFiveYearData[0].income += action.payload.amount;
 				state.thisYearData[monthDiff].income += action.payload.amount;
@@ -242,9 +260,34 @@ const transactionStateSlice = createSlice({
 					categoryToUpdate.data[monthDiff] += action.payload.amount;
 				}
 			}
-		}
+		},
+		openModal: (state, action) => {
+			const editId = action.payload;
+			state.editModalData = state.transactions.find(
+				(transaction) => transaction.transactionId === editId
+			);
+			console.log(state.editModalData);
+			state.showEditModal = true;
+		},
+		closeModal: (state) => {
+			state.editModalData = {};
+			state.showEditModal = false;
+		},
+		editTransaction: (state, action) => {
+			const { transactionId, name, date, type, category, amount } =
+				action.payload;
+			const transactionToEdit = state.transactions.find(
+				(transaction) => transaction.transactionId === transactionId
+			);
+			transactionToEdit.name = name;
+			transactionToEdit.date = date;
+			transactionToEdit.category = category;
+			transactionToEdit.amount = amount;
+		},
+		deleteTransaction: (state, action) => {}
 	}
 });
 
-export const { addTransaction } = transactionStateSlice.actions;
+export const { addTransaction, openModal, closeModal } =
+	transactionStateSlice.actions;
 export default transactionStateSlice.reducer;

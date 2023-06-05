@@ -2,238 +2,199 @@ import React, { useState } from 'react';
 import Table from '../../components/Table/Table';
 import './Budget.css';
 import Cards from '../../components/Cards/Cards';
-// import { Calculator, Fish } from 'phosphor-react';
-// import Box from '../../components/Box/Box';
-// import Setit from '../../components/Setit/Setit';
-// import Overall from '../../components/Overall/Overall';
-// import { useAppSelector } from '../../app/hooks';
-// import Category from '../../components/Category/Category';
-// import meterImg from '../../imgs/meter.png.png';
-import BudgetCards from '../../components/ExpenseCards copy/ExpenseCards';
-import AddBudgetForm from '../../components/AddBudgetForm/AddBudgetForm';
+import { Calculator, Fish } from 'phosphor-react';
+import Box from '../../components/Box/Box';
+import Setit from '../../components/Setit/Setit';
+import Overall from '../../components/Overall/Overall';
+import { useAppSelector } from '../../app/hooks';
+import Category from '../../components/Category/Category';
+import meterImg from '../../imgs/meter.png.png';
+import NewTable from '../../components/NewTable/NewTable';
+import Enter from '../../components/Enter/Enter';
+import AddForm from '../../components/AddForm/AddForm';
 import FinanceScore from '../../components/FinanceScore/FinanceScore';
+
 function Budget() {
-	// const [isClicked, setClicked] = useState(false);
-	// const [isCross, setCross] = useState(false);
+	const [isClicked, setClicked] = useState(false);
+	const [isCross, setCross] = useState(false);
 
 	// const shoot = () => {
 	// 	this.parentElement.style.display='none';
 	//   }
 
-	// function handleClick() {
-	// 	setClicked(true);
-	// }
+	function handleClick() {
+		setClicked(true);
+	}
 
-	// function handleCross() {
-	// 	setCross(true);
-	// }
+	function handleCross() {
+		setCross(true);
+	}
 
-	// const transactionsData = useAppSelector(
-	// 	(state) => state.transactionState.transactions
-	// );
+	const transactionsData = [
+		{
+			name: 'Ordered Pizza',
+			date: '12/12/2021',
+			category: 'Food and drinks',
+			type: 'delete',
+			amount: 320
+		},
+		{
+			name: 'Beer',
+			date: '12/12/2021',
+			
+			category: 'Food and drinks',
+			type: 'delete',
+			amount: 1500
+		},
+		{
+			name: 'Beer',
+			date: '12/12/2021',
+			
+			category: 'Food and drinks',
+			type: 'delete',
+			amount: 1500
+		},
+		{
+			name: 'Beer',
+			date: '12/12/2021',
+			
+			category: 'Food and drinks',
+			type: 'delete',
+			amount: 1500
+		},
+		{
+			name: 'Beer',
+			date: '12/12/2021',
+			
+			category: 'Food and drinks',
+			type: 'delete',
+			amount: 1500
+		},
+		{
+			name: 'Beer',
+			date: '12/12/2021',
+			
+			category: 'Food and drinks',
+			type: 'delete',
+			amount: 1500
+		},
+		{
+			name: 'Beer',
+			date: '12/12/2021',
+			
+			category: 'Food and drinks',
+			type: 'delete',
+			amount: 1500
+		},
+		{
+			name: 'Beer',
+			date: '12/12/2021',
+			
+			category: 'Food and drinks',
+			type: 'delete',
+			amount: 1500
+		},
+		{
+			name: 'Beer',
+			date: '12/12/2021',
+			
+			category: 'Food and drinks',
+			type: 'delete',
+			amount: 1500
+		}
+	];
+	
+	const tableTransactionsData = [...transactionsData];
+	tableTransactionsData.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-	// const tableTransactionsData = [...transactionsData];
-	// tableTransactionsData.sort((a, b) => new Date(b.date) - new Date(a.date));
-
-	// const recentTransactions = tableTransactionsData.slice(0, 9);
+	const recentTransactions = tableTransactionsData.slice(0, 9);
 
 	return (
-		<div className="Budget">
+	<div className="Budget">
+		    <br/>
+			<br/>
+		<div className="grid-contain">
+          
+		   <div>
+		   {/* <h3>Budget</h3>
+		   <h4 className="overall">Overall Budget:</h4>	
+			<input type="number" className="block up" /> */}
+			<AddForm name="SET BUDGET" />
+			<AddForm name="SET YOUR GOAL"/>
+            </div>
 
-<div>
-<h1 
-style={{
-						color: 'white',
-						marginTop: '1rem',
-						fontSize: '2rem',
-						fontWeight: 'bolder',
-						marginTop: '2rem'
-					}}>
-					Budget</h1>
-			<div className="topDivision">
-				<AddBudgetForm/>
-				
+			<div style={{position: 'relative', top:'-35px'}}>
+			<FinanceScore />
+		     </div>
 
-				<AddBudgetForm/>
-				
-
-				<FinanceScore/>
-
-				</div>
-			
-
-			{/* <div className="bottomDiv">
-				<Table rows={recentTransactions} />
-				{!isMobile && <CategoryChart transactionsData={transactionsData} />}
-			</div> */}
-
-
-				{/* <h1
-					style={{
-						color: 'white',
-						marginTop: '1rem',
-						fontSize: '2rem',
-						fontWeight: 'bolder',
-						marginTop: '2rem'
-					}}
-				>
-					FIX YOUR BUDGET
-				</h1>
-			</div>
-			<div class="row">
-				<div class="colo">
-					<div class="columna">
-						<BudgetCards/>
-					</div>
-				</div>
-				<div class="colo">
-					<div class="columnb">
-				</div>
-					</div>
-				<div class="colo">
-					<div class="column3">
-					<FinanceScore/>
-					</div>
-				</div>
-			</div>
-
-			<div>
-				<h1
-					style={{
-						color: 'white',
-						marginTop: '1rem',
-						fontSize: '2rem',
-						fontWeight: 'bolder',
-						marginTop: '4rem'
-					}}
-				>
-					Setting category wise budget
-				</h1>
-			</div>
-			<div class="row mt-2 mb-4">
-				<div class="col-md-6">
-					<div class="box">
-						
-					</div>
-				</div>
-
-				<div class="col-md-6">
-					<div class="box">
-						
-					</div>
-				</div>
-			</div>
-			<div>
-				<h1
-					style={{
-						color: 'white',
-						marginTop: '1rem',
-						fontSize: '2rem',
-						fontWeight: 'bolder',
-						marginTop: '4rem'
-					}}
-				>
-					Amount 
-				</h1>
-			</div>
-			<div class="row mt-2 mb-4">
-				<div class="col-md-6">
-					<div class="box">
-						
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="box">
-						
-					</div>
-				</div> */}
-			</div>
 		</div>
+			
+			
+			
+			<h4>Set your category-wise budget:</h4>
+            <br/>
+			
+			<div className="grid-container">
+				<div style={{width: '100px'}}>
+					{/* <label for="category" className="inline"></label>
+					 <select name="category" id="category" className="style merge">
+						<option value="Business">Business</option>
+						<option value="Investment">Investment</option>
+						<option value="Salary" selected>
+							Salary
+						</option>
+						<option value="Other">Other</option>
+					</select> */}
+					<Enter />
+				</div>
 
+				{/* <div>
+					<input
+						type="number"
+						placeholder="Current Budget"
+						name="current"
+						className="style"
+					/>
+				</div>
 
+				<div>
+					<input
+						type="text"
+						placeholder="New Budget"
+						name="new"
+						className="style"
+					/>
+				</div>  */}
 
-);
+<div class="form__linput merge">
+      <input class="form__input" type="number" name="fname" id="fname" pattern="\w{1,}" value="15000" style={{height:'54px'}} required />
+      <label class="form__label" for="fname">CURRENT BUDGET</label>
+    </div>
+
+    <div class="form__linput merge" style={{position: 'relative', top: '1px'}}>
+      <input class="form__input" type="number" name="lname" id="lname" pattern="\w{1,}" required style={{position: 'relative', top: '-4px', height:'57px'}}/>
+      <label class="form__label" for="lname" >NEW BUDGET</label>
+    </div>
+
+				<div className="light">
+					<button className="merge btnstyle"><div className="font">+ CATEGORY</div></button>
+					{/* <label class="form__label" for="button">+ Add</label> */}
+					
+				</div>
+			</div>
+          <br/>
+		 
+		  <NewTable rows={recentTransactions} />
+		  <br/>
+			<br/>
+			<br/>
+			<h4>Deeper look at category-wise budget:</h4>
+			
+			<Category />
+			<br/>
+			<br/>
+		</div>
+	);
 }
 
 export default Budget;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-			
-
-		/* // 	<h3>Set Overall Budget</h3>
-		// 	<input type="number" />
-		// 	<img src={meterImg} alt="Meter pic" />
-
-		// 	<h4>Set your category-wise budget:</h4>
-
-		// 	<div className="grid-container">
-		// 		<div>
-		// 			<label for="category">Enter Category:</label>
-		// 			<select name="category" id="category" className="style">
-		// 				<option value="Business">Business</option>
-		// 				<option value="Investment">Investment</option>
-		// 				<option value="Salary" selected>
-		// 					Salary
-		// 				</option>
-		// 				<option value="Other">Other</option>
-		// 			</select>
-		// 		</div>
-
-		// 		<div>
-		// 			<input
-		// 				type="number"
-		// 				placeholder="Current Budget"
-		// 				name="current"
-		// 				className="style"
-		// 			/>
-		// 		</div>
-
-		// 		<div>
-		// 			<input
-		// 				type="text"
-		// 				placeholder="New Budget"
-		// 				name="new"
-		// 				className="style"
-		// 			/>
-		// 		</div>
-
-		// 		<div>
-		// 			<button>+</button>
-		// 			<p className="inline">Add Category</p>
-		// 		</div>
-		// 	</div>
-
-		//	<Category /> */
-		 /* div>} */
-
-		 
-
-
-		
-	

@@ -6,10 +6,12 @@ import { SidebarData } from '../Data/Data';
 import { UilBars } from '@iconscout/react-unicons';
 import { motion } from 'framer-motion';
 import { UilUniversity } from '@iconscout/react-unicons';
+import { useAppDispatch } from '../app/hooks';
+import { logout } from '../features/transactionState/transactionStateSlice';
 
 const Sidebar = ({ onChildProp }) => {
 	const [selected, setSelected] = useState(0);
-
+	const dispatch = useAppDispatch();
 	const [expanded, setExpaned] = useState(true);
 
 	const sidebarVariants = {
@@ -61,7 +63,14 @@ const Sidebar = ({ onChildProp }) => {
 						);
 					})}
 
-					<div className="menuItem">
+					<div
+						onClick={() => {
+							dispatch(logout());
+
+							window.location.reload(false);
+						}}
+						className="menuItem"
+					>
 						<UilSignOutAlt />
 						<span>Logout</span>
 					</div>

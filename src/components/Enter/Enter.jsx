@@ -9,30 +9,40 @@ import {
 	InputLabel,
 	FormControl
 } from '@mui/material';
-import { useAppDispatch } from '../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
 
+function Enter({ selectedCategory }) {
+	const categories = useAppSelector(
+		(state) => state.transactionState.categories
+	);
+	var allowedCategories = [...categories];
+	allowedCategories = allowedCategories.filter(
+		(category) => category.type !== 'income'
+	);
+	const defaultCategory = allowedCategories.filter(
+		(category) => category.id === 8
+	)[0];
 
-function Enter(){
-
-    const [category, setCategory] = useState("Others");
-    const categoryHandler = (event) => {
+	const [category, setCategory] = useState(defaultCategory);
+	const categoryHandler = (event) => {
 		setCategory(event.target.value);
+		selectedCategory(event.target.value);
 	};
 
-    const param = {
-        things: ['Food and drinks','EMI','House Rent','Groceries','Entertainment','Subscriptions','Video Games','Miscellaneous','Savings','Salary','Gifts','Awards','Bonus','Others']
-    }
+	// const param = {
+	//     things: ['Food and drinks','EMI','House Rent','Groceries','Entertainment','Subscriptions','Video Games','Miscellaneous','Savings','Salary','Gifts','Awards','Bonus','Others']
+	// }
 
-    return(<motion.div
-        className="CCard"
-        style={{
-            background: 'inherit'
-            // boxShadow: param.color.boxShadow
-        }}>
-    
-
-    <div className="binput">
-         <div className="categ">
+	return (
+		<motion.div
+			className="CCard"
+			style={{
+				background: 'inherit'
+				// boxShadow: param.color.boxShadow
+			}}
+		>
+			<div className="binput">
+				<div className="categ">
 					<FormControl fullWidth>
 						<InputLabel id="cat">CATEGORY</InputLabel>
 						<Select
@@ -45,20 +55,26 @@ function Enter(){
 							labelId="cat"
 							label="Cat"
 							value={category}
-							style={{border: '2px solid hsl(171, 76%, 45%)', borderRadius: '9px', width:'165px', height: '53px'}}
+							style={{
+								border: '2px solid hsl(171, 76%, 45%)',
+								borderRadius: '9px',
+								width: '165px',
+								height: '53px'
+							}}
 						>
-							{/* <MenuItem value={'groceries'}>Groceries</MenuItem>
-							<MenuItem value={'clothes'}>Clothes</MenuItem>
-							<MenuItem value={'investments'}>Investment</MenuItem> */}
-							{param.things.map((thing) => {
-								return <MenuItem value={thing}>{thing}</MenuItem>;
+							{allowedCategories.map((category) => {
+								return (
+									<MenuItem key={category.id} value={category}>
+										{category.value}
+									</MenuItem>
+								);
 							})}
 						</Select>
 					</FormControl>
 				</div>
 			</div>
-            </motion.div>
-        )
+		</motion.div>
+	);
 }
 
 export default Enter;

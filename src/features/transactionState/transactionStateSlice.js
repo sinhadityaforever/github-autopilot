@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
+	isLoggedIn: false,
 	showEditModal: false,
 	editModalData: {},
 	categories: [
@@ -226,6 +227,44 @@ const initialState = {
 			categoryId: 8,
 			data: [1567, 9502, 2718, 5413, 3647, 8069]
 		}
+	],
+
+	categoryWiseBudget: [
+		{
+			categoryId: 0,
+			budget: 10000,
+			amountSpent: 5000
+		},
+		{
+			categoryId: 2,
+			budget: 2000,
+			amountSpent: 500
+		},
+		{
+			categoryId: 3,
+			budget: 3000,
+			amountSpent: 1500
+		},
+		{
+			categoryId: 4,
+			budget: 2000,
+			amountSpent: 1500
+		},
+		{
+			categoryId: 5,
+			budget: 1000,
+			amountSpent: 500
+		},
+		{
+			categoryId: 6,
+			budget: 5000,
+			amountSpent: 1200
+		},
+		{
+			categoryId: 8,
+			budget: 1000,
+			amountSpent: 900
+		}
 	]
 };
 
@@ -274,7 +313,8 @@ const transactionStateSlice = createSlice({
 			state.showEditModal = false;
 		},
 		editTransaction: (state, action) => {
-			const { transactionId, name, date, category, amount } = action.payload;
+			var { transactionId, name, date, category, amount } = action.payload;
+			amount = parseInt(amount);
 			const transactionToEdit = state.transactions.find(
 				(transaction) => transaction.transactionId === transactionId
 			);
@@ -334,6 +374,39 @@ const transactionStateSlice = createSlice({
 			state.transactions = state.transactions.filter(
 				(transaction) => transaction.transactionId !== action.payload
 			);
+		},
+		addCategoryBudget: (state, action) => {
+			const { categoryId, budget } = action.payload;
+			console.log(categoryId, budget);
+			const budgetToUpdate = state.categoryWiseBudget.find(
+				(category) => category.categoryId === categoryId
+			);
+			if (!budgetToUpdate) {
+				state.categoryWiseBudget.push({
+					categoryId,
+					budget,
+					amountSpent: 0
+				});
+				return;
+			}
+			console.log(budgetToUpdate);
+			budgetToUpdate.budget = budget;
+		},
+		deleteCategoryBudget: (state, action) => {
+			const categoryId = action.payload;
+			console.log(categoryId);
+			state.categoryWiseBudget = state.categoryWiseBudget.filter(
+				(category) => category.categoryId !== categoryId
+			);
+		},
+		login: (state, action) => {
+			localStorage.setItem('isLoggedIn', true);
+			state.isLoggedIn = true;
+		},
+		logout: (state, action) => {
+			console.log('Logged');
+			localStorage.clear();
+			state.isLoggedIn = false;
 		}
 	}
 });
@@ -343,6 +416,10 @@ export const {
 	openModal,
 	closeModal,
 	editTransaction,
-	deleteTransaction
+	deleteTransaction,
+	addCategoryBudget,
+	deleteCategoryBudget,
+	login,
+	logout
 } = transactionStateSlice.actions;
 export default transactionStateSlice.reducer;

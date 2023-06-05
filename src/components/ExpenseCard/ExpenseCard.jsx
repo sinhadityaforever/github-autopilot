@@ -43,7 +43,7 @@ function CompactCard({ param }) {
 	const [name, setName] = useState('');
 	const [amount, setAmount] = useState(0);
 	const [category, setCategory] = useState('Other');
-	const [date, setDate] = useState();
+	const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
 	const dispatch = useAppDispatch();
 	const nameHandler = (event) => {
 		setName(event.target.value);

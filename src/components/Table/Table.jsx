@@ -28,13 +28,29 @@ const makeStyle = (type) => {
 };
 
 export default function BasicTable({ rows }) {
+	const [selectedToEdit, setSelectedToEdit] = React.useState({});
+	const handleSelectedToEdit = ({
+		defaultName,
+		defaultAmount,
+		defaultCategory,
+		defaultDate,
+		transactionId
+	}) => {
+		setSelectedToEdit({
+			defaultName,
+			defaultAmount,
+			defaultCategory,
+			defaultDate,
+			transactionId
+		});
+	};
 	const dispatch = useAppDispatch();
 	const handleModal = (transactionId) => {
-		dispatch(openModal(transactionId));
+		dispatch(openModal());
 	};
 	return (
 		<div className="Table">
-			<EditTransactionDialog />
+			<EditTransactionDialog defaultData={selectedToEdit} />
 			<h3>Recent Transactions</h3>
 			{rows && rows.length > 0 ? (
 				<TableContainer
@@ -92,25 +108,23 @@ export default function BasicTable({ rows }) {
 									<TableCell sx={{ color: 'white' }} align="left">
 										{row.category}
 									</TableCell>
-									{/* <TableCell sx={{ color: 'white' }} align="left">
-									
-
+									<TableCell sx={{ color: 'white' }} align="left">
 										<UilPen
 											onClick={() => {
-												// console.log(
-												// 	row.name,
-												// 	row.date,
-												// 	row.type,
-												// 	row.category,
-												// 	row.amount
-												// );
+												handleSelectedToEdit({
+													defaultName: row.name,
+													defaultAmount: row.amount,
+													defaultCategory: row.category,
+													defaultDate: row.date,
+													transactionId: row.transactionId
+												});
 												handleModal(row.transactionId);
 											}}
 											size="1.5rem"
 											color="white"
 											cursor="pointer"
 										/>
-									</TableCell> */}
+									</TableCell>
 								</TableRow>
 							))}
 						</TableBody>

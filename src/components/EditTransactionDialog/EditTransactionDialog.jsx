@@ -11,37 +11,74 @@ import {
 	InputLabel,
 	FormControl
 } from '@mui/material';
-import { closeModal } from '../../features/transactionState/transactionStateSlice';
+import {
+	closeModal,
+	deleteTransaction,
+	editTransaction
+} from '../../features/transactionState/transactionStateSlice';
 import './EditTransactionDialog.css';
 const Transition = React.forwardRef(function Transition(props, ref) {
 	return <Slide direction="up" ref={ref} {...props} />;
 });
 
-function EditTransactionDialog() {
+function EditTransactionDialog({ defaultData }) {
+	console.log(defaultData.defaultCategory);
+	//redux
 	const dispatch = useAppDispatch();
 	const open = useAppSelector((state) => state.transactionState.showEditModal);
 	const categories = useAppSelector(
 		(state) => state.transactionState.categories
 	);
-	var modalData = useAppSelector(
-		(state) => state.transactionState.editModalData
-	);
+	// var modalData = useAppSelector(
+	// 	(state) => state.transactionState.editModalData
+	// );
+
+	//handling input
 	const categoryData = [...categories];
 	const categoriesToShow = categoryData.map((category) => category.value);
 	const [editName, setEditName] = React.useState('');
 	const [editAmount, setEditAmount] = React.useState(0);
-	const [editCategory, setEditCategory] = React.useState('');
+	const [editCategory, setEditCategory] = React.useState();
 	const [editDate, setEditDate] = React.useState();
 
 	React.useEffect(() => {
-		setEditCategory(modalData.category);
-		setEditName(modalData.name);
-		setEditAmount(modalData.amount);
-
-		setEditDate(modalData.date);
-	}, [modalData]);
-	const nameHandler = (e) => {
+		setEditName(defaultData.defaultName);
+		setEditAmount(defaultData.defaultAmount);
+		setEditCategory(defaultData.defaultCategory);
+		setEditDate(defaultData.defaultDate);
+	}, [defaultData]);
+	const handleEditName = (e) => {
 		setEditName(e.target.value);
+	};
+	const handleEditAmount = (e) => {
+		const value = e.target.value;
+		const onlyNumbers = value.replace(/[^0-9]/g, ''); // Remove non-numeric characters
+		e.target.value = onlyNumbers;
+		setEditAmount(e.target.value);
+	};
+	const handleEditCategory = (e) => {
+		setEditCategory(e.target.value);
+	};
+	const handleEditDate = (e) => {
+		setEditDate(e.target.value);
+	};
+	const currDate = new Date();
+	const prevSixMonthDate = new Date(currDate.setMonth(currDate.getMonth() - 5));
+	const handleEditTransaction = () => {
+		const data = {
+			name: editName,
+			amount: editAmount,
+			category: editCategory,
+			date: editDate,
+			transactionId: defaultData.transactionId
+		};
+		console.log(data);
+		dispatch(editTransaction(data));
+		dispatch(closeModal());
+	};
+	const handleDeleteTransaction = () => {
+		dispatch(deleteTransaction(defaultData.transactionId));
+		dispatch(closeModal());
 	};
 
 	const handleClose = () => {
@@ -95,7 +132,8 @@ function EditTransactionDialog() {
 								variant="standard"
 								value={editName}
 								placeholder="Name"
-								onChange={nameHandler}
+								onChange={handleEditName}
+								// onChange={nameHandler}
 							></TextField>
 						</div>
 						<div className="amount">
@@ -104,6 +142,7 @@ function EditTransactionDialog() {
 								type="text"
 								placeholder="Amount"
 								value={editAmount}
+								onChange={handleEditAmount}
 								//onInput={handleInputChange}
 								sx={lightColor}
 							/>
@@ -115,12 +154,12 @@ function EditTransactionDialog() {
 								variant="standard"
 								type="date"
 								inputProps={{
-									//max: new Date().toISOString().split('T')[0],
-									defaultValue: new Date().toISOString().split('T')[0]
-									// min: prevSixMonthDate.toISOString().split('T')[0]
+									max: new Date().toISOString().split('T')[0],
+
+									min: prevSixMonthDate.toISOString().split('T')[0]
 								}}
 								// defaultValue={editDate}
-								onInput={() => {}}
+								onInput={handleEditDate}
 								sx={lightColor}
 							/>
 						</div>
@@ -135,8 +174,9 @@ function EditTransactionDialog() {
 									required
 									variant="standard"
 									labelId="category"
-									label="Category"
+									label="No Change"
 									value={editCategory}
+									onChange={handleEditCategory}
 								>
 									{categoriesToShow.map((category) => {
 										return <MenuItem value={category}>{category}</MenuItem>;
@@ -153,10 +193,12 @@ function EditTransactionDialog() {
 								backgroundColor: '#5DE2B2',
 								':hover': { backgroundColor: '#636363' }
 							}}
+							onClick={handleEditTransaction}
 						>
 							Confirm
 						</Button>
 						<Button
+							onClick={handleDeleteTransaction}
 							className="add-button"
 							variant="contained"
 							sx={{

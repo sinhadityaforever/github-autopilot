@@ -133,9 +133,9 @@ button:hover {
 
 	
     cursor: pointer;
-	background-color: inherit;
+	background-color: #00E396;
 	border:  2px solid var(--form__input_border-cr_active);
-	color: var(--form__input_border-cr_active);
+	color: white;
   border-radius: 9px;
   /* position: relative;
   left: 20px; */
@@ -414,7 +414,8 @@ input {
 }
 
 .font{
-	background: hsl(var(--cr_big-stone));
+	/* background: hsl(var(--cr_big-stone)); */
+ 
 	
 	
 	

@@ -7,32 +7,33 @@ const inlineStyle = {
 
 const BUDGET_ITEMS = [
 	{
-		itemName: 'Clothing',
+		itemName: 'Food and drinks',
 		budgeted: 5000,
-		spent: 1500
+		spent: 320
 	},
 	{
-		itemName: 'Eating Out',
+		itemName: 'EMI',
 		budgeted: 5000,
 		spent: 590
 	},
 	{
-		itemName: 'Video Games',
+		itemName: 'House Rent',
 		budgeted: 5000,
 		spent: 2000
 	},
+	
 	{
-		itemName: 'Video Games',
-		budgeted: 5000,
-		spent: 200
-	},
-	{
-		itemName: 'Video Games',
+		itemName: 'Groceries',
 		budgeted: 5000,
 		spent: 500
 	},
 	{
-		itemName: 'Video Games',
+		itemName: 'Entertainment',
+		budgeted: 5000,
+		spent: 200
+	},
+	{
+		itemName: 'Subscriptions',
 		budgeted: 5000,
 		spent: 3000
 	},
@@ -42,15 +43,10 @@ const BUDGET_ITEMS = [
 		spent: 1200
 	},
 	{
-		itemName: 'Video Games',
+		itemName: 'Miscellaneous',
 		budgeted: 5000,
 		spent: 1000
 	},
-	{
-		itemName: 'Video Games',
-		budgeted: 5000,
-		spent: 1500
-	}
 ];
 
 const BudgetItem = (props) => {

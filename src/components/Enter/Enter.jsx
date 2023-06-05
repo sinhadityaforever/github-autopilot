@@ -14,13 +14,13 @@ import { useAppDispatch } from '../../app/hooks';
 
 function Enter(){
 
-    const [category, setCategory] = useState(" Transfer");
+    const [category, setCategory] = useState("Others");
     const categoryHandler = (event) => {
 		setCategory(event.target.value);
 	};
 
     const param = {
-        things: [' groceries', ' clothes', ' investments', ' Transfer']
+        things: ['Food and drinks','EMI','House Rent','Groceries','Entertainment','Subscriptions','Video Games','Miscellaneous','Savings','Salary','Gifts','Awards','Bonus','Others']
     }
 
     return(<motion.div

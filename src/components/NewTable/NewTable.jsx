@@ -43,15 +43,15 @@ export default function BasicTable({ rows }) {
 					>
 						<TableHead>
 							<TableRow>
-								<TableCell sx={{ color: 'white' }}>Transaction Name</TableCell>
+								<TableCell sx={{ color: 'white' }}>Category</TableCell>
 								<TableCell sx={{ color: 'white' }}>Amount (in ₹)</TableCell>
-								<TableCell sx={{ color: 'white' }} align="left">
+								{/* <TableCell sx={{ color: 'white' }} align="left">
 									Date
-								</TableCell>
+								</TableCell> */}
 								
-								<TableCell sx={{ color: 'white' }} align="left">
+								{/* <TableCell sx={{ color: 'white' }} align="left">
 									Category
-								</TableCell>
+								</TableCell> */}
                                 <TableCell sx={{ color: 'white' }} align="left">
 									
 								</TableCell>
@@ -66,17 +66,17 @@ export default function BasicTable({ rows }) {
 									}}
 								>
 									<TableCell sx={{ color: 'white' }} component="th" scope="row">
-										{row.name}
+										{row.category}
 									</TableCell>
 									<TableCell sx={{ color: 'white' }} align="left">
 										{row.amount}
 									</TableCell>
-									<TableCell sx={{ color: 'white' }} align="left">
+									{/* <TableCell sx={{ color: 'white' }} align="left">
 										{row.date}
 									</TableCell>
 									<TableCell sx={{ color: 'white' }} align="left"> 
 										{row.category}
-									</TableCell>
+									</TableCell> */}
                                     <TableCell sx={{ color: 'white' }} align="left" className='cursor'>
 										<span className="status" style={makeStyle(row.type)}>
 											{row.type}

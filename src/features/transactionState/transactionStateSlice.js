@@ -262,20 +262,19 @@ const transactionStateSlice = createSlice({
 			}
 		},
 		openModal: (state, action) => {
-			const editId = action.payload;
-			state.editModalData = state.transactions.find(
-				(transaction) => transaction.transactionId === editId
-			);
-			console.log(state.editModalData);
+			// const editId = action.payload;
+			// state.editModalData = state.transactions.find(
+			// 	(transaction) => transaction.transactionId === editId
+			// );
+			// console.log(state.editModalData);
 			state.showEditModal = true;
 		},
 		closeModal: (state) => {
-			state.editModalData = {};
+			// state.editModalData = {};
 			state.showEditModal = false;
 		},
 		editTransaction: (state, action) => {
-			const { transactionId, name, date, type, category, amount } =
-				action.payload;
+			const { transactionId, name, date, category, amount } = action.payload;
 			const transactionToEdit = state.transactions.find(
 				(transaction) => transaction.transactionId === transactionId
 			);
@@ -283,11 +282,67 @@ const transactionStateSlice = createSlice({
 			transactionToEdit.date = date;
 			transactionToEdit.category = category;
 			transactionToEdit.amount = amount;
+			if (transactionToEdit.type === 'income') {
+				const monthDiff = new Date().getMonth() - new Date(date).getMonth();
+				state.lastFiveYearData[0].income -= transactionToEdit.amount;
+				state.lastFiveYearData[0].income += amount;
+				state.thisYearData[monthDiff].income -= transactionToEdit.amount;
+				state.thisYearData[monthDiff].income += amount;
+			} else {
+				const monthDiff = new Date().getMonth() - new Date(date).getMonth();
+				state.lastFiveYearData[0].expense -= transactionToEdit.amount;
+				state.lastFiveYearData[0].expense += amount;
+				state.thisYearData[monthDiff].expenditure -= transactionToEdit.amount;
+				state.thisYearData[monthDiff].expenditure += amount;
+				console.log(category);
+				const categoryIdToUpdate = state.categories.find(
+					(_category) => _category.value === category
+				).id;
+				const categoryToUpdate = state.sixMonthsCategoryData.find(
+					(category) => category.categoryId === categoryIdToUpdate
+				);
+				if (categoryToUpdate) {
+					categoryToUpdate.data[monthDiff] -= transactionToEdit.amount;
+					categoryToUpdate.data[monthDiff] += amount;
+				}
+			}
 		},
-		deleteTransaction: (state, action) => {}
+		deleteTransaction: (state, action) => {
+			const transactionToDelete = state.transactions.find(
+				(transaction) => transaction.transactionId === action.payload
+			);
+			if (transactionToDelete.type === 'income') {
+				const monthDiff =
+					new Date().getMonth() - new Date(transactionToDelete.date).getMonth();
+				state.lastFiveYearData[0].income -= transactionToDelete.amount;
+				state.thisYearData[monthDiff].income -= transactionToDelete.amount;
+			} else {
+				const monthDiff =
+					new Date().getMonth() - new Date(transactionToDelete.date).getMonth();
+				state.lastFiveYearData[0].expense -= transactionToDelete.amount;
+				state.thisYearData[monthDiff].expenditure -= transactionToDelete.amount;
+				const categoryIdToUpdate = state.categories.find(
+					(category) => category.value === transactionToDelete.category
+				).id;
+				const categoryToUpdate = state.sixMonthsCategoryData.find(
+					(category) => category.categoryId === categoryIdToUpdate
+				);
+				if (categoryToUpdate) {
+					categoryToUpdate.data[monthDiff] -= transactionToDelete.amount;
+				}
+			}
+			state.transactions = state.transactions.filter(
+				(transaction) => transaction.transactionId !== action.payload
+			);
+		}
 	}
 });
 
-export const { addTransaction, openModal, closeModal } =
-	transactionStateSlice.actions;
+export const {
+	addTransaction,
+	openModal,
+	closeModal,
+	editTransaction,
+	deleteTransaction
+} = transactionStateSlice.actions;
 export default transactionStateSlice.reducer;

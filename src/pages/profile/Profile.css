@@ -68,6 +68,11 @@
 	object-fit: cover;
 	border-radius: 50%;
 }
+
+.profile-picture-image {
+	width: 10rem;
+}
+
 .name {
 	margin-top: 1rem;
 	margin-left: 4.5rem;
@@ -78,10 +83,6 @@
 	color: rgb(202, 202, 202);
 	text-align: center;
 	margin-left: 1.5rem;
-}
-
-.edit-picture {
-	cursor: pointer;
 }
 
 @media screen and (max-width: 768px) {
@@ -104,6 +105,4 @@
 		margin-left: 1rem;
 		font-size: smaller;
 	}
-
 }
-

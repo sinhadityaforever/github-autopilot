@@ -39,7 +39,7 @@ const Sidebar = ({ onChildProp }) => {
 				<div className="logo">
 					<UilUniversity size="3rem" />
 					<span>
-						Sh<span>o</span>ps
+						Tracki<span>Fi</span>
 					</span>
 				</div>
 

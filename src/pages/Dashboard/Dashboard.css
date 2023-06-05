@@ -1,7 +1,7 @@
 .Dashboard {
 	/* padding-top: 1rem; */
 	display: flex;
-	padding-top: 3rem;
+	padding-top: 5rem;
 	flex-direction: column;
 	justify-content: space-evenly;
 	overflow-y: auto;
@@ -63,7 +63,7 @@
 	}
 
 	.db-title {
-		margin-top: 2rem;
+		display: none;
 	}
 
 	.topDivision {

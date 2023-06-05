@@ -34,7 +34,12 @@ const Dashboard = () => {
 
 	return (
 		<div className="Dashboard">
-			<h1 className="db-title">Dashboard</h1>
+			<span
+				style={{ fontSize: '2rem', fontWeight: 'bolder', display: 'none' }}
+				className="db-title"
+			>
+				Dashboard
+			</span>
 			<div className="topDivision">
 				<ExpenseCards />
 

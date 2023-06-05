@@ -39,9 +39,8 @@ function App() {
 			<div className="App">
 				<div className="AppGlass">
 					<Sidebar onChildProp={handleChildProp} />
-					{/* <Dashboard /> */}
+
 					{renderComponent()}
-					{/* <RightSide /> */}
 				</div>
 			</div>
 		</Provider>

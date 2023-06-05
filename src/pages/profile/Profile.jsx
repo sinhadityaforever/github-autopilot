@@ -123,9 +123,15 @@ function Profile() {
 			<div className="view-profile">
 				<div className="view-profile-container">
 					<div className="profile-picture">
-						<img src={img1} />
+						<img className="profile-picture-image" src={img1} />
 
-						<UilCameraChange cursor="pointer"></UilCameraChange>
+						<UilCameraChange
+							className="edit-profile-profile"
+							cursor="pointer"
+							style={{
+								marginTop: '8rem'
+							}}
+						></UilCameraChange>
 						<input
 							type="file"
 							accept="image/*"

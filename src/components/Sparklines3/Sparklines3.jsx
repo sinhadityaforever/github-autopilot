@@ -41,6 +41,8 @@ class Sparklines3 extends React.Component {
 				group: 'sparklines',
 				type: 'area',
 				height: 160,
+				
+          width:230,
 				sparkline: {
 					enabled: true
 				},

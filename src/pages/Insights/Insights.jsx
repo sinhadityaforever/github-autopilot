@@ -28,18 +28,18 @@ function Insights() {
 					This Year
 				</h1>
 			</div>
-			<div class="row sparkboxes mt-2 mb-4">
-				<div class="col-md-4">
+			<div class="row ">
+				<div class="col-md-4 col-sm-6">
 					<div class="column1">
 						<Sparklines />
 					</div>
 				</div>
-				<div class="col-md-4">
+				<div class="col-md-4 col-sm-6">
 					<div class="column2">
 						<Sparklines2 />
 					</div>
 				</div>
-				<div class="col-md-4">
+				<div class="col-md-4 col-sm-6">
 					<div class="column3">
 						<Sparklines3 />
 					</div>
@@ -59,14 +59,14 @@ function Insights() {
 					Last 5 Years
 				</h1>
 			</div>
-			<div class="row mt-2 mb-4">
-				<div class="col-md-6">
+			<div class="row ">
+				<div class=" col-md-6">
 					<div class="box">
 						<Histogram />
 					</div>
 				</div>
 
-				<div class="col-md-6">
+				<div class=" col-md-6">
 					<div class="box">
 						<AreaChart />
 					</div>
@@ -85,13 +85,13 @@ function Insights() {
 					Category-wise
 				</h1>
 			</div>
-			<div class="row mt-2 mb-4">
-				<div class="col-md-6">
+			<div class="row ">
+				<div class=" col-md-6">
 					<div class="box">
 						<DonutChart />
 					</div>
 				</div>
-				<div class="col-md-6">
+				<div class=" col-md-6">
 					<div class="box">
 						<StackedBarChart />
 					</div>

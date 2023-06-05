@@ -1,53 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useAppSelector } from '../../app/hooks';
 import './Category.css';
 
 const inlineStyle = {
-    height: '15px',
-  };
-
-const BUDGET_ITEMS = [
-	{
-		itemName: 'Food and drinks',
-		budgeted: 5000,
-		spent: 320
-	},
-	{
-		itemName: 'EMI',
-		budgeted: 5000,
-		spent: 590
-	},
-	{
-		itemName: 'House Rent',
-		budgeted: 5000,
-		spent: 2000
-	},
-	
-	{
-		itemName: 'Groceries',
-		budgeted: 5000,
-		spent: 500
-	},
-	{
-		itemName: 'Entertainment',
-		budgeted: 5000,
-		spent: 200
-	},
-	{
-		itemName: 'Subscriptions',
-		budgeted: 5000,
-		spent: 3000
-	},
-	{
-		itemName: 'Video Games',
-		budgeted: 5000,
-		spent: 1200
-	},
-	{
-		itemName: 'Miscellaneous',
-		budgeted: 5000,
-		spent: 1000
-	},
-];
+	height: '15px'
+};
 
 const BudgetItem = (props) => {
 	return (
@@ -59,41 +16,69 @@ const BudgetItem = (props) => {
 	);
 };
 
-const BudgetItemName = ({ itemName }) => {
+const BudgetItemName = ({ categoryName }) => {
 	return (
-		<div className="budget-item" title={itemName}>
-			{itemName}
+		<div className="budget-item" title={categoryName}>
+			{categoryName}
 		</div>
 	);
 };
 
-const AllocationItem = ({ spent, budgeted }) => {
+const AllocationItem = ({ categorySpent, categoryBudget }) => {
 	return (
 		<div className="allocation">
-			<span className={'money ' + (spent > budgeted ? 'over-budget' : '')}>
-				₹{spent}
+			<span
+				className={
+					'money ' + (categorySpent > categoryBudget ? 'over-budget' : '')
+				}
+			>
+				₹{categorySpent}
 			</span>{' '}
-			of <span class="money">₹{budgeted}</span>
+			of <span class="money">₹{categoryBudget}</span>
 		</div>
 	);
 };
 
-const ProgressBar = ({ spent, budgeted }) => {
+const ProgressBar = ({ categorySpent, categoryBudget }) => {
 	return (
-		<div className={'progress-bar ' + (spent > budgeted ? 'over-budget' : '')} style={inlineStyle}>
-			<progress max={budgeted} value={spent}>
-				{spent}
+		<div
+			className={
+				'progress-bar ' + (categorySpent > categoryBudget ? 'over-budget' : '')
+			}
+			style={inlineStyle}
+		>
+			<progress max={categoryBudget} value={categorySpent}>
+				{categorySpent}
 			</progress>
 		</div>
 	);
 };
 
 const Category = () => {
-	return (<div>
-		{BUDGET_ITEMS.map((item) => {
-			return <BudgetItem {...item} />;
-		})}
-	</div>);
+	const [rows, setRows] = useState([]);
+	var categories = useAppSelector((state) => state.transactionState.categories);
+	var budgetData = useAppSelector(
+		(state) => state.transactionState.categoryWiseBudget
+	);
+	useEffect(() => {
+		const tableRows = budgetData.map((item) => {
+			const category = categories.find((cat) => cat.id === item.categoryId);
+			return {
+				categoryId: item.categoryId,
+				categoryName: category ? category.value : '',
+				categoryBudget: item.budget,
+				categorySpent: item.amountSpent
+			};
+		});
+		setRows(tableRows);
+	}, [budgetData, categories]);
+	return (
+		<div>
+			{rows.map((item) => {
+				return <BudgetItem {...item} />;
+			})}
+		</div>
+	);
 };
 
 export default Category;

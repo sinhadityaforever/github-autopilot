@@ -7,7 +7,11 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import './NewTable.css';
-import { Card } from '@mui/material';
+import { Button, Card } from '@mui/material';
+import { UilTrashAlt } from '@iconscout/react-unicons';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { deleteCategoryBudget } from '../../features/transactionState/transactionStateSlice';
+import { useEffect } from 'react';
 
 const makeStyle = (type) => {
 	if (type === 'delete') {
@@ -15,19 +19,41 @@ const makeStyle = (type) => {
 			background: '#f1807d',
 			color: 'black'
 		};
-	// } else if (type === 'expense') {
-	// 	return {
-	// 		background: '#BB86FC',
-	// 		color: 'black'
-	// 	};
-	 }
+		// } else if (type === 'expense') {
+		// 	return {
+		// 		background: '#BB86FC',
+		// 		color: 'black'
+		// 	};
+	}
 };
 
-export default function BasicTable({ rows }) {
+export default function BasicTable() {
+	const [rows, setRows] = React.useState([]);
+	const dispatch = useAppDispatch();
+
+	var categories = useAppSelector((state) => state.transactionState.categories);
+	var budgetData = useAppSelector(
+		(state) => state.transactionState.categoryWiseBudget
+	);
+	useEffect(() => {
+		const tableRows = budgetData.map((item) => {
+			const category = categories.find((cat) => cat.id === item.categoryId);
+			return {
+				categoryId: item.categoryId,
+				categoryName: category ? category.value : '',
+				categoryBudget: item.budget
+			};
+		});
+		setRows(tableRows);
+	}, [budgetData, categories]);
+
+	const handleDelete = (categoryId) => () => {
+		dispatch(deleteCategoryBudget(categoryId));
+	};
 	return (
 		<div className="Table">
 			<h4>Category-wise Budget Table:</h4>
-            <br/>
+			<br />
 			{rows && rows.length > 0 ? (
 				<TableContainer
 					component={Paper}
@@ -44,45 +70,43 @@ export default function BasicTable({ rows }) {
 						<TableHead>
 							<TableRow>
 								<TableCell sx={{ color: 'white' }}>Category</TableCell>
-								<TableCell sx={{ color: 'white' }}>Amount (in ₹)</TableCell>
-								{/* <TableCell sx={{ color: 'white' }} align="left">
-									Date
-								</TableCell> */}
-								
-								{/* <TableCell sx={{ color: 'white' }} align="left">
-									Category
-								</TableCell> */}
-                                <TableCell sx={{ color: 'white' }} align="left">
-									
+								<TableCell sx={{ color: 'white' }}>Budget</TableCell>
+
+								<TableCell sx={{ color: 'white' }} align="left">
+									Delete
 								</TableCell>
 							</TableRow>
 						</TableHead>
 						<TableBody style={{ color: 'white' }}>
 							{rows.map((row) => (
 								<TableRow
-									key={row.name}
+									key={row.categoryId}
 									sx={{
 										'&:last-child td, &:last-child th': { border: 0 }
 									}}
 								>
 									<TableCell sx={{ color: 'white' }} component="th" scope="row">
-										{row.category}
+										{row.categoryName}
 									</TableCell>
 									<TableCell sx={{ color: 'white' }} align="left">
-										{row.amount}
+										{row.categoryBudget}
 									</TableCell>
-									{/* <TableCell sx={{ color: 'white' }} align="left">
-										{row.date}
+									<TableCell
+										sx={{ color: 'white' }}
+										align="left"
+										className="cursor"
+									>
+										<Button
+											sx={{
+												backgroundColor: '#E65065',
+												color: 'white ',
+												fontSize: '0.7rem'
+											}}
+											onClick={handleDelete(row.categoryId)}
+										>
+											<UilTrashAlt />
+										</Button>
 									</TableCell>
-									<TableCell sx={{ color: 'white' }} align="left"> 
-										{row.category}
-									</TableCell> */}
-                                    <TableCell sx={{ color: 'white' }} align="left" className='cursor'>
-										<span className="status" style={makeStyle(row.type)}>
-											{row.type}
-										</span>
-									</TableCell>
-									
 								</TableRow>
 							))}
 						</TableBody>

@@ -170,7 +170,7 @@ function Budget() {
     </div>
 
 				<div className="light">
-					<button className="merge btnstyle"><div className="font">+ SET</div></button>
+					<button className="merge btnstyle"><div className="font"><strong>+ SET</strong></div></button>
 					{/* <label class="form__label" for="button">+ Add</label> */}
 					
 				</div>

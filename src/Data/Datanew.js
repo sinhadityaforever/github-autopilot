@@ -163,15 +163,16 @@ export const transactionsData = [
 	{
 		name: 'Ordered Pizza',
 		date: '12/12/2021',
-		type: 'setBudget',
 		category: categoryObj.Food,
+		type: 'delete',
 		amount: 320
 	},
-	// {
-	// 	name: 'Salary',
-	// 	date: '12/12/2021',
-	// 	type: 'income',
-	// 	category: categoryObj.Business,
-	// 	amount: 25000
-	// }
+	{
+		name: 'Salary',
+		date: '12/12/2021',
+		
+		category: categoryObj.Business,
+		type: 'delete',
+		amount: 25000
+	}
 ];

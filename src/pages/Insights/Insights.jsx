@@ -11,8 +11,22 @@ import DonutChart from '../../components/Piechart/Piechart';
 import AreaChart from '../../components/Areachart/Areachart';
 import StackedBarChart from '../../components/Savingschart/Savingschart';
 import { fontFamily } from '@mui/system';
+import { useAppSelector } from '../../app/hooks';
 
 function Insights() {
+	const lastFiveYearData = useAppSelector(
+		(state) => state.transactionState.lastFiveYearData
+	);
+	const thisYearData = useAppSelector(
+		(state) => state.transactionState.thisYearData
+	);
+	const sixMonthsCategoryData = useAppSelector(
+		(state) => state.transactionState.sixMonthsCategoryData
+	);
+	const categories = useAppSelector(
+		(state) => state.transactionState.categories
+	);
+
 	return (
 		<div className="container">
 			<div>
@@ -31,17 +45,17 @@ function Insights() {
 			<div class="row ">
 				<div class="col-md-4 col-sm-6">
 					<div class="column1">
-						<Sparklines />
+						<Sparklines thisYearData={thisYearData} />
 					</div>
 				</div>
 				<div class="col-md-4 col-sm-6">
 					<div class="column2">
-						<Sparklines2 />
+						<Sparklines2 thisYearData={thisYearData} />
 					</div>
 				</div>
 				<div class="col-md-4 col-sm-6">
 					<div class="column3">
-						<Sparklines3 />
+						<Sparklines3 thisYearData={thisYearData} />
 					</div>
 				</div>
 			</div>
@@ -62,13 +76,13 @@ function Insights() {
 			<div class="row ">
 				<div class=" col-md-6">
 					<div class="box">
-						<Histogram />
+						<Histogram lastFiveYearData={lastFiveYearData} />
 					</div>
 				</div>
 
 				<div class=" col-md-6">
 					<div class="box">
-						<AreaChart />
+						<AreaChart lastFiveYearData={lastFiveYearData} />
 					</div>
 				</div>
 			</div>
@@ -88,12 +102,18 @@ function Insights() {
 			<div class="row ">
 				<div class=" col-md-6">
 					<div class="box">
-						<DonutChart />
+						<DonutChart
+							sixMonthsCategoryData={sixMonthsCategoryData}
+							categories={categories}
+						/>
 					</div>
 				</div>
 				<div class=" col-md-6">
 					<div class="box">
-						<StackedBarChart />
+						<StackedBarChart
+							sixMonthsCategoryData={sixMonthsCategoryData}
+							categories={categories}
+						/>
 					</div>
 				</div>
 			</div>

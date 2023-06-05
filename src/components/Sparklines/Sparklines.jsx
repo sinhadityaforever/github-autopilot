@@ -1,100 +1,126 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import 'apexcharts/dist/apexcharts.css';
 import ApexCharts from 'apexcharts';
+import { useAppSelector } from '../../app/hooks';
 
-const Sparklines=()=> {
-  const chartRef = useRef(null);
+class Sparklines extends React.Component {
+	constructor(props) {
+		super(props);
+		this.chartRef = React.createRef();
+	}
 
-  useEffect(() => {
-    const renderChart = () => {
-      var sparklineData = [
-        47, 45, 54, 38, 56, 24, 65, 31, 37, 39, 62, 51, 35, 41, 35, 27, 93, 53,
-        61, 27, 54, 43, 19, 46
-      ];
+	componentDidMount() {
+		this.renderChart();
+	}
 
-      var spark1 = {
-        chart: {
-          id: 'sparkline1',
-          group: 'sparklines',
-          type: 'area',
-          height: 160,
-          width:230,
-          sparkline: {
-            enabled: true
-          },
-          parentHeightOffset: 0
-        },
-        stroke: {
-          curve: 'straight'
-        },
-        fill: {
-          opacity: 1
-        },
-        series: [
-          {
-            name: 'Sales',
-            data: sparklineData
-          }
-        ],
-        labels: [...Array(24).keys()].map((n) => `2018-09-0${n + 1}`),
-        yaxis: {
-          min: 0
-        },
-        xaxis: {
-          type: 'datetime'
-        },
-        colors: ['#5DEBB8'],
-        title: {
-          text: 'Rs 424,652',
-          offsetX: 30,
-          style: {
-            fontSize: '24px',
-            color: 'white',
-            cssClass: 'apexcharts-yaxis-title'
-          }
-        },
-        subtitle: {
-          text: 'Salary',
-          offsetX: 30,
-          style: {
-            fontSize: '14px',
-            color: 'white',
-            cssClass: 'apexcharts-yaxis-title'
-          }
-        }
-      };
+	renderChart() {
+		const data = this.props.thisYearData;
+		const thisYearData = [...data];
+		const income = thisYearData
+			.sort((a, b) => b.index - a.index)
+			.map((item) => item.income);
 
-      var chartOptions = {
-        ...spark1,
-        chart: {
-          ...spark1.chart,
-          parentHeightOffset: 0
-        }
-      };
+		const total = income.reduce(
+			(accumulator, currentValue) => accumulator + currentValue,
+			0
+		);
+		const formattedMoney = total.toLocaleString('en-US', {
+			style: 'currency',
+			currency: 'INR',
+			maximumFractionDigits: 0
+		});
 
-      new ApexCharts(chartRef.current, chartOptions).render();
-    };
+		const monthNames = [
+			'Jan',
+			'Feb',
+			'Mar',
+			'Apr',
+			'May',
+			'Jun',
+			'Jul',
+			'Aug',
+			'Sep',
+			'Oct',
+			'Nov',
+			'Dec'
+		];
 
-    renderChart();
+		const currentDate = new Date();
+		const lastTwelveMonths = [];
 
-    const resizeHandler = () => {
-      if (chartRef.current) {
-        ApexCharts.exec('sparkline1', 'updateOptions', {
-          chart: {
-            height: window.innerWidth < 576 ? 200 : 160
-          }
-        });
-      }
-    };
+		for (let i = 11; i >= 0; i--) {
+			const monthIndex = currentDate.getMonth() - i;
+			const year =
+				currentDate.getFullYear() +
+				Math.floor((currentDate.getMonth() - i) / 12);
+			const month = monthNames[monthIndex >= 0 ? monthIndex : monthIndex + 12];
+			lastTwelveMonths.push(month + ' ' + year);
+		}
 
-    window.addEventListener('resize', resizeHandler);
+		var sparklineData = income;
 
-    return () => {
-      window.removeEventListener('resize', resizeHandler);
-    };
-  }, []);
+		var spark1 = {
+			chart: {
+				id: 'sparkline1',
+				group: 'sparklines',
+				type: 'area',
+				height: 160,
+				sparkline: {
+					enabled: true
+				},
+				parentHeightOffset: 0
+			},
+			stroke: {
+				curve: 'straight'
+			},
+			fill: {
+				opacity: 1
+			},
+			series: [
+				{
+					name: 'Income',
+					data: sparklineData
+				}
+			],
+			labels: lastTwelveMonths,
+			yaxis: {
+				min: 0
+			},
+			colors: ['#5DEBB8'],
+			title: {
+				text: formattedMoney,
+				offsetX: 30,
+				style: {
+					fontSize: '24px',
+					color: 'white',
+					cssClass: 'apexcharts-yaxis-title'
+				}
+			},
+			subtitle: {
+				text: 'Salary',
+				offsetX: 30,
+				style: {
+					fontSize: '14px',
+					color: 'white',
+					cssClass: 'apexcharts-yaxis-title'
+				}
+			}
+		};
 
-  return <div ref={chartRef} />;
+		var chartOptions = {
+			...spark1,
+			chart: {
+				...spark1.chart,
+				parentHeightOffset: 0
+			}
+		};
+
+		new ApexCharts(this.chartRef.current, chartOptions).render();
+	}
+
+	render() {
+		return <div ref={this.chartRef} />;
+	}
 }
 
 export default Sparklines;

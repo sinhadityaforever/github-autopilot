@@ -6,65 +6,55 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import './Table.css';
-import { Button, Card, Tab } from '@mui/material';
-import { UilPen } from '@iconscout/react-unicons';
-import { useAppDispatch } from '../../app/hooks';
-import { openModal } from '../../features/transactionState/transactionStateSlice';
-import EditTransactionDialog from '../EditTransactionDialog/EditTransactionDialog';
+import './NewTable.css';
+import { Card } from '@mui/material';
 
 const makeStyle = (type) => {
-	if (type === 'income') {
+	if (type === 'delete') {
 		return {
-			background: '#03DAC5',
-			color: 'white'
+			background: '#f1807d',
+			color: 'black'
 		};
-	} else if (type === 'expense') {
-		return {
-			background: '#BB86FC',
-			color: 'white'
-		};
-	}
+	// } else if (type === 'expense') {
+	// 	return {
+	// 		background: '#BB86FC',
+	// 		color: 'black'
+	// 	};
+	 }
 };
 
 export default function BasicTable({ rows }) {
-	const dispatch = useAppDispatch();
-	const handleModal = (transactionId) => {
-		dispatch(openModal(transactionId));
-	};
 	return (
 		<div className="Table">
-			<EditTransactionDialog />
-			<h3>Recent Transactions</h3>
+			<h4>Category-wise Budget Table:</h4>
+            <br/>
 			{rows && rows.length > 0 ? (
 				<TableContainer
 					component={Paper}
 					style={{
-						boxShadow: '0px 13px 20px 0px #80808029',
-						maxHeight: '15rem'
+						boxShadow: '0px 90px 20px 0px #0000000d',
+						maxHeight: '20rem'
 					}}
 				>
 					<Table
-						sx={{ minWidth: 650, maxHeight: '10rem' }}
+						sx={{ minWidth: 650, maxHeight: '15rem' }}
 						aria-label="simple table"
-						style={{ backgroundColor: '#616161' }}
+						style={{ backgroundColor: '#544d4d' }}
 					>
 						<TableHead>
 							<TableRow>
 								<TableCell sx={{ color: 'white' }}>Transaction Name</TableCell>
-								<TableCell sx={{ color: 'white' }}>Amount</TableCell>
+								<TableCell sx={{ color: 'white' }}>Amount (in ₹)</TableCell>
 								<TableCell sx={{ color: 'white' }} align="left">
 									Date
 								</TableCell>
-								<TableCell sx={{ color: 'white' }} align="left">
-									Transaction Type
-								</TableCell>
+								
 								<TableCell sx={{ color: 'white' }} align="left">
 									Category
 								</TableCell>
-								{/* <TableCell sx={{ color: 'white' }} align="left">
-									Edit
-								</TableCell> */}
+                                <TableCell sx={{ color: 'white' }} align="left">
+									
+								</TableCell>
 							</TableRow>
 						</TableHead>
 						<TableBody style={{ color: 'white' }}>
@@ -84,33 +74,15 @@ export default function BasicTable({ rows }) {
 									<TableCell sx={{ color: 'white' }} align="left">
 										{row.date}
 									</TableCell>
-									<TableCell sx={{ color: 'white' }} align="left">
+									<TableCell sx={{ color: 'white' }} align="left"> 
+										{row.category}
+									</TableCell>
+                                    <TableCell sx={{ color: 'white' }} align="left" className='cursor'>
 										<span className="status" style={makeStyle(row.type)}>
 											{row.type}
 										</span>
 									</TableCell>
-									<TableCell sx={{ color: 'white' }} align="left">
-										{row.category}
-									</TableCell>
-									{/* <TableCell sx={{ color: 'white' }} align="left">
 									
-
-										<UilPen
-											onClick={() => {
-												// console.log(
-												// 	row.name,
-												// 	row.date,
-												// 	row.type,
-												// 	row.category,
-												// 	row.amount
-												// );
-												handleModal(row.transactionId);
-											}}
-											size="1.5rem"
-											color="white"
-											cursor="pointer"
-										/>
-									</TableCell> */}
 								</TableRow>
 							))}
 						</TableBody>

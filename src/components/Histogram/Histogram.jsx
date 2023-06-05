@@ -1,20 +1,31 @@
 import React, { useEffect, useRef } from 'react';
 import 'apexcharts/dist/apexcharts.css';
 import ApexCharts from 'apexcharts';
+import { useAppSelector } from '../../app/hooks';
 
-const Histogram = () => {
+const Histogram = ({ lastFiveYearData }) => {
 	const chartRef = useRef(null);
+	const date = new Date();
+	const data = [...lastFiveYearData];
+	const thisYear = date.getFullYear();
+	const incomes = data
+		.sort((a, b) => a.index - b.index)
+		.map((item) => item.income);
+
+	const expenditures = data
+		.sort((a, b) => a.index - b.index)
+		.map((item) => item.expense);
 
 	useEffect(() => {
 		const options = {
 			series: [
 				{
 					name: 'Income',
-					data: [44, 55, 41, 64, 22, 43, 21]
+					data: incomes
 				},
 				{
 					name: 'Expenditure',
-					data: [53, 32, 33, 52, 13, 44, 32]
+					data: expenditures
 				}
 			],
 			chart: {
@@ -48,7 +59,13 @@ const Histogram = () => {
 				intersect: false
 			},
 			xaxis: {
-				categories: [2001, 2002, 2003, 2004, 2005, 2006, 2007],
+				categories: [
+					thisYear - 4,
+					thisYear - 3,
+					thisYear - 2,
+					thisYear - 1,
+					thisYear
+				],
 				labels: {
 					show: true,
 					style: {
@@ -76,7 +93,7 @@ const Histogram = () => {
 		return () => {
 			chart.destroy();
 		};
-	}, []);
+	}, [expenditures, incomes, thisYear]);
 
 	return <div id="chart" ref={chartRef}></div>;
 };

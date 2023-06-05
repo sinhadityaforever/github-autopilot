@@ -37,6 +37,9 @@ const lightColor = {
 
 // Compact Card
 function CompactCard({ param }) {
+	const currDate = new Date();
+	const prevSixMonthDate = new Date(currDate.setMonth(currDate.getMonth() - 5));
+	const currMonth = currDate.getMonth();
 	const [name, setName] = useState('');
 	const [amount, setAmount] = useState(0);
 	const [category, setCategory] = useState('Other');
@@ -49,6 +52,8 @@ function CompactCard({ param }) {
 		setCategory(event.target.value);
 	};
 	const dateHandler = (event) => {
+		console.log('trigerred');
+
 		setDate(event.target.value);
 	};
 
@@ -60,7 +65,11 @@ function CompactCard({ param }) {
 	};
 
 	const submitHandler = () => {
-		if (!name || !amount || !category || !date) return;
+		if (!name || !amount || !category || !date) {
+			console.log(name, amount, category, date);
+			return;
+		}
+
 		dispatch(
 			addTransaction({
 				name,
@@ -113,7 +122,12 @@ function CompactCard({ param }) {
 					<TextField
 						variant="standard"
 						type="date"
-						onInput={dateHandler}
+						inputProps={{
+							max: new Date().toISOString().split('T')[0],
+							min: prevSixMonthDate.toISOString().split('T')[0]
+						}}
+						defaultValue={new Date().toISOString().split('T')[0]}
+						onChange={dateHandler}
 						sx={lightColor}
 					/>
 				</div>
@@ -131,9 +145,6 @@ function CompactCard({ param }) {
 							label="Category"
 							value={category}
 						>
-							{/* <MenuItem value={'groceries'}>Groceries</MenuItem>
-							<MenuItem value={'clothes'}>Clothes</MenuItem>
-							<MenuItem value={'investments'}>Investment</MenuItem> */}
 							{param.categories.map((category) => {
 								return <MenuItem value={category}>{category}</MenuItem>;
 							})}

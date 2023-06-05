@@ -3,9 +3,16 @@ import ReactApexChart from 'react-apexcharts';
 import './CategoryChart.css';
 function CategoryChart({ transactionsData }) {
 	//Parsing data for graph
-	const expenseTransactions = transactionsData.filter(
-		(transaction) => transaction.type === 'expense'
-	);
+	const expenseTransactions = transactionsData.filter((transaction) => {
+		const transactionDate = new Date(transaction.date);
+
+		if (
+			transaction.type === 'expense' &&
+			transactionDate.getMonth() === new Date().getMonth()
+		) {
+			return transaction;
+		}
+	});
 	const expenseCategories = [
 		...new Set(expenseTransactions.map((transaction) => transaction.category))
 	];

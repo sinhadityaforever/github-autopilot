@@ -13,28 +13,50 @@ class Sparklines2 extends React.Component {
 	}
 
 	renderChart() {
-		var randomizeArray = function (arg) {
-			var array = arg.slice();
-			var currentIndex = array.length,
-				temporaryValue,
-				randomIndex;
+		const data = this.props.thisYearData;
+		const thisYearData = [...data];
+		const expense = thisYearData
+			.sort((a, b) => b.index - a.index)
+			.map((item) => item.expenditure);
+		const total = expense.reduce(
+			(accumulator, currentValue) => accumulator + currentValue,
+			0
+		);
 
-			while (0 !== currentIndex) {
-				randomIndex = Math.floor(Math.random() * currentIndex);
-				currentIndex -= 1;
+		const formattedMoney = total.toLocaleString('en-US', {
+			style: 'currency',
+			currency: 'INR',
+			maximumFractionDigits: 0
+		});
 
-				temporaryValue = array[currentIndex];
-				array[currentIndex] = array[randomIndex];
-				array[randomIndex] = temporaryValue;
-			}
-
-			return array;
-		};
-
-		var sparklineData = [
-			47, 45, 54, 38, 56, 24, 65, 31, 37, 39, 62, 51, 35, 41, 35, 27, 93, 53,
-			61, 27, 54, 43, 19, 46
+		const monthNames = [
+			'Jan',
+			'Feb',
+			'Mar',
+			'Apr',
+			'May',
+			'Jun',
+			'Jul',
+			'Aug',
+			'Sep',
+			'Oct',
+			'Nov',
+			'Dec'
 		];
+
+		const currentDate = new Date();
+		const lastTwelveMonths = [];
+
+		for (let i = 11; i >= 0; i--) {
+			const monthIndex = currentDate.getMonth() - i;
+			const year =
+				currentDate.getFullYear() +
+				Math.floor((currentDate.getMonth() - i) / 12);
+			const month = monthNames[monthIndex >= 0 ? monthIndex : monthIndex + 12];
+			lastTwelveMonths.push(month + ' ' + year);
+		}
+
+		var sparklineData = expense;
 
 		var spark2 = {
 			chart: {
@@ -58,19 +80,17 @@ class Sparklines2 extends React.Component {
 			series: [
 				{
 					name: 'Expenses',
-					data: randomizeArray(sparklineData)
+					data: sparklineData
 				}
 			],
-			labels: [...Array(24).keys()].map((n) => `2018-09-0${n + 1}`),
+			labels: lastTwelveMonths,
 			yaxis: {
 				min: 0
 			},
-			xaxis: {
-				type: 'datetime'
-			},
+
 			colors: ['#FF4560'],
 			title: {
-				text: 'Rs 235,312',
+				text: formattedMoney,
 				offsetX: 30,
 				style: {
 					fontSize: '24px',

@@ -34,12 +34,6 @@
   
 
 
-.Budget {
-	overflow-y: auto;
-	scrollbar-width: none;
-	color: white;
-}
-
 /* :hover {
 	background-color: #29d32f;
 }button */
@@ -61,8 +55,12 @@ h4 {
 } */
 
 .Budget {
+  overflow-y: auto;
+	scrollbar-width: none;
+	color: white;
 	align-items: center;
 	max-height: max-content;
+  
 
 	/* background: linear-gradient(
     106.37deg,

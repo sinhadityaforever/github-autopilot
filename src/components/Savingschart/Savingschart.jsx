@@ -1,33 +1,44 @@
 import React, { useEffect, useRef } from 'react';
 import ApexCharts from 'apexcharts';
 
-const StackedBarChart = () => {
+const StackedBarChart = ({ sixMonthsCategoryData, categories }) => {
 	const chartRef = useRef(null);
+	const data = [...sixMonthsCategoryData];
+	const result = data.map(({ categoryId, data }) => {
+		const category = categories.find((category) => category.id === categoryId);
+		const reversedData = data.slice().reverse();
+		return { name: category.value, data: reversedData };
+	});
+
+	const monthNames = [
+		'Jan',
+		'Feb',
+		'Mar',
+		'Apr',
+		'May',
+		'Jun',
+		'Jul',
+		'Aug',
+		'Sep',
+		'Oct',
+		'Nov',
+		'Dec'
+	];
+
+	const currentDate = new Date();
+	const lastSixMonths = [];
+
+	for (let i = 5; i >= 0; i--) {
+		const monthIndex = currentDate.getMonth() - i;
+		const year =
+			currentDate.getFullYear() + Math.floor((currentDate.getMonth() - i) / 12);
+		const month = monthNames[monthIndex >= 0 ? monthIndex : monthIndex + 12];
+		lastSixMonths.push(month + ' ' + year);
+	}
 
 	useEffect(() => {
 		const options = {
-			series: [
-				{
-					name: 'Food',
-					data: [44, 55, 41, 37, 22, 43, 21]
-				},
-				{
-					name: 'Clothing',
-					data: [53, 32, 33, 52, 13, 43, 32]
-				},
-				{
-					name: 'Bills',
-					data: [12, 17, 11, 9, 15, 11, 20]
-				},
-				{
-					name: 'Accessories',
-					data: [9, 7, 5, 8, 6, 9, 4]
-				},
-				{
-					name: 'Savings',
-					data: [25, 12, 19, 32, 25, 24, 10]
-				}
-			],
+			series: result,
 			chart: {
 				type: 'bar',
 				height: 350,
@@ -51,7 +62,7 @@ const StackedBarChart = () => {
 				}
 			},
 			xaxis: {
-				categories: ['Jan', 'Feb', 'Mar', 'April', 'May', 'June'],
+				categories: lastSixMonths,
 				labels: {
 					style: {
 						colors: 'white'
@@ -68,7 +79,7 @@ const StackedBarChart = () => {
 			tooltip: {
 				y: {
 					formatter: function (val) {
-						return val + 'K';
+						return val;
 					}
 				}
 			},

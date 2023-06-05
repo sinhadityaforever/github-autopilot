@@ -10,9 +10,11 @@ const FinanceScore = () => {
       var options = {
         series: [75],
         chart: {
+
         height: 350,
         position:'relative',
         top:'-20px',
+
         type: 'radialBar',
         toolbar: {
           show: true
@@ -40,7 +42,9 @@ const FinanceScore = () => {
           },
           track: {
             background: '#fff',
+
             strokeWidth: '90%',
+
             margin: 0, // margin is in pixels
             dropShadow: {
               enabled: true,
@@ -86,7 +90,9 @@ const FinanceScore = () => {
       stroke: {
         lineCap: 'round'
       },
+
       labels: ['Budget Score'],
+
       };
 
       var chart = new ApexCharts(document.querySelector("#chart"), options);

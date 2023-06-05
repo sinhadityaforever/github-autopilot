@@ -7,25 +7,34 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import './Table.css';
-import { Card } from '@mui/material';
+import { Button, Card, Tab } from '@mui/material';
+import { UilPen } from '@iconscout/react-unicons';
+import { useAppDispatch } from '../../app/hooks';
+import { openModal } from '../../features/transactionState/transactionStateSlice';
+import EditTransactionDialog from '../EditTransactionDialog/EditTransactionDialog';
 
 const makeStyle = (type) => {
 	if (type === 'income') {
 		return {
 			background: '#03DAC5',
-			color: 'black'
+			color: 'white'
 		};
 	} else if (type === 'expense') {
 		return {
 			background: '#BB86FC',
-			color: 'black'
+			color: 'white'
 		};
 	}
 };
 
 export default function BasicTable({ rows }) {
+	const dispatch = useAppDispatch();
+	const handleModal = (transactionId) => {
+		dispatch(openModal(transactionId));
+	};
 	return (
 		<div className="Table">
+			<EditTransactionDialog />
 			<h3>Recent Transactions</h3>
 			{rows && rows.length > 0 ? (
 				<TableContainer
@@ -53,6 +62,9 @@ export default function BasicTable({ rows }) {
 								<TableCell sx={{ color: 'white' }} align="left">
 									Category
 								</TableCell>
+								{/* <TableCell sx={{ color: 'white' }} align="left">
+									Edit
+								</TableCell> */}
 							</TableRow>
 						</TableHead>
 						<TableBody style={{ color: 'white' }}>
@@ -80,6 +92,25 @@ export default function BasicTable({ rows }) {
 									<TableCell sx={{ color: 'white' }} align="left">
 										{row.category}
 									</TableCell>
+									{/* <TableCell sx={{ color: 'white' }} align="left">
+									
+
+										<UilPen
+											onClick={() => {
+												// console.log(
+												// 	row.name,
+												// 	row.date,
+												// 	row.type,
+												// 	row.category,
+												// 	row.amount
+												// );
+												handleModal(row.transactionId);
+											}}
+											size="1.5rem"
+											color="white"
+											cursor="pointer"
+										/>
+									</TableCell> */}
 								</TableRow>
 							))}
 						</TableBody>

@@ -27,9 +27,16 @@ function ExpenseChart({ transactionsData }) {
 
 	const getData = () => {
 		transactionsData.forEach((item) => {
-			if (item.type === 'expense') {
+			const itemDate = new Date(item.date);
+			if (
+				item.type === 'expense' &&
+				itemDate.getMonth() === new Date().getMonth()
+			) {
 				expense += item.amount;
-			} else {
+			} else if (
+				item.type === 'income' &&
+				itemDate.getMonth() === new Date().getMonth()
+			) {
 				income += item.amount;
 			}
 		});

@@ -1,12 +1,25 @@
 import React, { useEffect, useRef } from 'react';
 import ApexCharts from 'apexcharts';
 
-const DonutChart = () => {
+const DonutChart = ({ sixMonthsCategoryData, categories }) => {
 	const chartRef = useRef(null);
+
+	const data = [...sixMonthsCategoryData];
+	const result = data.map(({ categoryId, data }) => {
+		const category = categories.find((category) => category.id === categoryId);
+		const sum = data.reduce(
+			(accumulator, currentValue) => accumulator + currentValue,
+			0
+		);
+		return { category: category.value, value: sum };
+	});
+
+	const values = result.map((item) => item.value);
+	const categoriesName = result.map((item) => item.category);
 
 	useEffect(() => {
 		const options = {
-			series: [44, 55, 41, 17, 15],
+			series: values,
 			chart: {
 				width: 380,
 				foreColor: 'white',
@@ -40,7 +53,7 @@ const DonutChart = () => {
 					}
 				}
 			},
-			labels: ['Food', 'EMI', 'Clothing', 'Electric Bill', 'Savings'],
+			labels: categoriesName,
 			dataLabels: {
 				style: {
 					color: 'white'
@@ -94,7 +107,7 @@ const DonutChart = () => {
 		return () => {
 			chart.destroy();
 		};
-	}, []);
+	}, [categoriesName, values]);
 
 	return <div id="chart" ref={chartRef}></div>;
 };

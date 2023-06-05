@@ -32,8 +32,6 @@ const Dashboard = () => {
 	const tableTransactionsData = [...transactionsData];
 	tableTransactionsData.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-	const recentTransactions = tableTransactionsData.slice(0, 9);
-
 	return (
 		<div className="Dashboard">
 			<h1 className="db-title">Dashboard</h1>
@@ -45,7 +43,7 @@ const Dashboard = () => {
 			</div>
 
 			<div className="bottomDiv">
-				<Table rows={recentTransactions} />
+				<Table rows={tableTransactionsData} />
 				{!isMobile && <CategoryChart transactionsData={transactionsData} />}
 			</div>
 		</div>

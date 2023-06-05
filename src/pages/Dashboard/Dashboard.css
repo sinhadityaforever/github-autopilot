@@ -1,6 +1,7 @@
 .Dashboard {
 	/* padding-top: 1rem; */
 	display: flex;
+	padding-top: 3rem;
 	flex-direction: column;
 	justify-content: space-evenly;
 	overflow-y: auto;
@@ -17,6 +18,7 @@
 }
 
 .bottomDiv {
+	margin-top: 3rem;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;

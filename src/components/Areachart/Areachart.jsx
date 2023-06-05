@@ -1,7 +1,49 @@
 import React, { useEffect, useRef } from 'react';
 import ApexCharts from 'apexcharts';
 
-const AreaChart = () => {
+const AreaChart = ({ lastFiveYearData }) => {
+	const data = [...lastFiveYearData];
+	const date = new Date();
+	const thisYear = date.getFullYear();
+	const incomes = data
+		.sort((a, b) => a.index - b.index)
+		.map((item) => item.income);
+
+	const expenses = data
+		.sort((a, b) => a.index - b.index)
+		.map((item) => item.expense);
+
+	const savings = data
+		.sort((a, b) => a.index - b.index)
+		.map((item) => item.income - item.expense);
+
+	const years = [
+		thisYear - 4,
+		thisYear - 3,
+		thisYear - 2,
+		thisYear - 1,
+		thisYear
+	];
+
+	const incomeData = years.map((year, index) => {
+		return {
+			x: year,
+			y: incomes[index]
+		};
+	});
+	const expenseData = years.map((year, index) => {
+		return {
+			x: year,
+			y: expenses[index]
+		};
+	});
+	const savingsData = years.map((year, index) => {
+		return {
+			x: year,
+			y: savings[index]
+		};
+	});
+
 	const chartRef = useRef(null);
 	var colorPalette = ['#00D8B6', '#008FFB', '#FF4560'];
 
@@ -9,7 +51,7 @@ const AreaChart = () => {
 		const options = {
 			chart: {
 				height: 340,
-				width: 340,
+				width: 400,
 				type: 'area',
 				zoom: {
 					enabled: false
@@ -22,78 +64,15 @@ const AreaChart = () => {
 			series: [
 				{
 					name: 'Income',
-					data: [
-						{
-							x: -4,
-							y: 5
-						},
-						{
-							x: -3,
-							y: 3
-						},
-						{
-							x: -2,
-							y: 8
-						},
-						{
-							x: -1,
-							y: 4
-						},
-						{
-							x: 0,
-							y: 5
-						}
-					]
+					data: incomeData
 				},
 				{
 					name: 'Savings',
-					data: [
-						{
-							x: -4,
-							y: 6
-						},
-						{
-							x: -3,
-							y: 4
-						},
-						{
-							x: -2,
-							y: 8
-						},
-						{
-							x: -1,
-							y: 5.5
-						},
-						{
-							x: 0,
-							y: 6
-						}
-					]
+					data: savingsData
 				},
 				{
 					name: 'Expense',
-					data: [
-						{
-							x: -4,
-							y: 5
-						},
-						{
-							x: -3,
-							y: 4
-						},
-						{
-							x: -2,
-							y: 11
-						},
-						{
-							x: -1,
-							y: 4
-						},
-						{
-							x: 0,
-							y: 8
-						}
-					]
+					data: expenseData
 				}
 			],
 			fill: {
@@ -140,6 +119,7 @@ const AreaChart = () => {
 					show: false
 				},
 				labels: {
+					show: false,
 					style: {
 						colors: 'white'
 					}

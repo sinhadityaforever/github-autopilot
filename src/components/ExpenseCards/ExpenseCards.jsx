@@ -1,5 +1,6 @@
 import React from 'react';
 import './ExpenseCards.css';
+
 import { expenseCardData } from '../../Data/Data';
 
 import ExpenseCard from '../ExpenseCard/ExpenseCard';

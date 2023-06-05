@@ -104,23 +104,14 @@ export const cardsData = [
 
 export const expenseCardData = [
 	{
-		title: 'Add Income',
+		title: 'Set category-wise budget',
 		color: {
 			backGround: 'linear-gradient(180deg, #bb67ff 0%, #c484f3 100%)',
 			boxShadow: '0px 10px 20px 0px #e0c6f5'
 		},
-		png: UilMoneyWithdraw,
-		type: 'income'
+		png: UilChart,
+		type: 'setBudget'
 	},
-	{
-		title: 'Add Expense',
-		color: {
-			 backGround: 'linear-gradient(180deg, #FF919D 0%, #FC929D 100%)',
-			boxShadow: '0px 10px 20px 0px #FDC0C7'
-		},
-		png: UilMoneyInsert,
-		type: 'expense'
-	}
 ];
 
 // Recent Update Card Data
@@ -172,15 +163,15 @@ export const transactionsData = [
 	{
 		name: 'Ordered Pizza',
 		date: '12/12/2021',
-		type: 'expense',
+		type: 'setBudget',
 		category: categoryObj.Food,
 		amount: 320
 	},
-	{
-		name: 'Salary',
-		date: '12/12/2021',
-		type: 'income',
-		category: categoryObj.Business,
-		amount: 25000
-	}
+	// {
+	// 	name: 'Salary',
+	// 	date: '12/12/2021',
+	// 	type: 'income',
+	// 	category: categoryObj.Business,
+	// 	amount: 25000
+	// }
 ];

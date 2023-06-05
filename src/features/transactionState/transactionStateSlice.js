@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
+	isLoggedIn: false,
 	showEditModal: false,
 	editModalData: {},
 	categories: [
@@ -397,6 +398,15 @@ const transactionStateSlice = createSlice({
 			state.categoryWiseBudget = state.categoryWiseBudget.filter(
 				(category) => category.categoryId !== categoryId
 			);
+		},
+		login: (state, action) => {
+			localStorage.setItem('isLoggedIn', true);
+			state.isLoggedIn = true;
+		},
+		logout: (state, action) => {
+			console.log('Logged');
+			localStorage.clear();
+			state.isLoggedIn = false;
 		}
 	}
 });
@@ -408,6 +418,8 @@ export const {
 	editTransaction,
 	deleteTransaction,
 	addCategoryBudget,
-	deleteCategoryBudget
+	deleteCategoryBudget,
+	login,
+	logout
 } = transactionStateSlice.actions;
 export default transactionStateSlice.reducer;

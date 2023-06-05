@@ -42,65 +42,58 @@ function Budget() {
 			name: 'Beer',
 			date: '12/12/2021',
 			
-			category: 'Food and drinks',
+			category: 'EMI',
 			type: 'delete',
-			amount: 1500
+			amount: 590
 		},
 		{
 			name: 'Beer',
 			date: '12/12/2021',
 			
-			category: 'Food and drinks',
+			category: 'House Rent',
 			type: 'delete',
-			amount: 1500
+			amount: 2000
+		},
+		
+		{
+			name: 'Beer',
+			date: '12/12/2021',
+			
+			category: 'Groceries',
+			type: 'delete',
+			amount: 500
 		},
 		{
 			name: 'Beer',
 			date: '12/12/2021',
 			
-			category: 'Food and drinks',
+			category: 'Entertainment',
 			type: 'delete',
-			amount: 1500
+			amount: 200
 		},
 		{
 			name: 'Beer',
 			date: '12/12/2021',
 			
-			category: 'Food and drinks',
+			category: 'Subscriptions',
 			type: 'delete',
-			amount: 1500
+			amount: 3000
 		},
 		{
 			name: 'Beer',
 			date: '12/12/2021',
 			
-			category: 'Food and drinks',
+			category: 'Video games',
 			type: 'delete',
-			amount: 1500
+			amount: 1200
 		},
 		{
 			name: 'Beer',
 			date: '12/12/2021',
 			
-			category: 'Food and drinks',
+			category: 'Miscellaneous',
 			type: 'delete',
-			amount: 1500
-		},
-		{
-			name: 'Beer',
-			date: '12/12/2021',
-			
-			category: 'Food and drinks',
-			type: 'delete',
-			amount: 1500
-		},
-		{
-			name: 'Beer',
-			date: '12/12/2021',
-			
-			category: 'Food and drinks',
-			type: 'delete',
-			amount: 1500
+			amount: 1000
 		}
 	];
 	
@@ -167,7 +160,7 @@ function Budget() {
 				</div>  */}
 
 <div class="form__linput merge">
-      <input class="form__input" type="number" name="fname" id="fname" pattern="\w{1,}" value="15000" style={{height:'54px'}} required />
+      <input class="form__input" type="number" name="fname" id="fname" pattern="\w{1,}" value="5000" style={{height:'54px'}} required />
       <label class="form__label" for="fname">CURRENT BUDGET</label>
     </div>
 
@@ -177,7 +170,7 @@ function Budget() {
     </div>
 
 				<div className="light">
-					<button className="merge btnstyle"><div className="font">+ CATEGORY</div></button>
+					<button className="merge btnstyle"><div className="font">+ SET</div></button>
 					{/* <label class="form__label" for="button">+ Add</label> */}
 					
 				</div>

@@ -17,10 +17,10 @@
 
 @media screen and (max-width: 768px) {
 	.Cards {
-		margin-left: 1rem;
 		width: 80%;
 		flex-direction: column;
 		margin-top: 1rem;
+		align-self: center;
 	}
 	.parentContainer {
 		margin-bottom: 150px;

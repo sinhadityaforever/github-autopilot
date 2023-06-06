@@ -31,6 +31,18 @@ function Loginpage() {
 			<div className="loginContainer" id="container">
 				<div className="form-container log-in-container">
 					<form className="loginForm" action="#">
+						<div
+							className="mobileLogo"
+							style={{
+								// display: 'none',
+								flexDirection: 'row',
+								fontSize: '2rem',
+								fontWeight: '700'
+							}}
+						>
+							<span>Tracki</span>
+							<span style={{ color: '#FF919D' }}>Fi</span>
+						</div>
 						<h1>Login</h1>
 						<div className="social-container">
 							<a href="#" className="social">
@@ -59,6 +71,19 @@ function Loginpage() {
 						<button onClick={submitHandler} className="loginButton">
 							Log In
 						</button>
+						<div
+							className="mobile-disclaimer"
+							style={{
+								fontSize: '0.6rem',
+								marginTop: '3rem'
+							}}
+						>
+							<p>
+								*Since we don't have a backend, use these to login:
+								<br></br>
+								Email: abc@email.com <br></br> Password: test@123{' '}
+							</p>
+						</div>
 					</form>
 				</div>
 				<div className="overlay-container">

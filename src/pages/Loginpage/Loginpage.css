@@ -167,3 +167,24 @@ a {
 	height: 40px;
 	width: 40px;
 }
+.mobileLogo {
+	display: none;
+}
+.mobile-disclaimer {
+	display: none;
+}
+
+@media screen and (max-width: 768px) {
+	.loginContainer {
+		position: inherit;
+	}
+	.form-container {
+		min-width: 100vw;
+	}
+	.mobileLogo {
+		display: flex;
+	}
+	.mobile-disclaimer {
+		display: flex;
+	}
+}

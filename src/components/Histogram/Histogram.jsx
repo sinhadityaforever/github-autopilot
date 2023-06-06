@@ -33,6 +33,21 @@ const Histogram = ({ lastFiveYearData }) => {
 				height: 400,
 				width: 400
 			},
+			responsive: [
+				{
+					breakpoint: 768,
+					options: {
+						chart: {
+							width: 300
+						},
+						yaxis: {
+							labels: {
+								show: false
+							}
+						}
+					}
+				}
+			],
 			plotOptions: {
 				bar: {
 					vertical: true,

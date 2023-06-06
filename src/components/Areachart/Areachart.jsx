@@ -57,6 +57,21 @@ const AreaChart = ({ lastFiveYearData }) => {
 					enabled: false
 				}
 			},
+			responsive: [
+				{
+					breakpoint: 768,
+					options: {
+						chart: {
+							width: 290
+						},
+						yaxis: {
+							labels: {
+								show: false
+							}
+						}
+					}
+				}
+			],
 			stroke: {
 				curve: 'straight'
 			},

@@ -39,10 +39,11 @@ function CategoryChart({ transactionsData }) {
 			},
 			responsive: [
 				{
-					// breakpoint: 480,
+					breakpoint: 768,
 					options: {
 						chart: {
-							width: 200
+							width: 280,
+							height: 280
 						},
 						legend: {
 							position: 'bottom'

@@ -48,6 +48,7 @@ export default function BasicTable({ rows }) {
 	const handleModal = (transactionId) => {
 		dispatch(openModal());
 	};
+
 	return (
 		<div className="Table">
 			<EditTransactionDialog defaultData={selectedToEdit} />
@@ -55,9 +56,11 @@ export default function BasicTable({ rows }) {
 			{rows && rows.length > 0 ? (
 				<TableContainer
 					component={Paper}
+					className="tableContainer"
 					style={{
 						boxShadow: '0px 13px 20px 0px #80808029',
 						maxHeight: '15rem'
+						// maxWidth: '100%'
 					}}
 				>
 					<Table

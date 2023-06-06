@@ -35,7 +35,7 @@ const Dashboard = () => {
 	return (
 		<div className="Dashboard">
 			<span
-				style={{ fontSize: '2rem', fontWeight: 'bolder', display: 'none' }}
+				style={{ fontSize: '2rem', fontWeight: 'bolder' }}
 				className="db-title"
 			>
 				Dashboard

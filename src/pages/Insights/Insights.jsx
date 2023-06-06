@@ -29,14 +29,13 @@ function Insights() {
 
 	return (
 		<div className="container">
-			<div>
+			<div className="heading1-container">
 				<h1
 					style={{
 						color: 'white',
-						marginTop: '1rem',
+						marginTop: '2rem',
 						fontSize: '2rem',
-						fontWeight: 'bolder',
-						marginTop: '2rem'
+						fontWeight: 'bolder'
 					}}
 				>
 					This Year
@@ -74,13 +73,13 @@ function Insights() {
 				</h1>
 			</div>
 			<div class="row mt-2 mb-4">
-				<div class="col-md-6">
+				<div class="col-md-6 box-container">
 					<div class="box">
 						<Histogram lastFiveYearData={lastFiveYearData} />
 					</div>
 				</div>
 
-				<div class="col-md-6">
+				<div class="col-md-6 box-container">
 					<div class="box">
 						<AreaChart lastFiveYearData={lastFiveYearData} />
 					</div>
@@ -100,7 +99,7 @@ function Insights() {
 				</h1>
 			</div>
 			<div class="row mt-2 mb-4">
-				<div class="col-md-6">
+				<div class="col-md-6 box-container">
 					<div class="box">
 						<DonutChart
 							sixMonthsCategoryData={sixMonthsCategoryData}
@@ -109,7 +108,7 @@ function Insights() {
 					</div>
 				</div>
 				<div class="col-md-6">
-					<div class="box">
+					<div class="box box-container">
 						<StackedBarChart
 							sixMonthsCategoryData={sixMonthsCategoryData}
 							categories={categories}

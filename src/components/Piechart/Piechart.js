@@ -21,7 +21,8 @@ const DonutChart = ({ sixMonthsCategoryData, categories }) => {
 		const options = {
 			series: values,
 			chart: {
-				width: 380,
+				width: 450,
+				height: 450,
 				foreColor: 'white',
 				type: 'donut',
 				dropShadow: {
@@ -33,6 +34,22 @@ const DonutChart = ({ sixMonthsCategoryData, categories }) => {
 					opacity: 0.2
 				}
 			},
+			responsive: [
+				{
+					breakpoint: 768,
+					options: {
+						chart: {
+							width: 300,
+							height: 300
+						},
+						yaxis: {
+							labels: {
+								show: false
+							}
+						}
+					}
+				}
+			],
 			stroke: {
 				width: 0
 			},

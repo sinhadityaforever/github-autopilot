@@ -46,6 +46,20 @@ const StackedBarChart = ({ sixMonthsCategoryData, categories }) => {
 				stacked: true,
 				stackType: '100%'
 			},
+			responsive: [
+				{
+					breakpoint: 768,
+					options: {
+						chart: {
+							width: 300
+						},
+
+						legend: {
+							position: 'bottom'
+						}
+					}
+				}
+			],
 			plotOptions: {
 				bar: {
 					horizontal: true
@@ -55,12 +69,12 @@ const StackedBarChart = ({ sixMonthsCategoryData, categories }) => {
 				width: 1,
 				colors: ['#fff']
 			},
-			title: {
-				text: '100% Stacked Bar',
-				style: {
-					color: 'white'
-				}
-			},
+			// title: {
+			// 	text: '100% Stacked Bar',
+			// 	style: {
+			// 		color: 'white'
+			// 	}
+			// },
 			xaxis: {
 				categories: lastSixMonths,
 				labels: {

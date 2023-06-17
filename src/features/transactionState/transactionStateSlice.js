@@ -400,11 +400,9 @@ const transactionStateSlice = createSlice({
 			);
 		},
 		login: (state, action) => {
-			localStorage.setItem('isLoggedIn', true);
 			state.isLoggedIn = true;
 		},
 		logout: (state, action) => {
-			console.log('Logged');
 			localStorage.clear();
 			state.isLoggedIn = false;
 		}

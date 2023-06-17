@@ -1,20 +1,34 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Provider } from 'react-redux';
 import './App.css';
-import { store } from './app/store';
+import * as ReactDOM from 'react-dom/client';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Budget from './pages/Budget/Budget';
 import Dashboard from './pages/Dashboard/Dashboard';
 import Insights from './pages/Insights/Insights';
 import Profile from './pages/profile/Profile';
-import LoginPage from './pages/Loginpage/Loginpage';
 import Sidebar from './components/Sidebar';
-import { useAppSelector } from './app/hooks';
+import { useAppDispatch, useAppSelector } from './app/hooks';
+import Loginpage from './pages/Loginpage/Loginpage';
+import Signup from './pages/Signup/Signup';
+import { getUserInfoApi } from './api/apiCalls';
+import { ToastContainer } from 'react-toastify';
+import { login } from './features/transactionState/transactionStateSlice';
 
 function App() {
-	const isLoggedIn = useAppSelector(
-		(state) => state.transactionState.isLoggedIn
-	);
-	const localStorageData = localStorage.getItem('isLoggedIn');
+	const token = localStorage.getItem('token');
+	const dispatch = useAppDispatch();
+	useEffect(() => {
+		if (token) {
+			const userInfo = async () => {
+				const response = await getUserInfoApi(token);
+				console.log(response);
+			};
+
+			userInfo();
+			dispatch(login());
+		}
+	}, []);
 
 	const [sidebarOption, setSidebarOption] = useState(0);
 	const handleChildProp = (childProp) => {
@@ -37,21 +51,31 @@ function App() {
 		}
 	};
 
-	return (
-		<>
-			{isLoggedIn || localStorageData ? (
+	const router = createBrowserRouter([
+		{
+			path: '/',
+			element: (
 				<div className="App">
+					<ToastContainer />
 					<div className="AppGlass">
 						<Sidebar onChildProp={handleChildProp} />
 
 						{renderComponent()}
 					</div>
 				</div>
-			) : (
-				<LoginPage />
-			)}
-		</>
-	);
+			)
+		},
+		{
+			path: '/login',
+			element: <Loginpage />
+		},
+		{
+			path: '/signup',
+			element: <Signup />
+		}
+	]);
+
+	return <>{<RouterProvider router={router}></RouterProvider>}</>;
 }
 
 export default App;

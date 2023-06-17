@@ -3,31 +3,31 @@ import './Loginpage.css';
 import Alert from '@mui/material/Alert';
 import { useAppDispatch } from '../../app/hooks';
 import { login } from '../../features/transactionState/transactionStateSlice';
+import { ToastContainer } from 'react-toastify';
+import { loginApi } from '../../api/apiCalls';
 function Loginpage() {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-	const [error, setError] = useState(false);
 	const dispatch = useAppDispatch();
-	const submitHandler = async () => {
-		if (email !== 'abc@email.com' || password !== 'test@123') {
-			setError(true);
-			const timer = setTimeout(() => {
-				setError(false);
+	const submitHandler = async (e) => {
+		e.preventDefault();
+		try {
+			const token = await loginApi({ email, password });
+
+			localStorage.setItem('token', token);
+
+			setTimeout(() => {
+				// Code to be executed after 3 seconds
+				console.log('Timer completed');
 			}, 3000);
-			timer();
-			return;
-		} else {
-			dispatch(login());
+		} catch (error) {
+			throw error;
 		}
 	};
 
 	return (
 		<div className="login-page">
-			{error && (
-				<Alert variant="standard" severity="error">
-					Please enter valid details
-				</Alert>
-			)}
+			<ToastContainer />
 			<div className="loginContainer" id="container">
 				<div className="form-container log-in-container">
 					<form className="loginForm" action="#">

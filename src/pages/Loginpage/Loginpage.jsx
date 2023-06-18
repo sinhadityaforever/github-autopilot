@@ -4,11 +4,13 @@ import Alert from '@mui/material/Alert';
 import { useAppDispatch } from '../../app/hooks';
 import { login } from '../../features/transactionState/transactionStateSlice';
 import { ToastContainer } from 'react-toastify';
-import { loginApi } from '../../api/apiCalls';
+import { getUserInfoApi, loginApi } from '../../api/apiCalls';
+import { useNavigate } from 'react-router-dom';
 function Loginpage() {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const dispatch = useAppDispatch();
+	const navigate = useNavigate();
 	const submitHandler = async (e) => {
 		e.preventDefault();
 		try {
@@ -16,10 +18,8 @@ function Loginpage() {
 
 			localStorage.setItem('token', token);
 
-			setTimeout(() => {
-				// Code to be executed after 3 seconds
-				console.log('Timer completed');
-			}, 3000);
+			dispatch(login());
+			navigate('/');
 		} catch (error) {
 			throw error;
 		}
@@ -27,7 +27,6 @@ function Loginpage() {
 
 	return (
 		<div className="login-page">
-			<ToastContainer />
 			<div className="loginContainer" id="container">
 				<div className="form-container log-in-container">
 					<form className="loginForm" action="#">

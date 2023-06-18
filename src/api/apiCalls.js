@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { toast } from 'react-toastify';
 const api = axios.create({
-	baseURL: 'http://localhost:5000'
+	baseURL: process.env.REACT_APP_API_URL
 });
 
 export const signupApi = async (body) => {
@@ -14,7 +14,7 @@ export const signupApi = async (body) => {
 			email,
 			password
 		});
-		toast.success(response.data.message);
+		toast.success(response.data.message + ' Please login to continue');
 	} catch (error) {
 		const errorMessage = error.response?.data?.message || 'An error occurred';
 		toast.error(errorMessage);

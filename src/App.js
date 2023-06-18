@@ -1,34 +1,43 @@
 import { useEffect, useState } from 'react';
-import { Provider } from 'react-redux';
 import './App.css';
 import * as ReactDOM from 'react-dom/client';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+
 import Budget from './pages/Budget/Budget';
 import Dashboard from './pages/Dashboard/Dashboard';
 import Insights from './pages/Insights/Insights';
 import Profile from './pages/profile/Profile';
 import Sidebar from './components/Sidebar';
-import { useAppDispatch, useAppSelector } from './app/hooks';
-import Loginpage from './pages/Loginpage/Loginpage';
-import Signup from './pages/Signup/Signup';
+import { useAppDispatch } from './app/hooks';
 import { getUserInfoApi } from './api/apiCalls';
 import { ToastContainer } from 'react-toastify';
 import { login } from './features/transactionState/transactionStateSlice';
+import PreloaderScreen from './pages/PreloaderScreen/PreloaderScreen';
+
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function App() {
+	const navigate = useNavigate();
 	const token = localStorage.getItem('token');
 	const dispatch = useAppDispatch();
+	const [isLoading, setIsLoading] = useState(true);
+
 	useEffect(() => {
 		if (token) {
-			const userInfo = async () => {
-				const response = await getUserInfoApi(token);
-				console.log(response);
-			};
+			getUserInfoApi(token)
+				.then((response) => {
+					console.log('from App');
+					dispatch(login());
 
-			userInfo();
-			dispatch(login());
+					setIsLoading(false);
+				})
+				.catch((error) => {
+					navigate('/login');
+				});
+		} else {
+			navigate('/login');
 		}
-	}, []);
+	}, [dispatch, navigate, token]);
 
 	const [sidebarOption, setSidebarOption] = useState(0);
 	const handleChildProp = (childProp) => {
@@ -51,10 +60,11 @@ function App() {
 		}
 	};
 
-	const router = createBrowserRouter([
-		{
-			path: '/',
-			element: (
+	return (
+		<React.Fragment>
+			{isLoading ? (
+				<PreloaderScreen />
+			) : (
 				<div className="App">
 					<ToastContainer />
 					<div className="AppGlass">
@@ -63,19 +73,9 @@ function App() {
 						{renderComponent()}
 					</div>
 				</div>
-			)
-		},
-		{
-			path: '/login',
-			element: <Loginpage />
-		},
-		{
-			path: '/signup',
-			element: <Signup />
-		}
-	]);
-
-	return <>{<RouterProvider router={router}></RouterProvider>}</>;
+			)}
+		</React.Fragment>
+	);
 }
 
 export default App;

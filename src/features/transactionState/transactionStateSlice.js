@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
+	userInfo: {},
 	isLoggedIn: false,
 	showEditModal: false,
 	editModalData: {},
@@ -405,6 +406,9 @@ const transactionStateSlice = createSlice({
 		logout: (state, action) => {
 			localStorage.clear();
 			state.isLoggedIn = false;
+		},
+		setUserInfo: (state, action) => {
+			state.userInfo = action.payload;
 		}
 	}
 });
@@ -418,6 +422,7 @@ export const {
 	addCategoryBudget,
 	deleteCategoryBudget,
 	login,
-	logout
+	logout,
+	setUserInfo
 } = transactionStateSlice.actions;
 export default transactionStateSlice.reducer;

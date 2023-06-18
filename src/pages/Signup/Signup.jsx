@@ -15,13 +15,7 @@ function Signup() {
 	const [firstname, setFirstname] = useState('');
 	const [lastname, setLastname] = useState('');
 	const [confirmPassword, setConfirmPassword] = useState('');
-	const [loading, setLoading] = useState(false);
 
-	const [error, setError] = useState();
-	const dispatch = useAppDispatch();
-	const errorHandler = (errorMessage) => {
-		setError(errorMessage);
-	};
 	const submitHandler = async (event) => {
 		event.preventDefault();
 		if (password !== confirmPassword) {
@@ -36,10 +30,8 @@ function Signup() {
 				email,
 				password
 			});
-			setTimeout(() => {
-				navigate('/login');
-				console.log('Timer completed');
-			}, 3000);
+
+			navigate('/login');
 		} catch (error) {
 			throw error;
 		}
@@ -47,7 +39,6 @@ function Signup() {
 
 	return (
 		<div className="login-page">
-			<ToastContainer />
 			<div className="loginContainer" id="container">
 				<div className="form-container log-in-container">
 					<form className="loginForm" action="#">

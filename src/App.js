@@ -10,7 +10,10 @@ import Sidebar from './components/Sidebar';
 import { useAppDispatch } from './app/hooks';
 import { getUserInfoApi } from './api/apiCalls';
 import { ToastContainer } from 'react-toastify';
-import { login } from './features/transactionState/transactionStateSlice';
+import {
+	login,
+	setUserInfo
+} from './features/transactionState/transactionStateSlice';
 import PreloaderScreen from './pages/PreloaderScreen/PreloaderScreen';
 
 import React from 'react';
@@ -27,6 +30,7 @@ function App() {
 			getUserInfoApi(token)
 				.then((response) => {
 					console.log('from App');
+					dispatch(setUserInfo(response));
 					dispatch(login());
 
 					setIsLoading(false);

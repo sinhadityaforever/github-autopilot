@@ -54,7 +54,12 @@ function Loginpage() {
 							type="password"
 							placeholder="Password"
 						/>
-						<p>Forgot your password?</p>
+						<p
+							style={{ cursor: 'pointer' }}
+							onClick={() => navigate('/signup')}
+						>
+							New user? Signup Instead.
+						</p>
 						<button onClick={submitHandler} className="loginButton">
 							Log In
 						</button>
@@ -85,7 +90,7 @@ function Loginpage() {
 								"Take charge of your finances, track transactions, set budgets,
 								and unlock valuable insights"
 							</p>
-							<div
+							{/* <div
 								style={{ fontSize: '0.7rem', marginTop: '1rem' }}
 								className="disclaimer"
 							>
@@ -95,7 +100,7 @@ function Loginpage() {
 									<br></br>
 									Email: abc@email.com <br></br> Password: test@123{' '}
 								</p>
-							</div>
+							</div> */}
 						</div>
 					</div>
 				</div>

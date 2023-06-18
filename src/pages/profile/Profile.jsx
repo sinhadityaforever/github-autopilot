@@ -2,10 +2,13 @@ import { Button, TextField, Typography } from '@mui/material';
 import React from 'react';
 import './Profile.css';
 import img1 from '../../imgs/img1.png';
-import { UilUserCircle } from '@iconscout/react-unicons';
-import { UilCameraChange } from '@iconscout/react-unicons';
-import { style } from '@mui/system';
+import { useAppSelector } from '../../app/hooks';
+
 function Profile() {
+	const profileInfo = useAppSelector(
+		(state) => state.transactionState.userInfo
+	);
+
 	const lightColor = {
 		borderColor: 'white',
 		input: {
@@ -18,6 +21,10 @@ function Profile() {
 			color: 'white'
 		}
 	};
+
+	const imageSrc =
+		'https://avataaars.io/?avatarStyle=Circle&topType=LongHairCurly&accessoriesType=Prescription02&hairColor=PastelPink&facialHairType=MoustacheMagnum&facialHairColor=Brown&clotheType=ShirtVNeck&clotheColor=PastelBlue&eyeType=Hearts&eyebrowType=Default&mouthType=Default&skinColor=Yellow';
+
 	return (
 		<div className="profile">
 			<div className="edit-profile">
@@ -123,15 +130,12 @@ function Profile() {
 			<div className="view-profile">
 				<div className="view-profile-container">
 					<div className="profile-picture">
-						<img className="profile-picture-image" src={img1} />
+						<img
+							className="profile-picture-image"
+							src={profileInfo.profilePicture || img1}
+							alt="profile-pic"
+						/>
 
-						<UilCameraChange
-							className="edit-profile-profile"
-							cursor="pointer"
-							style={{
-								marginTop: '8rem'
-							}}
-						></UilCameraChange>
 						<input
 							type="file"
 							accept="image/*"
@@ -142,11 +146,11 @@ function Profile() {
 					</div>
 					<div className="name">
 						<Typography fontWeight={'bold'} fontSize={'1.2rem'}>
-							Mike Andrew
+							{`${profileInfo.firstname} ${profileInfo.lastname}`}
 						</Typography>
 					</div>
 					<div className="detail-text">
-						<Typography>Email: abc@email.com</Typography>
+						<Typography>Email: {profileInfo.email}</Typography>
 
 						<Typography>Phone: 1234567890</Typography>
 					</div>

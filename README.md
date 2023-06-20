@@ -1,7 +1,7 @@
 
 # TrackiFi: A Finance Tracker Web Application
 
-A web based application to minimize the efforts required in booking a cab. 
+A web based application to keep track of personal finances. 
 
 
 ## Screenshots

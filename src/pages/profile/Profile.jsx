@@ -40,6 +40,7 @@ function Profile() {
 						<div className="left-field">
 							<span>First Name</span>
 							<TextField
+								defaultValue={profileInfo.firstname}
 								style={{ marginTop: '10px' }}
 								placeholder="First Name"
 								fullWidth
@@ -49,6 +50,7 @@ function Profile() {
 						<div className="right-field">
 							<span>Last Name</span>
 							<TextField
+								defaultValue={profileInfo.lastname}
 								sx={lightColor}
 								style={{ marginTop: '10px' }}
 								placeholder="Last Name"
@@ -60,6 +62,7 @@ function Profile() {
 						<div className="left-field">
 							<span>Email Address</span>
 							<TextField
+								defaultValue={profileInfo.email}
 								style={{ marginTop: '10px' }}
 								placeholder="Email Address"
 								fullWidth
@@ -96,6 +99,7 @@ function Profile() {
 						<div className="left-field">
 							<span>Country</span>
 							<TextField
+								defaultValue={profileInfo.country}
 								sx={lightColor}
 								style={{ marginTop: '10px' }}
 								fullWidth
@@ -106,6 +110,7 @@ function Profile() {
 						<div className="right-field">
 							<span>Postal Code</span>
 							<TextField
+								defaultValue={profileInfo.postalCode}
 								sx={lightColor}
 								style={{ marginTop: '10px' }}
 								fullWidth

@@ -142,57 +142,57 @@ const initialState = {
 			expenditure: 10000
 		},
 		{
-			index: -1,
+			index: 1,
 			income: 43256,
 			expenditure: 25817
 		},
 		{
-			index: -2,
+			index: 2,
 			income: 38423,
 			expenditure: 18122
 		},
 		{
-			index: -3,
+			index: 3,
 			income: 28975,
 			expenditure: 14659
 		},
 		{
-			index: -4,
+			index: 4,
 			income: 47042,
 			expenditure: 21346
 		},
 		{
-			index: -5,
+			index: 5,
 			income: 24534,
 			expenditure: 12562
 		},
 		{
-			index: -6,
+			index: 6,
 			income: 40218,
 			expenditure: 19547
 		},
 		{
-			index: -7,
+			index: 7,
 			income: 34432,
 			expenditure: 20137
 		},
 		{
-			index: -8,
+			index: 8,
 			income: 47212,
 			expenditure: 28645
 		},
 		{
-			index: -9,
+			index: 9,
 			income: 32075,
 			expenditure: 12784
 		},
 		{
-			index: -10,
+			index: 10,
 			income: 43297,
 			expenditure: 22763
 		},
 		{
-			index: -11,
+			index: 11,
 			income: 42348,
 			expenditure: 20578
 		}
@@ -274,6 +274,7 @@ const transactionStateSlice = createSlice({
 	initialState,
 	reducers: {
 		addTransaction: (state, action) => {
+			//todo: edit the lastId logic
 			action.payload.amount = parseInt(action.payload.amount);
 
 			const currMonth = new Date().getMonth();
@@ -409,6 +410,12 @@ const transactionStateSlice = createSlice({
 		},
 		setUserInfo: (state, action) => {
 			state.userInfo = action.payload;
+		},
+		setTransactionData: (state, action) => {
+			state.transactions = action.payload.transactions;
+			state.lastFiveYearData = action.payload.lastFiveYearData;
+			state.thisYearData = action.payload.thisYearData;
+			state.sixMonthsCategoryData = action.payload.sixMonthsCategoryData;
 		}
 	}
 });
@@ -423,6 +430,7 @@ export const {
 	deleteCategoryBudget,
 	login,
 	logout,
-	setUserInfo
+	setUserInfo,
+	setTransactionData
 } = transactionStateSlice.actions;
 export default transactionStateSlice.reducer;

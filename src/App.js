@@ -8,10 +8,11 @@ import Insights from './pages/Insights/Insights';
 import Profile from './pages/profile/Profile';
 import Sidebar from './components/Sidebar';
 import { useAppDispatch } from './app/hooks';
-import { getUserInfoApi } from './api/apiCalls';
-import { ToastContainer } from 'react-toastify';
+import { getTransactionsApi, getUserInfoApi } from './api/apiCalls';
+import { toast, ToastContainer } from 'react-toastify';
 import {
 	login,
+	setTransactionData,
 	setUserInfo
 } from './features/transactionState/transactionStateSlice';
 import PreloaderScreen from './pages/PreloaderScreen/PreloaderScreen';
@@ -32,11 +33,21 @@ function App() {
 					console.log('from App');
 					dispatch(setUserInfo(response));
 					dispatch(login());
-
 					setIsLoading(false);
 				})
 				.catch((error) => {
 					navigate('/login');
+				});
+
+			getTransactionsApi(token)
+				.then((response) => {
+					dispatch(setTransactionData(response));
+					setIsLoading(false);
+				})
+				.catch((error) => {
+					toast.error(
+						'An error occurred while loading transactions, Please refresh'
+					);
 				});
 		} else {
 			navigate('/login');

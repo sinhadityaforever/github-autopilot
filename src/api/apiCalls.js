@@ -54,3 +54,19 @@ export const getUserInfoApi = async (token) => {
 		throw error;
 	}
 };
+
+export const getTransactionsApi = async (token) => {
+	toast.info('Getting transactions...');
+	try {
+		const response = await api.get(`/transactions`, {
+			headers: {
+				Authorization: `Bearer ${token}`
+			}
+		});
+		return response.data;
+	} catch (error) {
+		const errorMessage = error.response?.data?.message || 'An error occurred';
+		toast.error(errorMessage);
+		throw error;
+	}
+};

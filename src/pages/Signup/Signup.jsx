@@ -89,7 +89,7 @@ function Signup() {
 							onChange={(e) => setConfirmPassword(e.target.value)}
 							className="loginInput"
 							type="password"
-							placeholder="Password"
+							placeholder="Confirm Password"
 						/>
 
 						<p style={{ cursor: 'pointer' }} onClick={() => navigate('/login')}>

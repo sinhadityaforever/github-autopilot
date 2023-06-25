@@ -43,14 +43,14 @@ function Loginpage() {
 							<span style={{ color: '#FF919D' }}>Fi</span>
 						</div>
 						<h1>Login</h1>
-						<div className="social-container">
+						{/* <div className="social-container">
 							<a href="#" className="social">
 								<i className="fa fa-facebook fa-2x"></i>
 							</a>
 							<a href="#" className="social">
 								<i className="fab fa fa-twitter fa-2x"></i>
 							</a>
-						</div>
+						</div> */}
 
 						<input
 							value={email}

@@ -75,7 +75,7 @@ function Loginpage() {
 						<button onClick={submitHandler} className="loginButton">
 							Log In
 						</button>
-						<div
+						{/* <div
 							className="mobile-disclaimer"
 							style={{
 								fontSize: '0.6rem',
@@ -87,7 +87,7 @@ function Loginpage() {
 								<br></br>
 								Email: abc@email.com <br></br> Password: test@123{' '}
 							</p>
-						</div>
+						</div> */}
 					</form>
 				</div>
 				<div className="overlay-container">

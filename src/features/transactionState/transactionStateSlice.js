@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
+	userInfo: {},
 	isLoggedIn: false,
 	showEditModal: false,
 	editModalData: {},
@@ -141,57 +142,57 @@ const initialState = {
 			expenditure: 10000
 		},
 		{
-			index: -1,
+			index: 1,
 			income: 43256,
 			expenditure: 25817
 		},
 		{
-			index: -2,
+			index: 2,
 			income: 38423,
 			expenditure: 18122
 		},
 		{
-			index: -3,
+			index: 3,
 			income: 28975,
 			expenditure: 14659
 		},
 		{
-			index: -4,
+			index: 4,
 			income: 47042,
 			expenditure: 21346
 		},
 		{
-			index: -5,
+			index: 5,
 			income: 24534,
 			expenditure: 12562
 		},
 		{
-			index: -6,
+			index: 6,
 			income: 40218,
 			expenditure: 19547
 		},
 		{
-			index: -7,
+			index: 7,
 			income: 34432,
 			expenditure: 20137
 		},
 		{
-			index: -8,
+			index: 8,
 			income: 47212,
 			expenditure: 28645
 		},
 		{
-			index: -9,
+			index: 9,
 			income: 32075,
 			expenditure: 12784
 		},
 		{
-			index: -10,
+			index: 10,
 			income: 43297,
 			expenditure: 22763
 		},
 		{
-			index: -11,
+			index: 11,
 			income: 42348,
 			expenditure: 20578
 		}
@@ -273,15 +274,21 @@ const transactionStateSlice = createSlice({
 	initialState,
 	reducers: {
 		addTransaction: (state, action) => {
+			//todo: edit the lastId logic
 			action.payload.amount = parseInt(action.payload.amount);
 
 			const currMonth = new Date().getMonth();
 			const monthDiff = currMonth - new Date(action.payload.date).getMonth();
-			const lastId =
-				state.transactions[state.transactions.length - 1].transactionId;
+			const rev = {
+				0: 5,
+				1: 4,
+				2: 3,
+				3: 2,
+				4: 1
+			};
+
 			state.transactions.push({
-				...action.payload,
-				transactionId: lastId + 1
+				...action.payload
 			});
 			if (action.payload.type === 'income') {
 				state.lastFiveYearData[0].income += action.payload.amount;
@@ -296,7 +303,7 @@ const transactionStateSlice = createSlice({
 					(category) => category.categoryId === categoryIdToUpdate
 				);
 				if (categoryToUpdate) {
-					categoryToUpdate.data[monthDiff] += action.payload.amount;
+					categoryToUpdate.data[rev[monthDiff]] += action.payload.amount;
 				}
 			}
 		},
@@ -330,6 +337,13 @@ const transactionStateSlice = createSlice({
 				state.thisYearData[monthDiff].income += amount;
 			} else {
 				const monthDiff = new Date().getMonth() - new Date(date).getMonth();
+				const rev = {
+					0: 5,
+					1: 4,
+					2: 3,
+					3: 2,
+					4: 1
+				};
 				state.lastFiveYearData[0].expense -= transactionToEdit.amount;
 				state.lastFiveYearData[0].expense += amount;
 				state.thisYearData[monthDiff].expenditure -= transactionToEdit.amount;
@@ -343,22 +357,31 @@ const transactionStateSlice = createSlice({
 				);
 				if (categoryToUpdate) {
 					categoryToUpdate.data[monthDiff] -= transactionToEdit.amount;
-					categoryToUpdate.data[monthDiff] += amount;
+					categoryToUpdate.data[rev[monthDiff]] += amount;
 				}
 			}
 		},
 		deleteTransaction: (state, action) => {
+			console.log(action.payload);
 			const transactionToDelete = state.transactions.find(
 				(transaction) => transaction.transactionId === action.payload
 			);
 			if (transactionToDelete.type === 'income') {
 				const monthDiff =
 					new Date().getMonth() - new Date(transactionToDelete.date).getMonth();
+
 				state.lastFiveYearData[0].income -= transactionToDelete.amount;
 				state.thisYearData[monthDiff].income -= transactionToDelete.amount;
 			} else {
 				const monthDiff =
 					new Date().getMonth() - new Date(transactionToDelete.date).getMonth();
+				const rev = {
+					0: 5,
+					1: 4,
+					2: 3,
+					3: 2,
+					4: 1
+				};
 				state.lastFiveYearData[0].expense -= transactionToDelete.amount;
 				state.thisYearData[monthDiff].expenditure -= transactionToDelete.amount;
 				const categoryIdToUpdate = state.categories.find(
@@ -368,7 +391,7 @@ const transactionStateSlice = createSlice({
 					(category) => category.categoryId === categoryIdToUpdate
 				);
 				if (categoryToUpdate) {
-					categoryToUpdate.data[monthDiff] -= transactionToDelete.amount;
+					categoryToUpdate.data[rev[monthDiff]] -= transactionToDelete.amount;
 				}
 			}
 			state.transactions = state.transactions.filter(
@@ -400,13 +423,25 @@ const transactionStateSlice = createSlice({
 			);
 		},
 		login: (state, action) => {
-			localStorage.setItem('isLoggedIn', true);
 			state.isLoggedIn = true;
 		},
 		logout: (state, action) => {
-			console.log('Logged');
 			localStorage.clear();
 			state.isLoggedIn = false;
+		},
+		setUserInfo: (state, action) => {
+			state.userInfo = action.payload;
+		},
+		setTransactionData: (state, action) => {
+			state.transactions = action.payload.transactions;
+			state.transactions.forEach((transaction) => {
+				transaction.date = new Date(transaction.date)
+					.toISOString()
+					.split('T')[0];
+			});
+			state.lastFiveYearData = action.payload.lastFiveYearData;
+			state.thisYearData = action.payload.thisYearData;
+			state.sixMonthsCategoryData = action.payload.sixMonthsCategoryData;
 		}
 	}
 });
@@ -420,6 +455,8 @@ export const {
 	addCategoryBudget,
 	deleteCategoryBudget,
 	login,
-	logout
+	logout,
+	setUserInfo,
+	setTransactionData
 } = transactionStateSlice.actions;
 export default transactionStateSlice.reducer;

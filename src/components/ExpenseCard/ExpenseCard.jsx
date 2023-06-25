@@ -12,6 +12,7 @@ import {
 } from '@mui/material';
 import { useAppDispatch } from '../../app/hooks';
 import { addTransaction } from '../../features/transactionState/transactionStateSlice';
+import { addTransactionApi } from '../../api/apiCalls';
 
 // parent Card
 
@@ -64,11 +65,20 @@ function CompactCard({ param }) {
 		setAmount(event.target.value);
 	};
 
-	const submitHandler = () => {
+	const submitHandler = async () => {
 		if (!name || !amount || !category || !date) {
 			console.log(name, amount, category, date);
 			return;
 		}
+
+		const token = localStorage.getItem('token');
+		const transactionId = await addTransactionApi(token, {
+			name,
+			date,
+			type: param.type,
+			category,
+			amount
+		});
 
 		dispatch(
 			addTransaction({
@@ -76,7 +86,8 @@ function CompactCard({ param }) {
 				date,
 				type: param.type,
 				category,
-				amount
+				amount,
+				transactionId
 			})
 		);
 	};

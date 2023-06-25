@@ -3,31 +3,30 @@ import './Loginpage.css';
 import Alert from '@mui/material/Alert';
 import { useAppDispatch } from '../../app/hooks';
 import { login } from '../../features/transactionState/transactionStateSlice';
+import { ToastContainer } from 'react-toastify';
+import { getUserInfoApi, loginApi } from '../../api/apiCalls';
+import { useNavigate } from 'react-router-dom';
 function Loginpage() {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-	const [error, setError] = useState(false);
 	const dispatch = useAppDispatch();
-	const submitHandler = async () => {
-		if (email !== 'abc@email.com' || password !== 'test@123') {
-			setError(true);
-			const timer = setTimeout(() => {
-				setError(false);
-			}, 3000);
-			timer();
-			return;
-		} else {
+	const navigate = useNavigate();
+	const submitHandler = async (e) => {
+		e.preventDefault();
+		try {
+			const token = await loginApi({ email, password });
+
+			localStorage.setItem('token', token);
+
 			dispatch(login());
+			navigate('/');
+		} catch (error) {
+			throw error;
 		}
 	};
 
 	return (
 		<div className="login-page">
-			{error && (
-				<Alert variant="standard" severity="error">
-					Please enter valid details
-				</Alert>
-			)}
 			<div className="loginContainer" id="container">
 				<div className="form-container log-in-container">
 					<form className="loginForm" action="#">
@@ -67,7 +66,12 @@ function Loginpage() {
 							type="password"
 							placeholder="Password"
 						/>
-						<p>Forgot your password?</p>
+						<p
+							style={{ cursor: 'pointer' }}
+							onClick={() => navigate('/signup')}
+						>
+							New user? Signup Instead.
+						</p>
 						<button onClick={submitHandler} className="loginButton">
 							Log In
 						</button>
@@ -111,7 +115,7 @@ function Loginpage() {
 								"Take charge of your finances, track transactions, set budgets,
 								and unlock valuable insights"
 							</p>
-							<div
+							{/* <div
 								style={{ fontSize: '0.7rem', marginTop: '1rem' }}
 								className="disclaimer"
 							>
@@ -121,7 +125,7 @@ function Loginpage() {
 									<br></br>
 									Email: abc@email.com <br></br> Password: test@123{' '}
 								</p>
-							</div>
+							</div> */}
 						</div>
 					</div>
 				</div>

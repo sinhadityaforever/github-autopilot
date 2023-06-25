@@ -29,7 +29,7 @@ const Dashboard = () => {
 		(state) => state.transactionState.transactions
 	);
 
-	const tableTransactionsData = [...transactionsData];
+	var tableTransactionsData = [...transactionsData];
 	tableTransactionsData.sort((a, b) => new Date(b.date) - new Date(a.date));
 
 	return (

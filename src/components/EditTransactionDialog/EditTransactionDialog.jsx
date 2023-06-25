@@ -17,6 +17,7 @@ import {
 	editTransaction
 } from '../../features/transactionState/transactionStateSlice';
 import './EditTransactionDialog.css';
+import { deleteTransactionApi, updateTransactionApi } from '../../api/apiCalls';
 const Transition = React.forwardRef(function Transition(props, ref) {
 	return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -64,7 +65,8 @@ function EditTransactionDialog({ defaultData }) {
 	};
 	const currDate = new Date();
 	const prevSixMonthDate = new Date(currDate.setMonth(currDate.getMonth() - 5));
-	const handleEditTransaction = () => {
+	const token = localStorage.getItem('token');
+	const handleEditTransaction = async () => {
 		const data = {
 			name: editName,
 			amount: editAmount,
@@ -72,11 +74,13 @@ function EditTransactionDialog({ defaultData }) {
 			date: editDate,
 			transactionId: defaultData.transactionId
 		};
-		console.log(data);
+		await updateTransactionApi(token, defaultData.transactionId, data);
 		dispatch(editTransaction(data));
 		dispatch(closeModal());
 	};
-	const handleDeleteTransaction = () => {
+	const handleDeleteTransaction = async () => {
+		await deleteTransactionApi(token, defaultData.transactionId);
+
 		dispatch(deleteTransaction(defaultData.transactionId));
 		dispatch(closeModal());
 	};

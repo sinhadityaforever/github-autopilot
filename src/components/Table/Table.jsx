@@ -36,6 +36,7 @@ export default function BasicTable({ rows }) {
 		defaultDate,
 		transactionId
 	}) => {
+		// console.log(transactionId);
 		setSelectedToEdit({
 			defaultName,
 			defaultAmount,

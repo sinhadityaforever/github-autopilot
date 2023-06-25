@@ -325,15 +325,16 @@ const transactionStateSlice = createSlice({
 			const transactionToEdit = state.transactions.find(
 				(transaction) => transaction.transactionId === transactionId
 			);
+			const prevAmount = transactionToEdit.amount;
 			transactionToEdit.name = name;
 			transactionToEdit.date = date;
 			transactionToEdit.category = category;
 			transactionToEdit.amount = amount;
 			if (transactionToEdit.type === 'income') {
 				const monthDiff = new Date().getMonth() - new Date(date).getMonth();
-				state.lastFiveYearData[0].income -= transactionToEdit.amount;
+				state.lastFiveYearData[0].income -= prevAmount;
 				state.lastFiveYearData[0].income += amount;
-				state.thisYearData[monthDiff].income -= transactionToEdit.amount;
+				state.thisYearData[monthDiff].income -= prevAmount;
 				state.thisYearData[monthDiff].income += amount;
 			} else {
 				const monthDiff = new Date().getMonth() - new Date(date).getMonth();
@@ -344,9 +345,9 @@ const transactionStateSlice = createSlice({
 					3: 2,
 					4: 1
 				};
-				state.lastFiveYearData[0].expense -= transactionToEdit.amount;
+				state.lastFiveYearData[0].expense -= prevAmount;
 				state.lastFiveYearData[0].expense += amount;
-				state.thisYearData[monthDiff].expenditure -= transactionToEdit.amount;
+				state.thisYearData[monthDiff].expenditure -= prevAmount;
 				state.thisYearData[monthDiff].expenditure += amount;
 				console.log(category);
 				const categoryIdToUpdate = state.categories.find(
@@ -356,7 +357,7 @@ const transactionStateSlice = createSlice({
 					(category) => category.categoryId === categoryIdToUpdate
 				);
 				if (categoryToUpdate) {
-					categoryToUpdate.data[monthDiff] -= transactionToEdit.amount;
+					categoryToUpdate.data[rev[monthDiff]] -= prevAmount;
 					categoryToUpdate.data[rev[monthDiff]] += amount;
 				}
 			}

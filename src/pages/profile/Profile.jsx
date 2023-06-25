@@ -225,14 +225,6 @@ function Profile() {
 								marginTop: '8rem'
 							}}
 						></UilCameraChange>
-
-						{/* <input
-							type="file"
-							accept="image/*"
-							// ref={fileInputRef}
-							// style={{ display: 'none' }}
-							//onChange={handleFileChange}
-						/> */}
 					</div>
 					<div className="side-text-holder">
 						<div className="name">

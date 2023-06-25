@@ -36,11 +36,10 @@ th {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		width: 90vw;
+		width: 89vw;
 	}
 }
 
-
-.cursor{
+.cursor {
 	cursor: pointer;
 }

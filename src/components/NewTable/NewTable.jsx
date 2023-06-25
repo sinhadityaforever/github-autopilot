@@ -51,70 +51,76 @@ export default function BasicTable() {
 		dispatch(deleteCategoryBudget(categoryId));
 	};
 	return (
-		<div className="Table">
-			<h4>Category-wise Budget Table:</h4>
-			<br />
-			{rows && rows.length > 0 ? (
-				<TableContainer
-					component={Paper}
-					style={{
-						boxShadow: '0px 90px 20px 0px #0000000d',
-						maxHeight: '20rem'
-					}}
-				>
-					<Table
-						sx={{ minWidth: 650, maxHeight: '15rem' }}
-						aria-label="simple table"
-						style={{ backgroundColor: '#544d4d' }}
+		<div style={{ marginLeft: '0.6rem' }}>
+			<div className="Table">
+				<h4>Category-wise Budget Table:</h4>
+				<br />
+				{rows && rows.length > 0 ? (
+					<TableContainer
+						component={Paper}
+						style={{
+							boxShadow: '0px 90px 20px 0px #0000000d',
+							maxHeight: '20rem'
+						}}
 					>
-						<TableHead>
-							<TableRow>
-								<TableCell sx={{ color: 'white' }}>Category</TableCell>
-								<TableCell sx={{ color: 'white' }}>Budget</TableCell>
+						<Table
+							sx={{ minWidth: 650, maxHeight: '15rem' }}
+							aria-label="simple table"
+							style={{ backgroundColor: '#544d4d' }}
+						>
+							<TableHead>
+								<TableRow>
+									<TableCell sx={{ color: 'white' }}>Category</TableCell>
+									<TableCell sx={{ color: 'white' }}>Budget</TableCell>
 
-								<TableCell sx={{ color: 'white' }} align="left">
-									Delete
-								</TableCell>
-							</TableRow>
-						</TableHead>
-						<TableBody style={{ color: 'white' }}>
-							{rows.map((row) => (
-								<TableRow
-									key={row.categoryId}
-									sx={{
-										'&:last-child td, &:last-child th': { border: 0 }
-									}}
-								>
-									<TableCell sx={{ color: 'white' }} component="th" scope="row">
-										{row.categoryName}
-									</TableCell>
 									<TableCell sx={{ color: 'white' }} align="left">
-										{row.categoryBudget}
-									</TableCell>
-									<TableCell
-										sx={{ color: 'white' }}
-										align="left"
-										className="cursor"
-									>
-										<Button
-											sx={{
-												backgroundColor: '#E65065',
-												color: 'white ',
-												fontSize: '0.7rem'
-											}}
-											onClick={handleDelete(row.categoryId)}
-										>
-											<UilTrashAlt />
-										</Button>
+										Delete
 									</TableCell>
 								</TableRow>
-							))}
-						</TableBody>
-					</Table>
-				</TableContainer>
-			) : (
-				<span>No Records Found</span>
-			)}
+							</TableHead>
+							<TableBody style={{ color: 'white' }}>
+								{rows.map((row) => (
+									<TableRow
+										key={row.categoryId}
+										sx={{
+											'&:last-child td, &:last-child th': { border: 0 }
+										}}
+									>
+										<TableCell
+											sx={{ color: 'white' }}
+											component="th"
+											scope="row"
+										>
+											{row.categoryName}
+										</TableCell>
+										<TableCell sx={{ color: 'white' }} align="left">
+											{row.categoryBudget}
+										</TableCell>
+										<TableCell
+											sx={{ color: 'white' }}
+											align="left"
+											className="cursor"
+										>
+											<Button
+												sx={{
+													backgroundColor: '#E65065',
+													color: 'white ',
+													fontSize: '0.7rem'
+												}}
+												onClick={handleDelete(row.categoryId)}
+											>
+												<UilTrashAlt />
+											</Button>
+										</TableCell>
+									</TableRow>
+								))}
+							</TableBody>
+						</Table>
+					</TableContainer>
+				) : (
+					<span>No Records Found</span>
+				)}
+			</div>
 		</div>
 	);
 }

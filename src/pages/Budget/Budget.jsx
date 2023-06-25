@@ -1,23 +1,31 @@
-import React, { useState } from 'react';
-import Table from '../../components/Table/Table';
+import React, { useEffect, useState } from 'react';
 import './Budget.css';
-import Cards from '../../components/Cards/Cards';
-import { Calculator, Fish } from 'phosphor-react';
-import Box from '../../components/Box/Box';
-import Setit from '../../components/Setit/Setit';
-import Overall from '../../components/Overall/Overall';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import Category from '../../components/Category/Category';
-import meterImg from '../../imgs/meter.png.png';
 import NewTable from '../../components/NewTable/NewTable';
 import Enter from '../../components/Enter/Enter';
 import AddForm from '../../components/AddForm/AddForm';
 import FinanceScore from '../../components/FinanceScore/FinanceScore';
-import { useDispatch } from 'react-redux';
+
 import { addCategoryBudget } from '../../features/transactionState/transactionStateSlice';
-import { de } from 'date-fns/locale';
 
 function Budget() {
+	const [isMobile, setIsMobile] = useState(false);
+	useEffect(() => {
+		const handleResize = () => {
+			const isMobileView = window.matchMedia('(max-width: 768px)').matches;
+			setIsMobile(isMobileView);
+		};
+		handleResize();
+
+		// Add event listener for window resize
+		window.addEventListener('resize', handleResize);
+
+		// Clean up the event listener on component unmount
+		return () => {
+			window.removeEventListener('resize', handleResize);
+		};
+	}, []);
 	const dispatch = useAppDispatch();
 
 	const [selectedCategoryId, setSelectedCategoryId] = useState(8);
@@ -62,24 +70,50 @@ function Budget() {
 
 	return (
 		<div className="Budget">
+			{isMobile && <h1 className="budget-title">Budget</h1>}
 			<br />
 			<br />
-			<div className="grid-contain">
-				<div>
-					<AddForm name="SET BUDGET" />
-					<AddForm name="SET YOUR GOAL" />
-				</div>
 
-				<div style={{ position: 'relative', top: '-35px' }}>
-					<FinanceScore />
+			{isMobile ? (
+				<div className="grid-contain">
+					<div style={{ position: 'relative' }}>
+						<FinanceScore />
+					</div>
+					<div className="budget-box-container">
+						<div className="budget-box">
+							<AddForm name="SET BUDGET" />
+						</div>
+						<div className="budget-box">
+							<AddForm name="SET YOUR GOAL" />
+						</div>
+					</div>
 				</div>
-			</div>
+			) : (
+				<div className="grid-contain">
+					<div className="budget-box-container">
+						<div className="budget-box">
+							<AddForm name="SET BUDGET" />
+						</div>
+						<div className="budget-box">
+							<AddForm name="SET YOUR GOAL" />
+						</div>
+					</div>
 
-			<h4>Set your category-wise budget:</h4>
+					<div style={{ position: 'relative', top: '-35px' }}>
+						<FinanceScore />
+					</div>
+				</div>
+			)}
+
+			<h4
+				style={{ marginLeft: '10px', marginTop: '2rem', marginBottom: '2rem' }}
+			>
+				Set category-wise budget:
+			</h4>
 			<br />
 
 			<div className="grid-container">
-				<div style={{ width: '100px' }}>
+				<div className="first-grid-container">
 					<Enter selectedCategory={handleCategory} />
 				</div>
 
@@ -133,8 +167,9 @@ function Budget() {
 			<br />
 			<br />
 			<h4>Deeper look at category-wise budget:</h4>
-
-			<Category />
+			<div className="categorywise-budget-bars">
+				<Category />
+			</div>
 			<br />
 			<br />
 		</div>

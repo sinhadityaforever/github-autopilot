@@ -51,6 +51,7 @@ function ExpenseChart({ transactionsData }) {
 		],
 		options: {
 			colors: ['#03DAC5'],
+
 			title: {
 				text: 'This Month',
 				align: 'left',
@@ -65,6 +66,7 @@ function ExpenseChart({ transactionsData }) {
 					color: 'white'
 				}
 			},
+
 			chart: {
 				type: 'bar',
 
@@ -85,10 +87,14 @@ function ExpenseChart({ transactionsData }) {
 		}
 	};
 
+	const styles = isMobile
+		? { marginTop: '5rem', marginLeft: '2rem' }
+		: { marginTop: '5rem' };
+
 	return (
 		<div>
 			<ReactApexChart
-				style={{ marginTop: '5rem' }}
+				style={styles}
 				options={initializer.options}
 				series={initializer.series}
 				type="bar"

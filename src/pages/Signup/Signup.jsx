@@ -42,6 +42,18 @@ function Signup() {
 			<div className="loginContainer" id="container">
 				<div className="form-container log-in-container">
 					<form className="loginForm" action="#">
+						<div
+							className="mobileLogo"
+							style={{
+								// display: 'none',
+								flexDirection: 'row',
+								fontSize: '2rem',
+								fontWeight: '700'
+							}}
+						>
+							<span>Tracki</span>
+							<span style={{ color: '#FF919D' }}>Fi</span>
+						</div>
 						<h1>Signup</h1>
 
 						<input

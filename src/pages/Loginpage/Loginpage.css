@@ -82,7 +82,7 @@ a {
 	overflow: hidden;
 	width: 768px;
 	max-width: 100%;
-	min-height: 480px;
+	min-height: 37rem;
 }
 
 .form-container {
@@ -177,6 +177,7 @@ a {
 @media screen and (max-width: 768px) {
 	.loginContainer {
 		position: inherit;
+		min-height: 100vh;
 	}
 	.form-container {
 		min-width: 100vw;

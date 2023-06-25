@@ -40,7 +40,6 @@ export const loginApi = async (body) => {
 };
 
 export const getUserInfoApi = async (token) => {
-	toast.info('Getting user info...');
 	try {
 		const response = await api.get(`/user/getUser`, {
 			headers: {
@@ -56,7 +55,6 @@ export const getUserInfoApi = async (token) => {
 };
 
 export const updateUserInfoApi = async (token, body) => {
-	toast.info('Updating user info...');
 	try {
 		const response = await api.put(`/user/updateUser`, body, {
 			headers: {
@@ -91,7 +89,6 @@ export const getNewAvatarApi = async (token) => {
 };
 
 export const getTransactionsApi = async (token) => {
-	toast.info('Getting transactions...');
 	try {
 		const response = await api.get(`/transactions`, {
 			headers: {

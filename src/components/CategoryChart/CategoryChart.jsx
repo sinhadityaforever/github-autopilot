@@ -74,7 +74,9 @@ function CategoryChart({ transactionsData }) {
 
 	return (
 		<div className="chart">
-			{transactionsData && expenseAmountSums && expenseCategories ? (
+			{transactionsData.length > 0 &&
+			expenseAmountSums.length > 0 &&
+			expenseCategories.length > 0 ? (
 				<ReactApexChart
 					style={styles}
 					series={initializer.series}
@@ -82,7 +84,7 @@ function CategoryChart({ transactionsData }) {
 					type="donut"
 				/>
 			) : (
-				<span>No data to show Chart</span>
+				<></>
 			)}
 		</div>
 	);

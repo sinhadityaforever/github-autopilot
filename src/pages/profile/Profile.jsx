@@ -234,15 +234,19 @@ function Profile() {
 							//onChange={handleFileChange}
 						/> */}
 					</div>
-					<div className="name">
-						<Typography fontWeight={'bold'} fontSize={'1.2rem'}>
-							{`${profileInfo.firstname} ${profileInfo.lastname}`}
-						</Typography>
-					</div>
-					<div className="detail-text">
-						<Typography>Email: {profileInfo.email}</Typography>
+					<div className="side-text-holder">
+						<div className="name">
+							<Typography fontWeight={'bold'} fontSize={'1.2rem'}>
+								{`${profileInfo.firstname} ${profileInfo.lastname}`}
+							</Typography>
+						</div>
+						<div className="detail-text">
+							<Typography>Email: {profileInfo.email}</Typography>
 
-						<Typography>Phone: {profileInfo.phone || 'Not updated'}</Typography>
+							<Typography>
+								Phone: {profileInfo.phone || 'Not updated'}
+							</Typography>
+						</div>
 					</div>
 				</div>
 			</div>

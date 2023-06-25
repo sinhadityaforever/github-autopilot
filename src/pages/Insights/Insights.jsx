@@ -96,7 +96,7 @@ function Insights() {
 						marginTop: '4rem'
 					}}
 				>
-					Category-wise
+					Category-wise expenses (Last 6 Months)
 				</h1>
 			</div>
 			<div class="row mt-2 mb-4">

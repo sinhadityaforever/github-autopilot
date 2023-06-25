@@ -22,7 +22,7 @@ function RouterContainer() {
 
 	return (
 		<React.Fragment>
-			<ToastContainer />
+			<ToastContainer autoClose={800} />
 			<RouterProvider router={router} />
 		</React.Fragment>
 	);

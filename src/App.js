@@ -30,7 +30,7 @@ function App() {
 		if (token) {
 			getUserInfoApi(token)
 				.then((response) => {
-					console.log('from App');
+					console.log(response);
 					dispatch(setUserInfo(response));
 					dispatch(login());
 					setIsLoading(false);
@@ -41,6 +41,9 @@ function App() {
 
 			getTransactionsApi(token)
 				.then((response) => {
+					response.transactions.forEach((element) => {
+						element.transactionId = element._id;
+					});
 					dispatch(setTransactionData(response));
 					setIsLoading(false);
 				})

@@ -28,7 +28,7 @@ const StackedBarChart = ({ sixMonthsCategoryData, categories }) => {
 	const currentDate = new Date();
 	const lastSixMonths = [];
 
-	for (let i = 5; i >= 0; i--) {
+	for (let i = 0; i <= 5; i++) {
 		const monthIndex = currentDate.getMonth() - i;
 		const year =
 			currentDate.getFullYear() + Math.floor((currentDate.getMonth() - i) / 12);

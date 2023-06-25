@@ -1,13 +1,83 @@
 import { Button, TextField, Typography } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 import './Profile.css';
-import img1 from '../../imgs/img1.png';
-import { useAppSelector } from '../../app/hooks';
-
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import {
+	getNewAvatarApi,
+	getUserInfoApi,
+	updateUserInfoApi
+} from '../../api/apiCalls';
+import { UilCameraChange } from '@iconscout/react-unicons';
+import { setUserInfo } from '../../features/transactionState/transactionStateSlice';
 function Profile() {
+	const token = localStorage.getItem('token');
+	const dispatch = useAppDispatch();
 	const profileInfo = useAppSelector(
 		(state) => state.transactionState.userInfo
 	);
+
+	const [profileImg, setProfileImg] = useState(profileInfo.profilePicture);
+	const [firstname, setFirstname] = useState(profileInfo.firstname);
+	const [lastname, setLastname] = useState(profileInfo.lastname);
+	const [email, setEmail] = useState(profileInfo.email);
+	const [phone, setPhone] = useState(profileInfo.phone);
+	const [address, setAddress] = useState(profileInfo.address);
+	const [country, setCountry] = useState(profileInfo.country);
+	const [postalCode, setPostalCode] = useState(profileInfo.postalCode);
+
+	const firstNameHandler = (e) => {
+		setFirstname(e.target.value);
+	};
+	const lastNameHandler = (e) => {
+		setLastname(e.target.value);
+	};
+	const emailHandler = (e) => {
+		setEmail(e.target.value);
+	};
+	const phoneHandler = (e) => {
+		setPhone(e.target.value);
+	};
+	const addressHandler = (e) => {
+		setAddress(e.target.value);
+	};
+	const countryHandler = (e) => {
+		setCountry(e.target.value);
+	};
+	const postalCodeHandler = (e) => {
+		setPostalCode(e.target.value);
+	};
+
+	const getNewAvatar = async () => {
+		const res = await getNewAvatarApi(token);
+
+		setProfileImg(res.profilePicture);
+		console.log(res.profilePicture);
+	};
+
+	const submitHandler = async () => {
+		await updateUserInfoApi(token, {
+			firstname,
+			lastname,
+			email,
+			profilePicture: profileImg,
+			phone,
+			address,
+			country,
+			postalCode
+		});
+		dispatch(
+			setUserInfo({
+				firstname,
+				lastname,
+				email,
+				profilePicture: profileImg,
+				phone,
+				address,
+				country,
+				postalCode
+			})
+		);
+	};
 
 	const lightColor = {
 		borderColor: 'white',
@@ -21,9 +91,6 @@ function Profile() {
 			color: 'white'
 		}
 	};
-
-	const imageSrc =
-		'https://avataaars.io/?avatarStyle=Circle&topType=LongHairCurly&accessoriesType=Prescription02&hairColor=PastelPink&facialHairType=MoustacheMagnum&facialHairColor=Brown&clotheType=ShirtVNeck&clotheColor=PastelBlue&eyeType=Hearts&eyebrowType=Default&mouthType=Default&skinColor=Yellow';
 
 	return (
 		<div className="profile">
@@ -41,6 +108,7 @@ function Profile() {
 							<span>First Name</span>
 							<TextField
 								defaultValue={profileInfo.firstname}
+								onChange={firstNameHandler}
 								style={{ marginTop: '10px' }}
 								placeholder="First Name"
 								fullWidth
@@ -51,6 +119,7 @@ function Profile() {
 							<span>Last Name</span>
 							<TextField
 								defaultValue={profileInfo.lastname}
+								onChange={lastNameHandler}
 								sx={lightColor}
 								style={{ marginTop: '10px' }}
 								placeholder="Last Name"
@@ -63,6 +132,7 @@ function Profile() {
 							<span>Email Address</span>
 							<TextField
 								defaultValue={profileInfo.email}
+								onChange={emailHandler}
 								style={{ marginTop: '10px' }}
 								placeholder="Email Address"
 								fullWidth
@@ -74,6 +144,8 @@ function Profile() {
 							<span>Phone</span>
 							<TextField
 								sx={lightColor}
+								defaultValue={profileInfo.phone}
+								onChange={phoneHandler}
 								style={{ marginTop: '10px' }}
 								placeholder="Phone Number"
 								fullWidth
@@ -85,6 +157,8 @@ function Profile() {
 							<span>Address</span>
 							<TextField
 								placeholder="Address"
+								defaultValue={profileInfo.address}
+								onChange={addressHandler}
 								sx={lightColor}
 								style={{ marginTop: '10px' }}
 								fullWidth
@@ -100,6 +174,7 @@ function Profile() {
 							<span>Country</span>
 							<TextField
 								defaultValue={profileInfo.country}
+								onChange={countryHandler}
 								sx={lightColor}
 								style={{ marginTop: '10px' }}
 								fullWidth
@@ -111,6 +186,7 @@ function Profile() {
 							<span>Postal Code</span>
 							<TextField
 								defaultValue={profileInfo.postalCode}
+								onChange={postalCodeHandler}
 								sx={lightColor}
 								style={{ marginTop: '10px' }}
 								fullWidth
@@ -127,6 +203,7 @@ function Profile() {
 							color: 'black'
 						}}
 						variant="contained"
+						onClick={submitHandler}
 					>
 						Save
 					</Button>
@@ -137,17 +214,25 @@ function Profile() {
 					<div className="profile-picture">
 						<img
 							className="profile-picture-image"
-							src={profileInfo.profilePicture || img1}
+							src={profileImg}
 							alt="profile-pic"
 						/>
+						<UilCameraChange
+							className="edit-profile-profile"
+							onClick={getNewAvatar}
+							cursor="pointer"
+							style={{
+								marginTop: '8rem'
+							}}
+						></UilCameraChange>
 
-						<input
+						{/* <input
 							type="file"
 							accept="image/*"
 							// ref={fileInputRef}
-							style={{ display: 'none' }}
+							// style={{ display: 'none' }}
 							//onChange={handleFileChange}
-						/>
+						/> */}
 					</div>
 					<div className="name">
 						<Typography fontWeight={'bold'} fontSize={'1.2rem'}>
@@ -157,7 +242,7 @@ function Profile() {
 					<div className="detail-text">
 						<Typography>Email: {profileInfo.email}</Typography>
 
-						<Typography>Phone: 1234567890</Typography>
+						<Typography>Phone: {profileInfo.phone || 'Not updated'}</Typography>
 					</div>
 				</div>
 			</div>

@@ -154,6 +154,13 @@ const transactionStateSlice = createSlice({
 					} else {
 						budgetToUpdate.amountSpent += amount;
 					}
+				} else {
+					if (initialMonth === currMonth) {
+						const budgetToUpdate = state.categoryWiseBudget.find(
+							(item) => item.categoryId === categoryIdToUpdate
+						);
+						budgetToUpdate.amountSpent -= prevAmount;
+					}
 				}
 			}
 		},

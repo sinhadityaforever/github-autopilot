@@ -13,7 +13,7 @@ import { useNavigate } from 'react-router-dom';
 const Sidebar = ({ onChildProp }) => {
 	const [selected, setSelected] = useState(0);
 	const dispatch = useAppDispatch();
-	const [expanded, setExpaned] = useState(true);
+	const [expanded, setExpaned] = useState(false);
 
 	const sidebarVariants = {
 		true: {

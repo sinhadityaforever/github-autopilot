@@ -399,6 +399,34 @@ const transactionStateSlice = createSlice({
 				(transaction) => transaction.transactionId !== action.payload
 			);
 		},
+
+		setCategoryBudget(state, action) {
+			const datas = action.payload;
+			const currentMonth = new Date().getMonth(); // Get the current month (0-indexed)
+
+			state.categoryWiseBudget = datas.map((category) => {
+				const categoryTransactions = state.transactions.filter(
+					(transaction) =>
+						transaction.category ===
+							state.categories[category.categoryId].value &&
+						transaction.type === 'expense' &&
+						new Date(transaction.date).getMonth() === currentMonth
+				);
+
+				const amountSpent = categoryTransactions.reduce(
+					(acc, curr) => acc + curr.amount,
+					0
+				);
+
+				return {
+					...category,
+					amountSpent
+				};
+			});
+
+			console.log(state.categoryWiseBudget);
+		},
+
 		addCategoryBudget: (state, action) => {
 			const { categoryId, budget } = action.payload;
 			console.log(categoryId, budget);
@@ -406,11 +434,25 @@ const transactionStateSlice = createSlice({
 				(category) => category.categoryId === categoryId
 			);
 			if (!budgetToUpdate) {
+				const currentMonth = new Date().getMonth();
+				const category = state.categories.find((cat) => cat.id === categoryId);
+				const categoryTransactions = state.transactions.filter(
+					(transaction) =>
+						transaction.category === category.value &&
+						transaction.type === 'expense' &&
+						new Date(transaction.date).getMonth() === currentMonth
+				);
+				const amountSpent = categoryTransactions.reduce(
+					(acc, curr) => acc + curr.amount,
+					0
+				);
+
 				state.categoryWiseBudget.push({
 					categoryId,
 					budget,
-					amountSpent: 0
+					amountSpent
 				});
+
 				return;
 			}
 			console.log(budgetToUpdate);
@@ -458,6 +500,7 @@ export const {
 	login,
 	logout,
 	setUserInfo,
-	setTransactionData
+	setTransactionData,
+	setCategoryBudget
 } = transactionStateSlice.actions;
 export default transactionStateSlice.reducer;

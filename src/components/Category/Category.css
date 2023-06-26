@@ -54,7 +54,10 @@ progress[value] {
 }
 
 .over-budget {
-	color: #f00;
+	color: #ff4560;
+}
+.under-budget {
+	color: #00e396;
 }
 
 .over-budget progress[value]::-webkit-progress-value {

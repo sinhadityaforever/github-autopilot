@@ -27,14 +27,15 @@ const BudgetItemName = ({ categoryName }) => {
 const AllocationItem = ({ categorySpent, categoryBudget }) => {
 	return (
 		<div className="allocation">
+			<span className={'money '}>Safe to spend: </span>
 			<span
 				className={
-					'money ' + (categorySpent > categoryBudget ? 'over-budget' : '')
+					'money ' +
+					(categorySpent > categoryBudget ? 'over-budget' : 'under-budget')
 				}
 			>
-				₹{categorySpent}
-			</span>{' '}
-			of <span class="money">₹{categoryBudget}</span>
+				₹{categoryBudget - categorySpent}
+			</span>
 		</div>
 	);
 };

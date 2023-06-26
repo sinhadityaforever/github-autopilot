@@ -8,10 +8,15 @@ import Insights from './pages/Insights/Insights';
 import Profile from './pages/profile/Profile';
 import Sidebar from './components/Sidebar';
 import { useAppDispatch } from './app/hooks';
-import { getTransactionsApi, getUserInfoApi } from './api/apiCalls';
+import {
+	getBudgetDataApi,
+	getTransactionsApi,
+	getUserInfoApi
+} from './api/apiCalls';
 import { toast, ToastContainer } from 'react-toastify';
 import {
 	login,
+	setCategoryBudget,
 	setTransactionData,
 	setUserInfo
 } from './features/transactionState/transactionStateSlice';
@@ -45,11 +50,21 @@ function App() {
 						element.transactionId = element._id;
 					});
 					dispatch(setTransactionData(response));
-					setIsLoading(false);
 				})
 				.catch((error) => {
 					toast.error(
 						'An error occurred while loading transactions, Please refresh'
+					);
+				});
+
+			getBudgetDataApi(token)
+				.then((response) => {
+					dispatch(setCategoryBudget(response.budgetData));
+					setIsLoading(false);
+				})
+				.catch((error) => {
+					toast.error(
+						'An error occurred while loading Budgets, Please refresh'
 					);
 				});
 		} else {

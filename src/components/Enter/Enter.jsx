@@ -19,26 +19,18 @@ function Enter({ selectedCategory }) {
 	allowedCategories = allowedCategories.filter(
 		(category) => category.type !== 'income'
 	);
-	const defaultCategory = allowedCategories.filter(
-		(category) => category.id === 8
-	)[0];
 
-	const [category, setCategory] = useState(defaultCategory);
+	const [category, setCategory] = useState();
 	const categoryHandler = (event) => {
 		setCategory(event.target.value);
 		selectedCategory(event.target.value);
 	};
-
-	// const param = {
-	//     things: ['Food and drinks','EMI','House Rent','Groceries','Entertainment','Subscriptions','Video Games','Miscellaneous','Savings','Salary','Gifts','Awards','Bonus','Others']
-	// }
 
 	return (
 		<motion.div
 			className="CCard"
 			style={{
 				background: 'inherit'
-				// boxShadow: param.color.boxShadow
 			}}
 		>
 			<div className="binput">

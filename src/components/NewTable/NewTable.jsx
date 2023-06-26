@@ -12,6 +12,7 @@ import { UilTrashAlt } from '@iconscout/react-unicons';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { deleteCategoryBudget } from '../../features/transactionState/transactionStateSlice';
 import { useEffect } from 'react';
+import { deleteBudgetDataApi } from '../../api/apiCalls';
 
 const makeStyle = (type) => {
 	if (type === 'delete') {
@@ -28,6 +29,7 @@ const makeStyle = (type) => {
 };
 
 export default function BasicTable() {
+	const token = localStorage.getItem('token');
 	const [rows, setRows] = React.useState([]);
 	const dispatch = useAppDispatch();
 
@@ -41,13 +43,15 @@ export default function BasicTable() {
 			return {
 				categoryId: item.categoryId,
 				categoryName: category ? category.value : '',
-				categoryBudget: item.budget
+				categoryBudget: item.budget,
+				amountSpent: item.amountSpent
 			};
 		});
 		setRows(tableRows);
 	}, [budgetData, categories]);
 
-	const handleDelete = (categoryId) => () => {
+	const handleDelete = (categoryId) => async () => {
+		await deleteBudgetDataApi(token, categoryId);
 		dispatch(deleteCategoryBudget(categoryId));
 	};
 	return (
@@ -72,7 +76,7 @@ export default function BasicTable() {
 								<TableRow>
 									<TableCell sx={{ color: 'white' }}>Category</TableCell>
 									<TableCell sx={{ color: 'white' }}>Budget</TableCell>
-
+									<TableCell sx={{ color: 'white' }}>Amount Spent</TableCell>
 									<TableCell sx={{ color: 'white' }} align="left">
 										Delete
 									</TableCell>
@@ -95,6 +99,9 @@ export default function BasicTable() {
 										</TableCell>
 										<TableCell sx={{ color: 'white' }} align="left">
 											{row.categoryBudget}
+										</TableCell>
+										<TableCell sx={{ color: 'white' }} align="left">
+											{row.amountSpent}
 										</TableCell>
 										<TableCell
 											sx={{ color: 'white' }}

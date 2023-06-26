@@ -8,8 +8,10 @@ import AddForm from '../../components/AddForm/AddForm';
 import FinanceScore from '../../components/FinanceScore/FinanceScore';
 
 import { addCategoryBudget } from '../../features/transactionState/transactionStateSlice';
+import { addBudgetDataApi } from '../../api/apiCalls';
 
 function Budget() {
+	const token = localStorage.getItem('token');
 	const [isMobile, setIsMobile] = useState(false);
 	useEffect(() => {
 		const handleResize = () => {
@@ -28,34 +30,41 @@ function Budget() {
 	}, []);
 	const dispatch = useAppDispatch();
 
-	const [selectedCategoryId, setSelectedCategoryId] = useState(8);
+	const [selectedCategoryId, setSelectedCategoryId] = useState();
 
 	const [newValue, setNewValue] = useState(0);
 	var budgetData = useAppSelector(
 		(state) => state.transactionState.categoryWiseBudget
 	);
 	var allowedBudgetData = [...budgetData];
-	const defaultBudgetObject = allowedBudgetData.filter(
-		(budget) => budget.categoryId === selectedCategoryId
-	)[0];
-	const [defaultBudget, setDefaultBudget] = useState(
-		defaultBudgetObject.budget
-	);
+	// var defaultBudgetObject = allowedBudgetData.filter(
+	// 	(budget) => budget.categoryId === selectedCategoryId
+	// )[0];
+	// if (!defaultBudgetObject) {
+	// 	defaultBudgetObject = {
+	// 		categoryId: selectedCategoryId,
+	// 		budget: 0
+	// 	};
+	// }
+	const [defaultBudget, setDefaultBudget] = useState(0);
 
 	const handleCategory = (category) => {
 		setSelectedCategoryId(category.id);
-		console.log(selectedCategoryId);
-		const defaultBudgetUpdated = allowedBudgetData.filter(
-			(budget) => budget.categoryId === selectedCategoryId
-		)[0].budget;
-
-		setDefaultBudget(defaultBudgetUpdated);
+		console.log(category.value);
+		const defaultBudgetUpdated = allowedBudgetData.find(
+			(budget) => budget.categoryId === category.id
+		);
+		setDefaultBudget(defaultBudgetUpdated ? defaultBudgetUpdated.budget : 0);
 	};
 
 	const newBudgetHandler = (e) => {
 		setNewValue(e.target.value);
 	};
-	const setBudgetHandler = () => {
+	const setBudgetHandler = async () => {
+		await addBudgetDataApi(token, {
+			categoryId: selectedCategoryId,
+			budget: newValue
+		});
 		setDefaultBudget(newValue);
 		dispatch(
 			addCategoryBudget({ categoryId: selectedCategoryId, budget: newValue })
@@ -114,6 +123,7 @@ function Budget() {
 
 			<div className="grid-container">
 				<div className="first-grid-container">
+					{/* //Select Category Component */}
 					<Enter selectedCategory={handleCategory} />
 				</div>
 

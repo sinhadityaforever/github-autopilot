@@ -42,6 +42,7 @@ const transactionStateSlice = createSlice({
 			action.payload.amount = parseInt(action.payload.amount);
 
 			const currMonth = new Date().getMonth();
+			const newMonth = new Date(action.payload.date).getMonth();
 			const monthDiff = currMonth - new Date(action.payload.date).getMonth();
 			const rev = {
 				0: 5,
@@ -61,13 +62,25 @@ const transactionStateSlice = createSlice({
 				state.lastFiveYearData[0].expense += action.payload.amount;
 				state.thisYearData[monthDiff].expenditure += action.payload.amount;
 				const categoryIdToUpdate = state.categories.find(
-					(category) => category.value === action.payload.category
+					(category) =>
+						category.value === action.payload.category &&
+						category.type === 'expense'
 				).id;
 				const categoryToUpdate = state.sixMonthsCategoryData.find(
 					(category) => category.categoryId === categoryIdToUpdate
 				);
 				if (categoryToUpdate) {
 					categoryToUpdate.data[rev[monthDiff]] += action.payload.amount;
+				}
+
+				if (newMonth === currMonth) {
+					console.log('hit');
+					const budgetToUpdate = state.categoryWiseBudget.find(
+						(item) => item.categoryId === categoryIdToUpdate
+					);
+					if (budgetToUpdate) {
+						budgetToUpdate.amountSpent += action.payload.amount;
+					}
 				}
 			}
 		},
@@ -90,10 +103,15 @@ const transactionStateSlice = createSlice({
 				(transaction) => transaction.transactionId === transactionId
 			);
 			const prevAmount = transactionToEdit.amount;
+			const initialMonth = new Date(transactionToEdit.date).getMonth();
+			const currMonth = new Date().getMonth();
+			const finalMonth = new Date(date).getMonth();
+
 			transactionToEdit.name = name;
 			transactionToEdit.date = date;
 			transactionToEdit.category = category;
 			transactionToEdit.amount = amount;
+
 			if (transactionToEdit.type === 'income') {
 				const monthDiff = new Date().getMonth() - new Date(date).getMonth();
 				state.lastFiveYearData[0].income -= prevAmount;
@@ -115,7 +133,8 @@ const transactionStateSlice = createSlice({
 				state.thisYearData[monthDiff].expenditure += amount;
 				console.log(category);
 				const categoryIdToUpdate = state.categories.find(
-					(_category) => _category.value === category
+					(_category) =>
+						_category.value === category && _category.type === 'expense'
 				).id;
 				const categoryToUpdate = state.sixMonthsCategoryData.find(
 					(category) => category.categoryId === categoryIdToUpdate
@@ -124,6 +143,18 @@ const transactionStateSlice = createSlice({
 					categoryToUpdate.data[rev[monthDiff]] -= prevAmount;
 					categoryToUpdate.data[rev[monthDiff]] += amount;
 				}
+
+				if (finalMonth === currMonth) {
+					const budgetToUpdate = state.categoryWiseBudget.find(
+						(item) => item.categoryId === categoryIdToUpdate
+					);
+					if (initialMonth === currMonth) {
+						budgetToUpdate.amountSpent -= prevAmount;
+						budgetToUpdate.amountSpent += amount;
+					} else {
+						budgetToUpdate.amountSpent += amount;
+					}
+				}
 			}
 		},
 		deleteTransaction: (state, action) => {
@@ -131,6 +162,7 @@ const transactionStateSlice = createSlice({
 			const transactionToDelete = state.transactions.find(
 				(transaction) => transaction.transactionId === action.payload
 			);
+			const transactionMonth = new Date(transactionToDelete.date).getMonth();
 			if (transactionToDelete.type === 'income') {
 				const monthDiff =
 					new Date().getMonth() - new Date(transactionToDelete.date).getMonth();
@@ -150,13 +182,21 @@ const transactionStateSlice = createSlice({
 				state.lastFiveYearData[0].expense -= transactionToDelete.amount;
 				state.thisYearData[monthDiff].expenditure -= transactionToDelete.amount;
 				const categoryIdToUpdate = state.categories.find(
-					(category) => category.value === transactionToDelete.category
+					(category) =>
+						category.value === transactionToDelete.category &&
+						category.type === 'expense'
 				).id;
 				const categoryToUpdate = state.sixMonthsCategoryData.find(
 					(category) => category.categoryId === categoryIdToUpdate
 				);
 				if (categoryToUpdate) {
 					categoryToUpdate.data[rev[monthDiff]] -= transactionToDelete.amount;
+				}
+				if (transactionMonth === new Date().getMonth()) {
+					const budgetToUpdate = state.categoryWiseBudget.find(
+						(item) => item.categoryId === categoryIdToUpdate
+					);
+					budgetToUpdate.amountSpent -= transactionToDelete.amount;
 				}
 			}
 			state.transactions = state.transactions.filter(

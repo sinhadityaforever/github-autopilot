@@ -90,6 +90,22 @@ export const getNewAvatarApi = async (token) => {
 	}
 };
 
+export const updateUserBudgetApi = async (token, body) => {
+	try {
+		const response = await api.post(`/user/updateUserBudget`, body, {
+			headers: {
+				Authorization: `Bearer ${token}`
+			}
+		});
+		toast.success('Budget updated successfully');
+		return response.data;
+	} catch (error) {
+		const errorMessage = error.response?.data?.message || 'An error occurred';
+		toast.error(errorMessage);
+		throw error;
+	}
+};
+
 //transaction calls
 export const getTransactionsApi = async (token) => {
 	try {

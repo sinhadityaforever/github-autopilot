@@ -90,10 +90,10 @@ function Budget() {
 					</div>
 					<div className="budget-box-container">
 						<div className="budget-box">
-							<AddForm name="SET BUDGET" />
+							<AddForm name={'THIS MONTH'} id={1} />
 						</div>
 						<div className="budget-box">
-							<AddForm name="SET YOUR GOAL" />
+							<AddForm name="THIS YEAR'S" id={2} />
 						</div>
 					</div>
 				</div>
@@ -101,10 +101,10 @@ function Budget() {
 				<div className="grid-contain">
 					<div className="budget-box-container">
 						<div className="budget-box">
-							<AddForm name="SET BUDGET" />
+							<AddForm name="THIS MONTH" id={1} />
 						</div>
 						<div className="budget-box">
-							<AddForm name="SET YOUR GOAL" />
+							<AddForm name="THIS YEAR" id={2} />
 						</div>
 					</div>
 

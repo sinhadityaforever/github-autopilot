@@ -289,6 +289,12 @@ const transactionStateSlice = createSlice({
 			state.lastFiveYearData = action.payload.lastFiveYearData;
 			state.thisYearData = action.payload.thisYearData;
 			state.sixMonthsCategoryData = action.payload.sixMonthsCategoryData;
+		},
+		updateUserBudget: (state, action) => {
+			const { id, amount } = action.payload;
+			id === 1
+				? (state.userInfo.monthBudget = amount)
+				: (state.userInfo.yearBudget = amount);
 		}
 	}
 });
@@ -305,6 +311,7 @@ export const {
 	logout,
 	setUserInfo,
 	setTransactionData,
-	setCategoryBudget
+	setCategoryBudget,
+	updateUserBudget
 } = transactionStateSlice.actions;
 export default transactionStateSlice.reducer;

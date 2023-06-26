@@ -19,254 +19,18 @@ const initialState = {
 		{ id: 10, value: 'Other', type: 'income' }
 	],
 
-	transactions: [
-		{
-			name: 'Ordered Pizza',
-			transactionId: 1,
-			date: '2023-06-04',
-			type: 'expense',
-			category: 'Food',
-			amount: 320
-		},
-
-		{
-			name: 'Groceries',
-			transactionId: 2,
-			date: '2023-06-02',
-			type: 'expense',
-			category: 'Food',
-			amount: 150
-		},
-		{
-			name: 'Movie Tickets',
-			transactionId: 3,
-			date: '2023-06-01',
-
-			type: 'expense',
-			category: 'Entertainment',
-			amount: 50
-		},
-		{
-			name: 'Clothing Shopping',
-			transactionId: 4,
-			date: '2023-06-03',
-			type: 'expense',
-			category: 'Clothes',
-			amount: 200
-		},
-		{
-			name: 'Doctor',
-			transactionId: 5,
-			date: '2023-06-02',
-			type: 'expense',
-			category: 'Health',
-			amount: 80
-		},
-		{
-			name: 'Birthday Gift',
-			transactionId: 6,
-			date: '2023-06-03',
-			type: 'expense',
-			category: 'Gifts',
-			amount: 30
-		},
-
-		{
-			name: 'Freelance Work',
-			transactionId: 7,
-			date: '2023-06-03',
-			type: 'income',
-			category: 'Business',
-			amount: 500
-		},
-		{
-			name: 'Investment Dividends',
-			transactionId: 8,
-			date: '2023-06-03',
-			type: 'income',
-			category: 'Investments',
-			amount: 300
-		},
-		{
-			name: 'Salary',
-			transactionId: 9,
-			date: '2023-06-03',
-			type: 'income',
-			category: 'Salary',
-			amount: 350
-		},
-		{
-			name: 'Side Gig',
-			transactionId: 10,
-			date: '2023-06-03',
-			type: 'income',
-			category: 'Other',
-			amount: 200
-		}
-	],
+	transactions: [],
 
 	//Note: index 0 represents current year, index -1 represents previous year and so on
-	lastFiveYearData: [
-		{
-			index: 0,
-			income: 400000,
-			expense: 200000
-		},
-		{
-			index: -1,
-			income: 400000,
-			expense: 300300
-		},
-		{
-			index: -2,
-			income: 500000,
-			expense: 400000
-		},
-		{
-			index: -3,
-			income: 600000,
-			expense: 400000
-		},
-		{
-			index: -4,
-			income: 650000,
-			expense: 400000
-		}
-	],
+	lastFiveYearData: [],
 
 	//Note: index 0 represents current month, index -1 represents previous month and so on
-	thisYearData: [
-		{
-			index: 0,
-			income: 20000,
-			expenditure: 10000
-		},
-		{
-			index: 1,
-			income: 43256,
-			expenditure: 25817
-		},
-		{
-			index: 2,
-			income: 38423,
-			expenditure: 18122
-		},
-		{
-			index: 3,
-			income: 28975,
-			expenditure: 14659
-		},
-		{
-			index: 4,
-			income: 47042,
-			expenditure: 21346
-		},
-		{
-			index: 5,
-			income: 24534,
-			expenditure: 12562
-		},
-		{
-			index: 6,
-			income: 40218,
-			expenditure: 19547
-		},
-		{
-			index: 7,
-			income: 34432,
-			expenditure: 20137
-		},
-		{
-			index: 8,
-			income: 47212,
-			expenditure: 28645
-		},
-		{
-			index: 9,
-			income: 32075,
-			expenditure: 12784
-		},
-		{
-			index: 10,
-			income: 43297,
-			expenditure: 22763
-		},
-		{
-			index: 11,
-			income: 42348,
-			expenditure: 20578
-		}
-	],
+	thisYearData: [],
 
 	//Note: in data array, index 0 represents current month, index 1 represents previous month and so on
-	sixMonthsCategoryData: [
-		{
-			categoryId: 0,
-			data: [2456, 6387, 8124, 3291, 7019, 4567]
-		},
-		{
-			categoryId: 2,
-			data: [2125, 6534, 4698, 9234, 4856, 2015]
-		},
-		{
-			categoryId: 3,
-			data: [3178, 5456, 8932, 1823, 4567, 6591]
-		},
-		{
-			categoryId: 4,
-			data: [4612, 2913, 7234, 5201, 9854, 6547]
-		},
-		{
-			categoryId: 5,
-			data: [8521, 4079, 6031, 7264, 1923, 5423]
-		},
-		{
-			categoryId: 6,
-			data: [9321, 2876, 6112, 4015, 7542, 8436]
-		},
-		{
-			categoryId: 8,
-			data: [1567, 9502, 2718, 5413, 3647, 8069]
-		}
-	],
+	sixMonthsCategoryData: [],
 
-	categoryWiseBudget: [
-		{
-			categoryId: 0,
-			budget: 10000,
-			amountSpent: 5000
-		},
-		{
-			categoryId: 2,
-			budget: 2000,
-			amountSpent: 500
-		},
-		{
-			categoryId: 3,
-			budget: 3000,
-			amountSpent: 1500
-		},
-		{
-			categoryId: 4,
-			budget: 2000,
-			amountSpent: 1500
-		},
-		{
-			categoryId: 5,
-			budget: 1000,
-			amountSpent: 500
-		},
-		{
-			categoryId: 6,
-			budget: 5000,
-			amountSpent: 1200
-		},
-		{
-			categoryId: 8,
-			budget: 1000,
-			amountSpent: 900
-		}
-	]
+	categoryWiseBudget: []
 };
 
 const transactionStateSlice = createSlice({
@@ -412,19 +176,19 @@ const transactionStateSlice = createSlice({
 						transaction.type === 'expense' &&
 						new Date(transaction.date).getMonth() === currentMonth
 				);
-
+				console.log(JSON.stringify(categoryTransactions));
 				const amountSpent = categoryTransactions.reduce(
 					(acc, curr) => acc + curr.amount,
 					0
 				);
-
+				console.log(amountSpent);
 				return {
 					...category,
 					amountSpent
 				};
 			});
 
-			console.log(state.categoryWiseBudget);
+			console.log(JSON.stringify(state.categoryWiseBudget) + 'hello');
 		},
 
 		addCategoryBudget: (state, action) => {

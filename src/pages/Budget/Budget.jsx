@@ -93,7 +93,7 @@ function Budget() {
 							<AddForm name={'THIS MONTH'} id={1} />
 						</div>
 						<div className="budget-box">
-							<AddForm name="THIS YEAR'S" id={2} />
+							<AddForm name="THIS YEAR" id={2} />
 						</div>
 					</div>
 				</div>

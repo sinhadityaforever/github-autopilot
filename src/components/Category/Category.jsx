@@ -27,14 +27,16 @@ const BudgetItemName = ({ categoryName }) => {
 const AllocationItem = ({ categorySpent, categoryBudget }) => {
 	return (
 		<div className="allocation">
-			<span className={'money '}>Safe to spend: </span>
+			<span className={'money '}>
+				{categorySpent > categoryBudget ? 'Exceeded by: ' : 'Safe to spend: '}
+			</span>
 			<span
 				className={
 					'money ' +
 					(categorySpent > categoryBudget ? 'over-budget' : 'under-budget')
 				}
 			>
-				₹{categoryBudget - categorySpent}
+				₹{Math.abs(categoryBudget - categorySpent)}
 			</span>
 		</div>
 	);

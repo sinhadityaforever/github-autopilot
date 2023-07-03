@@ -12,14 +12,27 @@ A web based application to keep track of personal finances.
 
 
 
-## Deployment
+## Running the app in development mode
 
-To deploy this project run
+1. Create two .env files, one in server, and other in client folder.
+
+
+a) The server .env:
 
 ```bash
-  npm run deploy
+JWT_KEY: "Key for JWT token"
+MONGO_URI: "Database URI"
+PORT: "Port on which server should be running"
 ```
 
+b) The client .env:
+
+```bash
+REACT_APP_API_URL= "URL of server (Eg: http://localhost:5000)"
+```
+
+2. Start the server by running "npm run dev" inside server folder.
+3. Start the client by running "npm start" inside client folder.
 
 ## Live Website
 

@@ -1,5 +1,6 @@
 import { Button, TextField, Typography } from '@mui/material';
 import React, { useState } from 'react';
+import { UilLeftArrowFromLeft } from '@iconscout/react-unicons';
 import './Profile.css';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import {
@@ -9,7 +10,7 @@ import {
 } from '../../api/apiCalls';
 import { UilCameraChange } from '@iconscout/react-unicons';
 import { setUserInfo } from '../../features/transactionState/transactionStateSlice';
-function Profile() {
+function Profile({ editProfileHandler }) {
 	const token = localStorage.getItem('token');
 	const dispatch = useAppDispatch();
 	const profileInfo = useAppSelector(
@@ -95,13 +96,16 @@ function Profile() {
 	return (
 		<div className="profile">
 			<div className="edit-profile">
-				<Typography
-					fontSize={'1.5rem'}
-					fontWeight={'bold'}
-					className="edit-profile-text"
+				<Button
+					sx={{
+						marginTop: '20px',
+						backgroundColor: '#03DAC6',
+						color: 'white'
+					}}
+					onClick={editProfileHandler}
 				>
-					Edit Profile
-				</Typography>
+					Back
+				</Button>
 				<div className="edit-profile-field-container">
 					<div className="edit-profile-fields">
 						<div className="left-field">
@@ -198,9 +202,9 @@ function Profile() {
 						sx={{
 							backgroundColor: '#03DAC6',
 							width: '7rem',
+							color: 'white',
 							alignSelf: 'flex-end',
-							margin: '1rem',
-							color: 'black'
+							margin: '1rem'
 						}}
 						variant="contained"
 						onClick={submitHandler}

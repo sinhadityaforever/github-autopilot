@@ -24,6 +24,8 @@ import PreloaderScreen from './pages/PreloaderScreen/PreloaderScreen';
 
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import NewProfile from './pages/NewProfile/NewProfile';
+import ProfileContainer from './pages/ProfileContainer/ProfileContainer';
 
 function App() {
 	const navigate = useNavigate();
@@ -86,7 +88,7 @@ function App() {
 			case 2:
 				return <Insights />;
 			case 3:
-				return <Profile />;
+				return <ProfileContainer />;
 
 			default:
 				return <Dashboard />;

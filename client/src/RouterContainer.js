@@ -3,6 +3,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import App from './App';
 import Loginpage from './pages/Loginpage/Loginpage';
+import Profile from './pages/profile/Profile';
 import Signup from './pages/Signup/Signup';
 function RouterContainer() {
 	const router = createBrowserRouter([
